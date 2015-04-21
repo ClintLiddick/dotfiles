@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Mouse sensitivity
+xinput --set-prop "Logitech USB Optical Mouse" "Device Accel Constant Deceleration" .8
+
