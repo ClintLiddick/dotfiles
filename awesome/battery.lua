@@ -1,3 +1,5 @@
+-- Displays a batter % and time remaining widget
+-- requires acpi to be installed
 local wibox = require("wibox")
 batterywidget = wibox.widget.textbox()    
 batterywidget:set_text(" | Battery | ")    
