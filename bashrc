@@ -115,6 +115,3 @@ fi
 
 source /opt/ros/indigo/setup.bash
 
-# Aliases
-alias ll="ls -la"
-alias la="ls -a"
