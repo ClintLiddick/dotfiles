@@ -15,7 +15,8 @@ local menubar = require("menubar")
 require("debian.menu")
 
 -- Custom Widgets
---require("volume")
+require("volume")
+require("battery")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -198,7 +199,8 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    --right_layout:add(volume_widget)
+    right_layout:add(batterywidget)
+    right_layout:add(volume_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -226,6 +228,12 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "d", function () awful.util.spawn("dmenu_run") end),
     awful.key({ modkey, "Mod1"     }, "l", function () awful.util.spawn("slock") end),
     awful.key({ modkey,           }, "g", function () awful.util.spawn("google-chrome") end),
+    -- Volume
+    --awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn(
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle") end),
+    -- Brightness
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
+    awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
     -- Defaults
     awful.key({ modkey,           }, "Left",   awful.tag.viewprev       ),
     awful.key({ modkey,           }, "Right",  awful.tag.viewnext       ),

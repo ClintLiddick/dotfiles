@@ -6,7 +6,8 @@ volume_widget = wibox.widget.textbox()
 volume_widget:set_align("right")
 
 function update_volume(widget)
-   local fd = io.popen("amixer -c 1 sget Headphone") -- get USB headphones volume
+   -- get Master volume
+   local fd = io.popen("amixer -c 1 sget Master") 
    local status = fd:read("*all")
    fd:close()
 
