@@ -15,8 +15,8 @@ local menubar = require("menubar")
 require("debian.menu")
 
 -- Custom Widgets
---require("volume")
---require("battery")
+require("volume")
+require("battery")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -199,8 +199,8 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    --right_layout:add(batterywidget)
-    --right_layout:add(volume_widget)
+    right_layout:add(batterywidget)
+    right_layout:add(volume_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -226,11 +226,15 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- Clint's customization
     awful.key({ modkey,           }, "d", function () awful.util.spawn("dmenu_run") end),
-    awful.key({ modkey, "Mod1"     }, "l", function () awful.util.spawn("i3lock") end),
+    awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock") end),
     awful.key({ modkey,           }, "g", function () awful.util.spawn("google-chrome") end),
+    awful.key({ modkey, "Control" }, "w", function () awful.util.spawn("gksudo -m 'Are you sure you wish to restart networking?' service networking restart") end),
+    awful.key({ modkey,           }, "s", function () awful.util.spawn("unity-control-center") end),
     -- Volume
-    --awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn(
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer sset Master toggle") end),
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 1 -q sset Master 3%+") end),
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 1 -q sset Master 3%-") end),
+    --awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -c 1 sset Master toggle") end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -D pulse set Master 1+ toggle") end),
     -- Brightness
     awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 15") end),
     awful.key({ }, "XF86MonBrightnessUp",   function () awful.util.spawn("xbacklight -inc 15") end),
