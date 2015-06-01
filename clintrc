@@ -1,7 +1,14 @@
 #!/bin/bash
 
 # Mouse sensitivity
-xinput set-prop "Logitech USB Optical Mouse" "Device Accel Constant Deceleration" .8
+#xinput set-prop "Logitech USB Optical Mouse" "Device Accel Constant Deceleration" .8
 
+alias dig='dig +search'
+alias sd='source devel/setup.bash'
 
-dropbox start
+if [ "$(hostname)" == 'flexo' ]; then
+    source /opt/ros/indigo/setup.bash
+
+    export WORKON_HOME=~/.envs
+    source /usr/local/bin/virtualenvwrapper.sh
+fi

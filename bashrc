@@ -113,5 +113,4 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source /opt/ros/indigo/setup.bash
-
+source $HOME/dotfiles/clintrc
