@@ -48,7 +48,8 @@ end
 beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "x-terminal-emulator"
+--terminal = "x-terminal-emulator"
+terminal = "urxvtc -fn 'xft:DejaVu Sans Mono:pixelsize=10'"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
