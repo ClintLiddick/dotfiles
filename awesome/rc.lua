@@ -45,11 +45,11 @@ end
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init("/usr/share/awesome/themes/default/theme.lua")
+beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 --terminal = "x-terminal-emulator"
-terminal = "urxvtc -fn 'xft:DejaVu Sans Mono:pixelsize=10'"
+terminal = "urxvtc"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
