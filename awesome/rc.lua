@@ -15,8 +15,8 @@ local menubar = require("menubar")
 require("debian.menu")
 
 -- Custom Widgets
-require("volume")
-require("battery")
+--require("volume")
+--require("battery")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -49,7 +49,8 @@ beautiful.init("/usr/share/awesome/themes/default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 --terminal = "x-terminal-emulator"
-terminal = "urxvtc -fn 'xft:DejaVu Sans Mono:pixelsize=10'"
+--terminal = "urxvtc -fn 'xft:DejaVu Sans Mono:pixelsize=10'"
+terminal = "urxvtc"
 editor = "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -91,7 +92,7 @@ end
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, "Todo", "Chat" }, s, layouts[1])
+    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, "𝄞", "Todo", "Chat" }, s, layouts[1])
 end
 -- }}}
 
@@ -200,8 +201,8 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(batterywidget)
-    right_layout:add(volume_widget)
+    --right_layout:add(batterywidget)
+    --right_layout:add(volume_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
