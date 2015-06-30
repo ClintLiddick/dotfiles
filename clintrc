@@ -17,3 +17,11 @@ if [ "$(hostname)" == 'flexo' ]; then
     export WORKON_HOME=~/.envs
     source /usr/local/bin/virtualenvwrapper.sh
 fi
+
+export PATH=~/.cabal/bin:$PATH
+
+export DEBEMAIL="clint@clintonliddick.com"
+export DEBFULLNAME="Clinton Liddick"
+
+alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
+complete -F _quilt_completion $_quilt_complete_opt dquilt
