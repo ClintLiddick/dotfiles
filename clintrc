@@ -13,13 +13,12 @@ source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 
 source /opt/ros/indigo/setup.bash
 
+export WORKON_HOME=~/.envs
 if [ "$(hostname)" == 'flexo' ]; then
-
-    export WORKON_HOME=~/.envs
     source /usr/local/bin/virtualenvwrapper.sh
 fi
 
-export PATH=~/.cabal/bin:$PATH
+export PATH=~/.cabal/bin:/opt/node-current/bin:$PATH
 
 export DEBEMAIL="clint@clintonliddick.com"
 export DEBFULLNAME="Clinton Liddick"
