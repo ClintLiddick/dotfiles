@@ -1,22 +1,20 @@
 #!/bin/bash
 
-# Mouse sensitivity
-#xinput set-prop "Logitech USB Optical Mouse" "Device Accel Constant Deceleration" .8
-
 export TERM="xterm-256color"
 
+alias open='xdg-open'
 alias dig='dig +search'
 alias sd='source devel/setup.bash'
 alias cm='catkin_make'
+alias rmh='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
+alias e='emacs -nw'
 
 source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 
 source /opt/ros/indigo/setup.bash
 
 export WORKON_HOME=~/.envs
-if [ "$(hostname)" == 'flexo' ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
+source /usr/local/bin/virtualenvwrapper.sh
 
 export PATH=~/.cabal/bin:/opt/node-current/bin:$PATH
 

@@ -1,7 +1,7 @@
-;; QuickLisp
-(load (expand-file-name "~/quicklisp/slime-helper.el"))
-;; Replace "sbcl" with the path to your implementation
+(require 'slime-config "/opt/ros/indigo/share/slime_ros/slime-config.el") ; slime_ros provides slime
+; QuickLisp
 (setq inferior-lisp-program "sbcl")
+;(require 'slime-autoloads)
 
 
 ;; Packages
@@ -15,12 +15,10 @@
 
 
 ;; Vim
+(setq evil-toggle-key "") ; remove default C-z toggle
 (require 'evil)
 (evil-mode 1)
 (evilnc-default-hotkeys)
-(setq viper-mode t)
-;;(require 'viper)
-;;(setq viper-expert-level '5)
 
 
 ;; Misc
@@ -29,18 +27,13 @@
 (setq linum-format "%d ")
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
+(setq-default indent-tabs-mode nil)
+(setq tab-width 4)
 
 
 ;; company-mode autocompletion
 (add-hook 'after-init-hook 'global-company-mode)
-(slime-setup '(slime-company))
 (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
-
-
-;; ROS
-(add-to-list 'load-path "/opt/ros/indigo/share/emacs/site-lisp")
-(require 'rosemacs-config)
-(require 'slime-config "/opt/ros/indigo/share/slime_ros/slime-config.el")
 
 
 ;; Mouse
@@ -72,6 +65,9 @@
 (global-set-key (kbd "<mouse-4>") 'alternating-scroll-down-line)
 (global-set-key (kbd "<mouse-5>") 'alternating-scroll-up-line)
 
+
+;; Filetypes
+(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 ;; Look
 ;; (load-theme 'adwaita)
