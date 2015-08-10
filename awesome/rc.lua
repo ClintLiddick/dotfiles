@@ -230,7 +230,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock") end),
     awful.key({ modkey,           }, "g", function () awful.util.spawn("google-chrome") end),
     awful.key({ modkey, "Control" }, "w", function () awful.util.spawn("gksudo -m 'Are you sure you wish to restart networking?' service networking restart") end),
-    awful.key({ modkey,           }, "s", function () awful.util.spawn("gnome-control-center") end),
+    awful.key({ modkey,           }, "s", function () awful.util.spawn("unity-control-center") end),
     -- Volume
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -c 1 -q sset Master 3%+") end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -c 1 -q sset Master 3%-") end),
