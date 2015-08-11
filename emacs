@@ -35,6 +35,10 @@
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
 
+;; Todo.txt
+(setq todotxt-default-file (expand-file-name "~/Dropbox/todo.txt"))
+(require 'todotxt-mode)
+
 
 ;; Mouse
 (require 'xt-mouse)
