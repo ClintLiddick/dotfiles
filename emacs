@@ -15,6 +15,10 @@
 
 
 ;; Vim
+; evil-leader
+(require 'evil-leader)
+(global-evil-leader-mode) ; default leader is \
+; evil
 (setq evil-toggle-key "") ; remove default C-z toggle
 (require 'evil)
 (evil-mode 1)
@@ -34,6 +38,12 @@
 ;; company-mode autocompletion
 (add-hook 'after-init-hook 'global-company-mode)
 (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
+
+
+;; sr-speedbar
+(require 'sr-speedbar)
+(evil-leader/set-key "s" 'sr-speedbar-toggle)
+
 
 ;; Todo.txt
 (setq todotxt-default-file (expand-file-name "~/Dropbox/todo.txt"))
