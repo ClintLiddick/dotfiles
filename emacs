@@ -33,10 +33,14 @@
 (setq make-backup-files nil)
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
+(setq python-shell-interpreter "ipython")
 
 
 ;; company-mode autocompletion
+(require 'company)
+(require 'company-web-html)
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-idle-delay 0)
 (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
 
 
