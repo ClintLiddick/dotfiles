@@ -14,7 +14,7 @@ source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 source /opt/ros/indigo/setup.bash
 
 export WORKON_HOME=~/.envs
-source /usr/local/bin/virtualenvwrapper.sh
+source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
 export PATH=~/.cabal/bin:/opt/node-current/bin:$PATH
 
