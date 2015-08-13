@@ -16,10 +16,10 @@
 
 ;; Vim
 ; evil-leader
+(setq evil-toggle-key "") ; remove default C-z toggle
 (require 'evil-leader)
 (global-evil-leader-mode) ; default leader is \
 ; evil
-(setq evil-toggle-key "") ; remove default C-z toggle
 (require 'evil)
 (evil-mode 1)
 (evilnc-default-hotkeys)
@@ -89,6 +89,9 @@
 
 ;; Look
 ;; (load-theme 'adwaita)
+;; GUI
+(if (display-graphic-p)
+    (set-default-font "DejaVu Sans Mono-10"))
 
 
 ;; Custom
