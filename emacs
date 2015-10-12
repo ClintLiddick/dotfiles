@@ -22,7 +22,8 @@
 ; evil
 (require 'evil)
 (evil-mode 1)
-(evilnc-default-hotkeys)
+;; (evilnc-default-hotkeys)
+(global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
 
 
 ;; Misc
@@ -54,6 +55,11 @@
 (require 'todotxt-mode)
 
 
+;; Projectile
+(projectile-global-mode)
+(setq projectile-switch-project-action 'projectile-dired)
+
+
 ;; Mouse
 (require 'xt-mouse)
 (xterm-mouse-mode)
@@ -80,8 +86,8 @@
     (scroll-up-line))
   (setq alternating-scroll-up-next (not alternating-scroll-up-next)))
 
-(global-set-key (kbd "<mouse-4>") 'alternating-scroll-down-line)
-(global-set-key (kbd "<mouse-5>") 'alternating-scroll-up-line)
+;; (global-set-key (kbd "<mouse-4>") 'alternating-scroll-down-line)
+;; (global-set-key (kbd "<mouse-5>") 'alternating-scroll-up-line)
 
 
 ;; Filetypes
