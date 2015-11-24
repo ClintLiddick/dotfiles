@@ -5,24 +5,96 @@
 
 
 ;; Packages
-(when (>= emacs-major-version 24)
-  (require 'package)
-  (add-to-list
-   'package-archives
-   '("melpa" . "http://melpa.org/packages/")
-   t)
-  (package-initialize))
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+(package-initialize)
+
+(defvar clint-packages
+  '(async                ;; Asynchronous processing in Emacs
+    auto-complete        ;; Auto Completion for GNU Emacs
+    cmake-font-lock      ;; Advanced, type aware, highlight support for CMake
+    cmake-mode           ;; No description available.
+    company              ;; Modular text completion framework
+    company-jedi         ;; company-mode completion back-end for Python JEDI
+    company-web          ;; Company version of ac-html, complete for web,html,emmet,jade,slim modes
+    concurrent           ;; Concurrent utility functions for emacs lisp
+    ctable               ;; Table component for Emacs Lisp
+    dash                 ;; A modern list library for Emacs
+    deferred             ;; Simple asynchronous functions for emacs lisp
+    dockerfile-mode      ;; Major mode for editing Docker's Dockerfiles
+    epc                  ;; A RPC stack for the Emacs Lisp
+    epl                  ;; Emacs Package Library
+    evil                 ;; Extensible Vi layer for Emacs.
+    evil-leader          ;; let there be <leader>
+    evil-nerd-commenter  ;; Comment/uncomment lines efficiently. Like Nerd Commenter in Vim
+    flx                  ;; fuzzy matching with good sorting
+    flx-ido              ;; flx integration for ido
+    git-commit           ;; Edit Git commit messages
+    goto-chg             ;; goto last change
+    hl-todo              ;; highlight TODO keywords
+    jedi                 ;; a Python auto-completion for Emacs
+    jedi-core            ;; Common code of jedi.el and company-jedi.el
+    lua-mode             ;; a major-mode for editing Lua scripts
+    magit                ;; A Git porcelain inside Emacs
+    magit-popup          ;; Define prefix-infix-suffix command combos
+    markdown-mode        ;; Emacs Major mode for Markdown-formatted text files
+    nginx-mode           ;; major mode for editing nginx config files
+    pkg-info             ;; Information about packages
+    popup                ;; Visual Popup User Interface
+    projectile           ;; Manage and navigate projects in Emacs easily
+    python-environment   ;; virtualenv API for Emacs Lisp
+    sr-speedbar          ;; Same frame speedbar
+    todotxt-mode         ;; Major mode for editing todo.txt files
+    undo-tree            ;; Treat undo history as a tree
+    web-completion-data  ;; Shared completion data for ac-html and company-web
+    with-editor          ;; Use the Emacsclient as $EDITOR
+    yaml-mode            ;; Major mode for editing YAML file
+    )
+  "A list of packages to ensure are installed at launch.")
+
+;; activate all packages (in particular autoloads)
+(package-initialize)
+
+;;
+;; custom package installation, adapted from https://github.com/bbatsov/prelude
+;;
+(defun clint-packages-installed-p ()
+  "Check if all packages in `clint-packages' are installed."
+  (every #'package-installed-p clint-packages))
+
+(defun clint-require-package (package)
+  "Install PACKAGE unless already installed."
+  (unless (memq package clint-packages)
+    (add-to-list 'clint-packages package))
+  (unless (package-installed-p package)
+    (package-install package)))
+
+(defun clint-require-packages (packages)
+  "Ensure PACKAGES are installed.
+Missing packages are installed automatically."
+  (mapc #'clint-require-package packages))
+
+(defun clint-install-packages ()
+  "Install all packages listed in `clint-packages'."
+  (unless (clint-packages-installed-p)
+    ;; check for new packages (package versions)
+    (message "%s" "Emacs is now refreshing its package database...")
+    (package-refresh-contents)
+    (message "%s" " done.")
+    ;; install the missing packages
+    (clint-require-packages clint-packages)))
+
+;; run package installation
+(clint-install-packages)
 
 
 ;; Vim
-; evil-leader
-;; (setq evil-toggle-key "") ; remove default C-z toggle
 (require 'evil-leader)
 (global-evil-leader-mode) ; default leader is \
-; evil
 (require 'evil)
 (evil-mode 1)
-;; (evilnc-default-hotkeys)
+(evil-leader/set-key "q" 'evil-quit)
 (global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
 
 
@@ -32,6 +104,8 @@
 (setq linum-format "%d ")
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
+
+;; Indentation
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 (setq c-basic-offset tab-width)
@@ -48,9 +122,11 @@
 (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
 
 
-;; sr-speedbar
-(require 'sr-speedbar)
-(evil-leader/set-key "s" 'sr-speedbar-toggle)
+;; speedbar
+(require 'sr-speedbar) ;; for use in terminals
+(if (display-graphic-p)
+  (evil-leader/set-key "s" 'speedbar)
+  (evil-leader/set-key "s" 'sr-speedbar-toggle))
 
 
 ;; Todo.txt
@@ -90,11 +166,12 @@
     (scroll-up-line))
   (setq alternating-scroll-up-next (not alternating-scroll-up-next)))
 
-;; (global-set-key (kbd "<mouse-4>") 'alternating-scroll-down-line)
-;; (global-set-key (kbd "<mouse-5>") 'alternating-scroll-up-line)
+(when (not (display-graphic-p))
+  (global-set-key (kbd "<mouse-4>") 'alternating-scroll-down-line)
+  (global-set-key (kbd "<mouse-5>") 'alternating-scroll-up-line))
 
 
-;; Filetypes
+;; Custom Filetypes
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
 ;; Look
@@ -116,7 +193,9 @@
     ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
  '(projectile-project-root-files
    (quote
-    ("rebar.config" "project.clj" "SConstruct" "pom.xml" "build.sbt" "build.gradle" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json" "Cargo.toml" "mix.exs" "stack.yaml" "package.xml"))))
+    ("rebar.config" "project.clj" "SConstruct" "pom.xml" "build.sbt" "build.gradle" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json" "Cargo.toml" "mix.exs" "stack.yaml" "package.xml")))
+ '(speedbar-show-unknown-files t)
+ '(sr-speedbar-right-side nil))
 ;;(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
