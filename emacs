@@ -16,7 +16,7 @@
 
 ;; Vim
 ; evil-leader
-(setq evil-toggle-key "") ; remove default C-z toggle
+;; (setq evil-toggle-key "") ; remove default C-z toggle
 (require 'evil-leader)
 (global-evil-leader-mode) ; default leader is \
 ; evil
@@ -34,6 +34,9 @@
 (setq make-backup-files nil)
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
+(setq c-basic-offset tab-width)
+(setq c-default-style "linux")
+(setq cperl-indent-level tab-width)
 (setq python-shell-interpreter "ipython")
 
 
@@ -52,6 +55,7 @@
 
 ;; Todo.txt
 (setq todotxt-default-file (expand-file-name "~/Dropbox/todo.txt"))
+(setq todotxt-default-archive-file (expand-file-name "~/Dropbox/done.txt"))
 (require 'todotxt-mode)
 
 
@@ -109,7 +113,10 @@
  '(browse-url-browser-function (quote browse-url-generic))
  '(custom-safe-themes
    (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default))))
+    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
+ '(projectile-project-root-files
+   (quote
+    ("rebar.config" "project.clj" "SConstruct" "pom.xml" "build.sbt" "build.gradle" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json" "Cargo.toml" "mix.exs" "stack.yaml" "package.xml"))))
 ;;(custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
