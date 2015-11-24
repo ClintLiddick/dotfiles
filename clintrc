@@ -12,7 +12,7 @@ alias e='emacs -nw'
 
 source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 
-source /opt/ros/indigo/setup.bash
+# source /opt/ros/indigo/setup.bash
 
 if [ "$(hostname)" == 'flexo' ]; then
 
