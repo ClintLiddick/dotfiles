@@ -1,6 +1,6 @@
-(require 'slime-config "/opt/ros/indigo/share/slime_ros/slime-config.el") ; slime_ros provides slime
+;(require 'slime-config "/opt/ros/indigo/share/slime_ros/slime-config.el") ; slime_ros provides slime
 ; QuickLisp
-(setq inferior-lisp-program "sbcl")
+;(setq inferior-lisp-program "sbcl")
 ;(require 'slime-autoloads)
 
 
@@ -35,6 +35,8 @@
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 (setq python-shell-interpreter "ipython")
+;(define-key yas-minor-mode-map [(tab)] nil)
+;(define-key yas-minor-mode-map (kbd "TAB") nil)
 
 
 ;; company-mode autocompletion
@@ -52,6 +54,7 @@
 
 ;; Todo.txt
 (setq todotxt-default-file (expand-file-name "~/Dropbox/todo.txt"))
+(setq todotxt-default-archive-file (expand-file-name "~/Dropbox/done.txt"))
 (require 'todotxt-mode)
 
 
@@ -97,7 +100,7 @@
 ;; (load-theme 'adwaita)
 ;; GUI
 (if (display-graphic-p)
-    (set-default-font "DejaVu Sans Mono-10"))
+    (set-default-font "DejaVu Sans Mono-11"))
 
 
 ;; Custom
