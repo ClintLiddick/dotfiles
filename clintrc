@@ -7,8 +7,8 @@ alias open='xdg-open'
 alias dig='dig +search'
 alias sd='source devel/setup.bash'
 alias cm='catkin_make'
-alias rmh='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
-alias e='emacs -nw'
+alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
+alias e='emacsclient -nw'
 
 source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 
