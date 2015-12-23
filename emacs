@@ -5,6 +5,7 @@
 
 
 ;; Packages
+(require 'cl-lib nil t)
 (require 'package)
 (add-to-list 'package-archives
              '("melpa" . "http://melpa.org/packages/") t)
@@ -61,7 +62,7 @@
 ;;
 (defun clint-packages-installed-p ()
   "Check if all packages in `clint-packages' are installed."
-  (every #'package-installed-p clint-packages))
+  (cl-every #'package-installed-p clint-packages))
 
 (defun clint-require-package (package)
   "Install PACKAGE unless already installed."
