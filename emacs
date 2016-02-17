@@ -40,6 +40,7 @@
     magit                ;; A Git porcelain inside Emacs
     magit-popup          ;; Define prefix-infix-suffix command combos
     markdown-mode        ;; Emacs Major mode for Markdown-formatted text files
+    matlab-mode          ;; major mode for editing MATLAB files
     nginx-mode           ;; major mode for editing nginx config files
     pkg-info             ;; Information about packages
     popup                ;; Visual Popup User Interface
