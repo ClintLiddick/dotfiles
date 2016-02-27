@@ -106,16 +106,17 @@ Missing packages are installed automatically."
 (setq linum-format "%d ")
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
-
-;; Indentation
-(setq-default indent-tabs-mode nil)
-(setq tab-width 4)
-(setq c-basic-offset tab-width)
-(setq c-default-style "linux")
-(setq cperl-indent-level tab-width)
 (setq python-shell-interpreter "ipython")
 ;(define-key yas-minor-mode-map [(tab)] nil)
 ;(define-key yas-minor-mode-map (kbd "TAB") nil)
+
+
+;; Indentation
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+(setq c-basic-offset tab-width)
+(setq c-default-style "linux")
+(setq cperl-indent-level tab-width)
 
 
 ;; company-mode autocompletion
@@ -142,6 +143,10 @@ Missing packages are installed automatically."
 ;; Projectile
 (projectile-global-mode)
 (setq projectile-switch-project-action 'projectile-dired)
+
+
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 
 ;; Mouse
