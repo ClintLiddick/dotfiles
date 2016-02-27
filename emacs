@@ -32,9 +32,15 @@
 (setq linum-format "%d ")
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
-(setq-default indent-tabs-mode nil)
-(setq tab-width 4)
 (setq python-shell-interpreter "ipython")
+
+
+;; Indentation
+(setq-default indent-tabs-mode nil)
+(setq tab-width 2)
+(setq c-basic-offset tab-width)
+(setq c-default-style "linux")
+(setq cperl-indent-level tab-width)
 
 
 ;; company-mode autocompletion
@@ -58,6 +64,10 @@
 ;; Projectile
 (projectile-global-mode)
 (setq projectile-switch-project-action 'projectile-dired)
+
+
+;; Magit
+(global-set-key (kbd "C-x g") 'magit-status)
 
 
 ;; Mouse
