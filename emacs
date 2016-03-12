@@ -13,10 +13,10 @@
 
 (defvar clint-packages
   '(async                ;; Asynchronous processing in Emacs
-    auto-complete        ;; Auto Completion for GNU Emacs
     cmake-font-lock      ;; Advanced, type aware, highlight support for CMake
     cmake-mode           ;; No description available.
     company              ;; Modular text completion framework
+    company-flx          ;; flx based fuzzy matching for company
     company-jedi         ;; company-mode completion back-end for Python JEDI
     company-web          ;; Company version of ac-html, complete for web,html,emmet,jade,slim modes
     concurrent           ;; Concurrent utility functions for emacs lisp
@@ -31,6 +31,7 @@
     evil-nerd-commenter  ;; Comment/uncomment lines efficiently. Like Nerd Commenter in Vim
     flx                  ;; fuzzy matching with good sorting
     flx-ido              ;; flx integration for ido
+    flycheck             ;; on-the-fly syntax checking
     git-commit           ;; Edit Git commit messages
     goto-chg             ;; goto last change
     hl-todo              ;; highlight TODO keywords
@@ -117,6 +118,19 @@ Missing packages are installed automatically."
 (setq c-basic-offset tab-width)
 (setq c-default-style "linux")
 (setq cperl-indent-level tab-width)
+
+
+;; flycheck
+(add-hook 'after-init-hook #'global-flycheck-mode)
+(setq-default flycheck-gcc-language-standard "c++11"
+              flycheck-clang-language-standard "c++11")
+;; checkers:
+;; Python - flake8
+;; C++ - clang/gcc/cppcheck
+;; Rust - cargo
+;; Javascript - eslint
+;; LaTeX - chktex
+;; SQL - sqlint
 
 
 ;; company-mode autocompletion
