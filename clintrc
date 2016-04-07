@@ -11,7 +11,7 @@ alias e='emacsclient -nw'
 
 source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 
-source /opt/ros/indigo/setup.bash
+#source /opt/ros/indigo/setup.bash
 
 export WORKON_HOME=~/.envs
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
