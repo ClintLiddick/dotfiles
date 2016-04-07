@@ -13,6 +13,8 @@
 
 (defvar clint-packages
   '(async                ;; Asynchronous processing in Emacs
+    auctex               ;; TeX/LaTeX editing package
+    clang-format         ;; Format code using clang-format
     cmake-font-lock      ;; Advanced, type aware, highlight support for CMake
     cmake-mode           ;; No description available.
     company              ;; Modular text completion framework
@@ -122,8 +124,10 @@ Missing packages are installed automatically."
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
-(setq-default flycheck-gcc-language-standard "c++11"
-              flycheck-clang-language-standard "c++11")
+(add-hook 'c++-mode-hook (lambda()
+                           (setq flycheck-gcc-language-standard "c++11")
+                           (setq flycheck-clang-language-standard "c++11")))
+
 ;; checkers:
 ;; Python - flake8
 ;; C++ - clang/gcc/cppcheck
@@ -131,6 +135,11 @@ Missing packages are installed automatically."
 ;; Javascript - eslint
 ;; LaTeX - chktex
 ;; SQL - sqlint
+
+
+;; clang-format
+(require 'clang-format)
+(global-set-key [C-tab] 'clang-format-buffer)
 
 
 ;; company-mode autocompletion
@@ -161,6 +170,18 @@ Missing packages are installed automatically."
 
 ;; Magit
 (global-set-key (kbd "C-x g") 'magit-status)
+
+
+;; AUCTeX (LaTeX)
+(setq TeX-auto-save t)
+(setq TeX-parse-self t)
+(setq-default TeX-master nil)
+(add-hook 'LaTeX-mode-hook 'visual-line-mode)
+(add-hook 'LaTeX-mode-hook 'flyspell-mode)
+(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
+(setq reftex-plug-into-AUCTeX t)
+(setq TeX-PDF-mode t)
 
 
 ;; Mouse
@@ -201,7 +222,7 @@ Missing packages are installed automatically."
 ;; (load-theme 'adwaita)
 ;; GUI
 (if (display-graphic-p)
-    (set-default-font "DejaVu Sans Mono-11"))
+    (set-default-font "DejaVu Sans Mono-12"))
 
 
 ;; Custom
