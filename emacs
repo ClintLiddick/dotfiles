@@ -1,9 +1,3 @@
-;(require 'slime-config "/opt/ros/indigo/share/slime_ros/slime-config.el") ; slime_ros provides slime
-; QuickLisp
-;(setq inferior-lisp-program "sbcl")
-;(require 'slime-autoloads)
-
-
 ;; Packages
 (require 'cl-lib nil t)
 (require 'package)
@@ -139,7 +133,7 @@ Missing packages are installed automatically."
 
 ;; clang-format
 (require 'clang-format)
-(global-set-key [C-tab] 'clang-format-buffer)
+(evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
 
 
 ;; company-mode autocompletion
@@ -147,6 +141,8 @@ Missing packages are installed automatically."
 (require 'company-web-html)
 (add-hook 'after-init-hook 'global-company-mode)
 (setq company-idle-delay 0)
+(setq company-minimum-prefix-length 2)
+(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
 (add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
 
 
