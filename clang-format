@@ -8,3 +8,5 @@ BreakBeforeTernaryOperators: false
 BreakConstructorInitializersBeforeComma: true
 CommentPragmas:  ''
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
+CommentPragmas:  ''
+ConstructorInitializerAllOnOneLineOrOnePerLine: false

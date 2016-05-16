@@ -14,6 +14,7 @@
     company              ;; Modular text completion framework
     company-flx          ;; flx based fuzzy matching for company
     company-jedi         ;; company-mode completion back-end for Python JEDI
+    company-racer        ;; company-mode completion back-end for rust racer
     company-web          ;; Company version of ac-html, complete for web,html,emmet,jade,slim modes
     concurrent           ;; Concurrent utility functions for emacs lisp
     ctable               ;; Table component for Emacs Lisp
@@ -28,6 +29,7 @@
     flx                  ;; fuzzy matching with good sorting
     flx-ido              ;; flx integration for ido
     flycheck             ;; on-the-fly syntax checking
+    flycheck-rust        ;; flycheck backend for rust
     git-commit           ;; Edit Git commit messages
     goto-chg             ;; goto last change
     hl-todo              ;; highlight TODO keywords
@@ -43,6 +45,8 @@
     popup                ;; Visual Popup User Interface
     projectile           ;; Manage and navigate projects in Emacs easily
     python-environment   ;; virtualenv API for Emacs Lisp
+    racer                ;; Autocompletion with racer for rust
+    rust-mode            ;; Major mode for editing rust files
     sr-speedbar          ;; Same frame speedbar
     todotxt-mode         ;; Major mode for editing todo.txt files
     undo-tree            ;; Treat undo history as a tree
@@ -168,6 +172,17 @@ Missing packages are installed automatically."
 (global-set-key (kbd "C-x g") 'magit-status)
 
 
+;; rust/racer
+(require 'rust-mode)
+(setq racer-cmd "/usr/local/bin/racer")
+(setq racer-rust-src-path "/usr/local/src/rust/src")
+(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
+(add-hook 'rust-mode-hook #'racer-mode)
+(add-hook 'racer-mode-hook #'eldoc-mode)
+(add-hook 'racer-mode-hook #'company-mode)
+(evil-leader/set-key-for-mode 'rust-mode "f" 'rustfmt-format-buffer)
+
+
 ;; AUCTeX (LaTeX)
 (setq TeX-auto-save t)
 (setq TeX-parse-self t)
@@ -222,7 +237,7 @@ Missing packages are installed automatically."
 ;; (load-theme 'adwaita)
 ;; GUI
 (if (display-graphic-p)
-    (set-default-font "DejaVu Sans Mono-10"))
+    (set-default-font "DejaVu Sans Mono-12"))
 
 
 ;; Custom
