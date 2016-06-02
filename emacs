@@ -137,6 +137,7 @@ Missing packages are installed automatically."
 
 ;; clang-format
 (require 'clang-format)
+(evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
 (evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
 
 
