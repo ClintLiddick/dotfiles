@@ -7,8 +7,9 @@ alias sd='source devel/setup.bash'
 alias cb='catkin build'
 alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
 alias e='emacsclient -nw'
-# alias ext_monitor='xrandr --output HDMI1 --right-of eDP1 --mode'
+alias ext_monitor='xrandr --output HDMI2 --right-of eDP1 --mode 1920x1080'
 alias rustup='curl https://sh.rustup.rs -sSf | sh'
+alias showpings='sudo tcpdump -i eth0 icmp and icmp[icmptype]=icmp-echo'
 
 function ext_monitor {
     if [ -z "$1" ]
@@ -27,7 +28,7 @@ source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 export WORKON_HOME=~/.envs
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
 
-export PATH=~/.cabal/bin:/opt/node-current/bin:$PATH
+export PATH=~/sdk/emsdk_portable/emscripten/master:~/.cargo/bin:~/.cabal/bin:/opt/arduino-1.6.9:/opt/node-current/bin:$PATH
 
 export DEBEMAIL="clint@clintonliddick.com"
 export DEBFULLNAME="Clinton Liddick"
