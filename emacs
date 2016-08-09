@@ -238,13 +238,30 @@ Missing packages are installed automatically."
 ;; Custom Filetypes
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
 
+
 ;; Look
-;; (load-theme 'adwaita)
-;; GUI
+;; set font when in GUI mode
 (when (display-graphic-p)
   (set-frame-font "DejaVuSansMono-14")
   (load-theme 'solarized t))
 (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-14"))
+
+;; load theme on frame creation when running in daemon mode
+(if (daemonp)
+    (progn
+      (message "Booting in daemon mode")
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (select-frame frame)
+                  (if (display-graphic-p)
+                      (progn (message "Loading in graphic mode")
+                             (load-theme 'solarized t))
+                    (progn
+                      (message "Loading in non-graphic mode")
+                      (disable-theme 'solarized))))))
+  (progn
+    (message "Booting in non-daemon mode")
+    (load-theme 'solarized t)))
 
 
 ;; Custom
