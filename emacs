@@ -11,6 +11,7 @@
     clang-format         ;; Format code using clang-format
     cmake-font-lock      ;; Advanced, type aware, highlight support for CMake
     cmake-mode           ;; No description available.
+    color-theme-solarized;; Solarized themees for Emacs
     company              ;; Modular text completion framework
     company-flx          ;; flx based fuzzy matching for company
     company-jedi         ;; company-mode completion back-end for Python JEDI
@@ -241,8 +242,10 @@ Missing packages are installed automatically."
 ;; Look
 ;; (load-theme 'adwaita)
 ;; GUI
-(if (display-graphic-p)
-    (set-frame-font "DejaVu Sans Mono-10"))
+(when (display-graphic-p)
+  (set-frame-font "DejaVuSansMono-10")
+  (load-theme 'solarized t))
+(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-10"))
 
 
 ;; Custom
