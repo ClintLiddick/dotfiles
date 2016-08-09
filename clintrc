@@ -10,8 +10,9 @@ alias cb='catkin build'
 alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
 alias e='emacsclient -nw'
 alias ext_monitor='xrandr --output HDMI2 --right-of eDP1 --mode 1920x1080'
+alias ext_monitor_off='xrandr --output HDMI2 --off'
 alias rustup='curl https://sh.rustup.rs -sSf | sh'
-alias showpings='sudo tcpdump -i eth0 icmp and icmp[icmptype]=icmp-echo'
+alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
 
 function ext_monitor {
     if [ -z "$1" ]
