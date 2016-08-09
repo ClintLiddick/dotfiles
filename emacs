@@ -242,7 +242,7 @@ Missing packages are installed automatically."
 ;; (load-theme 'adwaita)
 ;; GUI
 (if (display-graphic-p)
-    (set-default-font "DejaVu Sans Mono-12"))
+    (set-frame-font "DejaVu Sans Mono-10"))
 
 
 ;; Custom
