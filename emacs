@@ -26,6 +26,7 @@
     evil                 ;; Extensible Vi layer for Emacs.
     evil-leader          ;; let there be <leader>
     evil-nerd-commenter  ;; Comment/uncomment lines efficiently. Like Nerd Commenter in Vim
+    evil-numbers         ;; increment / decrement binary, octal, decimal and hex literals
     flx                  ;; fuzzy matching with good sorting
     flx-ido              ;; flx integration for ido
     flycheck             ;; on-the-fly syntax checking
@@ -95,6 +96,9 @@ Missing packages are installed automatically."
 ;; Vim
 (require 'evil-leader)
 (global-evil-leader-mode) ; default leader is \
+(require 'evil-numbers)
+(evil-leader/set-key "+" 'evil-numbers/inc-at-pt)
+(evil-leader/set-key "0" 'evil-numbers/dec-at-pt)
 (require 'evil)
 (evil-mode 1)
 (evil-leader/set-key "q" 'evil-quit)
