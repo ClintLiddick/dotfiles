@@ -14,6 +14,7 @@
     color-theme-solarized;; Solarized themees for Emacs
     company              ;; Modular text completion framework
     company-flx          ;; flx based fuzzy matching for company
+    company-lua          ;; flx based fuzzy matching for company
     company-jedi         ;; company-mode completion back-end for Python JEDI
     company-racer        ;; company-mode completion back-end for rust racer
     company-web          ;; Company version of ac-html, complete for web,html,emmet,jade,slim modes
@@ -119,6 +120,7 @@ Missing packages are installed automatically."
 (setq c-basic-offset tab-width)
 (setq c-default-style "linux")
 (setq cperl-indent-level tab-width)
+(setq lua-indent-level 2)
 
 
 ;; flycheck
@@ -237,6 +239,7 @@ Missing packages are installed automatically."
 
 ;; Custom Filetypes
 (add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
+(add-to-list 'auto-mode-alist '("\\.t\\'" . lua-mode))
 
 
 ;; Look
