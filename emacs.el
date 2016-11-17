@@ -1,120 +1,239 @@
-;; Packages
-(require 'cl-lib nil t)
+;;; emacs-config --- my personal .emacs.el
+;;; Commentary:
+
+;;; Code:
+
+;; setup package archives
 (require 'package)
+(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.org/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
 
-(defvar clint-packages
-  '(async                ;; Asynchronous processing in Emacs
-    auctex               ;; TeX/LaTeX editing package
-    clang-format         ;; Format code using clang-format
-    cmake-font-lock      ;; Advanced, type aware, highlight support for CMake
-    cmake-mode           ;; No description available.
-    color-theme-solarized;; Solarized themees for Emacs
-    company              ;; Modular text completion framework
-    company-flx          ;; flx based fuzzy matching for company
-    company-lua          ;; flx based fuzzy matching for company
-    company-jedi         ;; company-mode completion back-end for Python JEDI
-    company-racer        ;; company-mode completion back-end for rust racer
-    company-web          ;; Company version of ac-html, complete for web,html,emmet,jade,slim modes
-    concurrent           ;; Concurrent utility functions for emacs lisp
-    ctable               ;; Table component for Emacs Lisp
-    dash                 ;; A modern list library for Emacs
-    deferred             ;; Simple asynchronous functions for emacs lisp
-    dockerfile-mode      ;; Major mode for editing Docker's Dockerfiles
-    epc                  ;; A RPC stack for the Emacs Lisp
-    epl                  ;; Emacs Package Library
-    evil                 ;; Extensible Vi layer for Emacs.
-    evil-leader          ;; let there be <leader>
-    evil-nerd-commenter  ;; Comment/uncomment lines efficiently. Like Nerd Commenter in Vim
-    flx                  ;; fuzzy matching with good sorting
-    flx-ido              ;; flx integration for ido
-    flycheck             ;; on-the-fly syntax checking
-    flycheck-rust        ;; flycheck backend for rust
-    git-commit           ;; Edit Git commit messages
-    goto-chg             ;; goto last change
-    hl-todo              ;; highlight TODO keywords
-    jedi                 ;; a Python auto-completion for Emacs
-    jedi-core            ;; Common code of jedi.el and company-jedi.el
-    lua-mode             ;; a major-mode for editing Lua scripts
-    magit                ;; A Git porcelain inside Emacs
-    magit-popup          ;; Define prefix-infix-suffix command combos
-    markdown-mode        ;; Emacs Major mode for Markdown-formatted text files
-    matlab-mode          ;; major mode for editing MATLAB files
-    nginx-mode           ;; major mode for editing nginx config files
-    pkg-info             ;; Information about packages
-    popup                ;; Visual Popup User Interface
-    projectile           ;; Manage and navigate projects in Emacs easily
-    python-environment   ;; virtualenv API for Emacs Lisp
-    racer                ;; Autocompletion with racer for rust
-    rust-mode            ;; Major mode for editing rust files
-    sr-speedbar          ;; Same frame speedbar
-    todotxt-mode         ;; Major mode for editing todo.txt files
-    undo-tree            ;; Treat undo history as a tree
-    web-completion-data  ;; Shared completion data for ac-html and company-web
-    with-editor          ;; Use the Emacsclient as $EDITOR
-    yaml-mode            ;; Major mode for editing YAML file
-    )
-  "A list of packages to ensure are installed at launch.")
-
-;; activate all packages (in particular autoloads)
-(package-initialize)
-
-;;
-;; custom package installation, adapted from https://github.com/bbatsov/prelude
-;;
-(defun clint-packages-installed-p ()
-  "Check if all packages in `clint-packages' are installed."
-  (cl-every #'package-installed-p clint-packages))
-
-(defun clint-require-package (package)
-  "Install PACKAGE unless already installed."
-  (unless (memq package clint-packages)
-    (add-to-list 'clint-packages package))
-  (unless (package-installed-p package)
-    (package-install package)))
-
-(defun clint-require-packages (packages)
-  "Ensure PACKAGES are installed.
-Missing packages are installed automatically."
-  (mapc #'clint-require-package packages))
-
-(defun clint-install-packages ()
-  "Install all packages listed in `clint-packages'."
-  (unless (clint-packages-installed-p)
-    ;; check for new packages (package versions)
-    (message "%s" "Emacs is now refreshing its package database...")
-    (package-refresh-contents)
-    (message "%s" " done.")
-    ;; install the missing packages
-    (clint-require-packages clint-packages)))
-
-;; run package installation
-(clint-install-packages)
+;; manually install use-package package manager
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
 
 
-;; Vim
-(require 'evil-leader)
-(global-evil-leader-mode) ; default leader is \
-(require 'evil)
-(evil-mode 1)
-(evil-leader/set-key "q" 'evil-quit)
-(global-set-key (kbd "M-;") 'evilnc-comment-or-uncomment-lines)
+;; configure use-package
+(setq use-package-always-ensure t)  ;; always download and install packages
+(setq use-package-always-pin "melpa-stable")  ;; prefer stable
+(eval-when-compile
+  (require 'use-package))
+(require 'bind-key)
+(require 'diminish)
 
 
-;; Misc
+;; automatically update packages daily
+(use-package spu
+  :defer
+  :pin melpa
+  :config (spu-package-upgrade-daily))
+
+;; evil - vi emulation
+(use-package evil-leader
+  :config
+  (global-evil-leader-mode)
+  (evil-leader/set-key "f" 'indent-according-to-mode)
+  (evil-leader/set-key "F" 'indent-region))
+(use-package evil
+  :config
+  (evil-mode 1)
+  (use-package evil-nerd-commenter
+    :bind (("M-;" . evilnc-comment-or-uncomment-lines)
+           :map evil-normal-state-map
+           ("/" . swiper))))
+
+
+;; flycheck syntax checking
+;; Python - flake8
+;; C++ - clang/gcc/cppcheck
+;; Rust - cargo
+;; Javascript - eslint
+;; LaTeX - chktex
+;; SQL - sqlint
+(use-package flycheck
+  :init 
+  (setq flycheck-gcc-language-standard "c++11")
+  (setq flycheck-clang-language-standard "c++11")
+  :config
+  (global-flycheck-mode)
+  (use-package flycheck-irony)
+  (add-hook 'flycheck-mode-hooqk 'flycheck-irony-setup)
+  (use-package flycheck-rust))
+
+
+;; C++
+;; auto-formatting
+(use-package clang-format
+  :config
+  (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
+  (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
+  (evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
+  (evil-leader/set-key-for-mode 'c-mode "F" 'clang-format-region))
+
+;; completion and search server
+(use-package irony
+  :config
+  (add-hook 'c++-mode-hook 'irony-mode)
+  (add-hook 'irony-mode-hook
+            (lambda ()
+              (define-key irony-mode-map [remap completion-at-point]
+                'irony-completion-at-point-async)
+              (define-key irony-mode-map [remap complete-symbol]
+                'irony-completion-at-point-async)))
+  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+
+
+;; ivy general completion
+(use-package ivy
+  :diminish (ivy-mode . "")
+  :init
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  :config
+  (ivy-mode 1))
+(use-package swiper)
+(use-package ivy-hydra)
+(use-package counsel
+  :init
+  (setq counsel-ag-base-command "rg --color=never --no-heading -H -e %s")
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c /" . counsel-ag)
+         ("C-c l" . counsel-locate)))
+
+
+;; projectile project interaction
+(use-package projectile
+  :init
+  (setq projectile-completion-system 'ivy)
+  :config
+  (projectile-global-mode))
+
+
+;; company code autocomplete
+(use-package company
+  :defer
+  :init (global-company-mode)
+  :bind ("TAB" . company-indent-or-complete-common)
+  :config
+  (setq company-idle-delay 0)
+  (setq company-minimum-prefix-length 2)
+
+  ;; the company-clang and company-c-headers can usually be replaced by
+  ;; more powerful company-irony versions, but those require the
+  ;; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON flag in order to work
+  ;; so we'll leave the original versions as fallback
+
+  ;; remove semantic so company-clang will actually be used
+  (setq company-backends (delete 'company-semantic company-backends))
+  ;; (use-package company-flx)
+  (use-package company-c-headers
+    :pin melpa
+    :config
+    (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")
+    (add-to-list 'company-backends 'company-c-headers))
+
+  (use-package company-irony
+    :config
+    (use-package company-irony-c-headers)
+    (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+
+  (use-package company-jedi
+    :config
+    (add-to-list 'company-backends 'company-jedi))
+
+  (use-package company-lua)
+  (use-package company-racer)
+  (use-package company-web)
+  (use-package web-completion-data))
+
+
+;; git
+(use-package git-commit)
+(use-package magit
+  :config
+  (setq magit-completing-read-function 'ivy-completing-read)
+  :bind ("C-x g" . magit-status))
+
+
+;; python
+(use-package jedi)
+(use-package jedi-core)
+
+
+;; rust
+(use-package rust-mode
+  :mode "\\.rs\\'"
+  :config
+  (use-package racer
+    :config
+    (add-hook 'rust-mode-hook 'racer-mode))
+  (evil-leader/set-key-for-mode 'rust-mode "f" 'rustfmt-format-buffer))
+
+
+;; AUCTeX (LaTeX)
+(use-package tex
+  :ensure auctex
+  :init
+  (setq TeX-auto-save t)
+  (setq TeX-parse-self t)
+  (setq-default TeX-master nil)
+  (setq reftex-plug-into-AUCTeX t)
+  (setq TeX-PDF-mode t)
+  :config
+  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+  (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
+
+
+;; speedbar
+(use-package sr-speedbar
+  :config
+  (setq speedbar-show-unknown-files t)
+  (setq sr-speedbar-right-side nil)
+  (evil-leader/set-key "s" 'sr-speedbar-toggle))
+
+
+;; mode packages
+(use-package cmake-mode
+  :mode ("CMakeLists\\.txt\\'"
+         "\\.cmake\\'"))
+(use-package dockerfile-mode :mode "Dockerfile\\'")
+(use-package lua-mode
+  :mode ("\\.lua\\'"
+         "\\.t\\'"))  ; terra files
+(use-package markdown-mode :mode "\\.md\\'")
+(use-package matlab-mode :mode "\\.m\\'")
+(use-package nginx-mode :mode "sites-available/.*'")
+(use-package yaml-mode
+  :mode ("\\.yaml\\'"
+         "\\.yml\\'"
+         "\\.sls\\'"))  ; salt files
+
+
+;; misc packages
+(use-package hl-todo)
+(use-package undo-tree
+  :diminish (undo-tree-mode . ""))
+(use-package with-editor)
+
+
+;; misc configuration
 (setq diff-switches "-u") ; unified diffs
 (global-linum-mode t)
 (setq linum-format "%d ")
+(setq column-number-mode t)
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
-(setq python-shell-interpreter "ipython")
-;(define-key yas-minor-mode-map [(tab)] nil)
-;(define-key yas-minor-mode-map (kbd "TAB") nil)
 
 
-;; Indentation
+;; indentation
 (setq-default indent-tabs-mode nil)
 (setq tab-width 2)
 (setq c-basic-offset tab-width)
@@ -123,96 +242,9 @@ Missing packages are installed automatically."
 (setq lua-indent-level 2)
 
 
-;; flycheck
-(add-hook 'after-init-hook #'global-flycheck-mode)
-(add-hook 'c++-mode-hook (lambda()
-                           (setq flycheck-gcc-language-standard "c++11")
-                           (setq flycheck-clang-language-standard "c++11")))
-
-;; checkers:
-;; Python - flake8
-;; C++ - clang/gcc/cppcheck
-;; Rust - cargo
-;; Javascript - eslint
-;; LaTeX - chktex
-;; SQL - sqlint
-
-
-;; clang-format
-(require 'clang-format)
-(evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
-(evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
-
-
-;; company-mode autocompletion
-(require 'company)
-(require 'company-web-html)
-(add-hook 'after-init-hook 'global-company-mode)
-(setq company-idle-delay 0)
-(setq company-minimum-prefix-length 2)
-(global-set-key (kbd "TAB") #'company-indent-or-complete-common)
-(add-hook 'python-mode-hook (lambda () (add-to-list 'company-backends 'company-jedi)))
-
-
-;; speedbar
-(require 'sr-speedbar) ;; for use in terminals
-(if (display-graphic-p)
-  (evil-leader/set-key "s" 'speedbar)
-  (evil-leader/set-key "s" 'sr-speedbar-toggle))
-
-
-;; Todo.txt
-(setq todotxt-default-file (expand-file-name "~/Dropbox/todo.txt"))
-(setq todotxt-default-archive-file (expand-file-name "~/Dropbox/done.txt"))
-(require 'todotxt-mode)
-
-
-;; Projectile
-(projectile-global-mode)
-(setq projectile-switch-project-action 'projectile-dired)
-
-
-;; Magit
-(global-set-key (kbd "C-x g") 'magit-status)
-
-
-;; rust/racer
-(require 'rust-mode)
-(setq racer-cmd "/usr/local/bin/racer")
-(setq racer-rust-src-path "/usr/local/src/rust/src")
-(add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-mode))
-(add-hook 'rust-mode-hook #'racer-mode)
-(add-hook 'racer-mode-hook #'eldoc-mode)
-(add-hook 'racer-mode-hook #'company-mode)
-(evil-leader/set-key-for-mode 'rust-mode "f" 'rustfmt-format-buffer)
-;; (add-hook `rust-mode-hook
-;;           '(lambda ()
-;;              (racer-active)
-;;              (racer-turn-on-eldoc)
-;;              (add-hook 'flycheck-mode-hook #'flycheck-rust-setup)
-;;              (set (make-local-variable 'company-backends) '(company-racer))
-;;              (local-set-key (kbd "M-.") #'racer-finder-definition)
-;;              (local-set-key (kbd "TAB") #'racer-complete-or-indent)))
-
-;; AUCTeX (LaTeX)
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
-(add-hook 'LaTeX-mode-hook 'visual-line-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
-(setq TeX-PDF-mode t)
-
-
-;; Mouse
-(require 'xt-mouse)
-(xterm-mouse-mode)
-(require 'mouse)
-(xterm-mouse-mode t)
-(defun track-mouse (e))
-(setq mouse-wheel-follow-mouse 't)
+;; mouse
+(use-package xt-mouse
+  :config (xterm-mouse-mode t))
 
 ;; enable mouse scrolling in terminal
 (defvar alternating-scroll-down-next t)
@@ -221,14 +253,12 @@ Missing packages are installed automatically."
 (defun alternating-scroll-down-line ()
   (interactive "@")
   (when alternating-scroll-down-next
-					;      (run-hook-with-args 'window-scroll-functions )
     (scroll-down-line))
   (setq alternating-scroll-down-next (not alternating-scroll-down-next)))
 
 (defun alternating-scroll-up-line ()
   (interactive "@")
   (when alternating-scroll-up-next
-					;      (run-hook-with-args 'window-scroll-functions)
     (scroll-up-line))
   (setq alternating-scroll-up-next (not alternating-scroll-up-next)))
 
@@ -237,60 +267,22 @@ Missing packages are installed automatically."
   (global-set-key (kbd "<mouse-5>") 'alternating-scroll-up-line))
 
 
-;; Custom Filetypes
-(add-to-list 'auto-mode-alist '("\\.sls\\'" . yaml-mode))
-(add-to-list 'auto-mode-alist '("\\.t\\'" . lua-mode))
-
-
-;; Look
-;; set font when in GUI mode
-(when (display-graphic-p)
-  (set-frame-font "DejaVuSansMono-14")
-  (load-theme 'solarized t))
+;; theme and font
 (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-14"))
+(if (display-graphic-p)
+    (set-frame-font "DejaVuSansMono-14"))
+(setq color-themes '())
+(use-package color-theme-solarized
+  :pin melpa
+  :config
+  (when (display-graphic-p)
+    (load-theme 'solarized t))
+  (add-hook 'after-make-frame-functions
+            (lambda (frame)
+              (message "made frame")
+              ;; (select-frame frame)
+              (when (display-graphic-p frame)
+                (set-frame-font "DejaVuSansMono-14")
+                (load-theme 'solarized t)))))
 
-;; load theme on frame creation when running in daemon mode
-(if (daemonp)
-    (progn
-      (message "Booting in daemon mode")
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (select-frame frame)
-                  (if (display-graphic-p)
-                      (progn (message "Loading in graphic mode")
-                             (load-theme 'solarized t))
-                    (progn
-                      (message "Loading in non-graphic mode")
-                      (disable-theme 'solarized))))))
-  (progn
-    (message "Booting in non-daemon mode")
-    (load-theme 'solarized t)))
-
-
-;; Custom
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(browse-url-browser-function (quote browse-url-generic))
- '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(projectile-project-root-files
-   (quote
-    ("rebar.config" "project.clj" "SConstruct" "pom.xml" "build.sbt" "build.gradle" "Gemfile" "requirements.txt" "setup.py" "tox.ini" "package.json" "gulpfile.js" "Gruntfile.js" "bower.json" "composer.json" "Cargo.toml" "mix.exs" "stack.yaml" "package.xml")))
- '(speedbar-show-unknown-files t)
- '(sr-speedbar-right-side nil))
-;;(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-;; '(font-lock-function-name-face ((t (:foreground "brightblue")))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(font-lock-function-name-face ((t (:foreground "brightblue")))))
+;;; emacs.el ends here
