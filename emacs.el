@@ -25,6 +25,7 @@
   (require 'use-package))
 (require 'bind-key)
 (require 'diminish)
+(use-package cl)
 
 
 ;; automatically update packages daily
@@ -63,12 +64,14 @@
   (global-flycheck-mode)
   (use-package flycheck-irony)
   (add-hook 'flycheck-mode-hooqk 'flycheck-irony-setup)
-  (use-package flycheck-rust))
+  (use-package flycheck-rust
+    :pin melpa))
 
 
 ;; C++
 ;; auto-formatting
 (use-package clang-format
+  :pin melpa
   :config
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
@@ -147,8 +150,10 @@
     :config
     (add-to-list 'company-backends 'company-jedi))
 
-  (use-package company-lua)
-  (use-package company-racer)
+  (use-package company-lua
+    :pin melpa)
+  (use-package company-racer
+    :pin melpa)
   (use-package company-web)
   (use-package web-completion-data))
 
@@ -171,6 +176,7 @@
   :mode "\\.rs\\'"
   :config
   (use-package racer
+    :pin melpa
     :config
     (add-hook 'rust-mode-hook 'racer-mode))
   (evil-leader/set-key-for-mode 'rust-mode "f" 'rustfmt-format-buffer))
@@ -194,6 +200,7 @@
 
 ;; speedbar
 (use-package sr-speedbar
+  :pin melpa
   :config
   (setq speedbar-show-unknown-files t)
   (setq sr-speedbar-right-side nil)
@@ -209,7 +216,9 @@
   :mode ("\\.lua\\'"
          "\\.t\\'"))  ; terra files
 (use-package markdown-mode :mode "\\.md\\'")
-(use-package matlab-mode :mode "\\.m\\'")
+(use-package matlab-mode
+  :pin melpa
+  :mode "\\.m\\'")
 (use-package nginx-mode :mode "sites-available/.*'")
 (use-package yaml-mode
   :mode ("\\.yaml\\'"
