@@ -115,7 +115,8 @@
   :init
   (setq projectile-completion-system 'ivy)
   :config
-  (projectile-global-mode))
+  (projectile-global-mode)
+  (setq projectile-switch-project-action 'neotree-projectile-action))
 
 
 ;; company code autocomplete
@@ -198,13 +199,15 @@
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
 
 
-;; speedbar
-(use-package sr-speedbar
-  :pin melpa
+;; neotree code directory tree viewer
+(use-package neotree
   :config
-  (setq speedbar-show-unknown-files t)
-  (setq sr-speedbar-right-side nil)
-  (evil-leader/set-key "s" 'sr-speedbar-toggle))
+  (setq neo-smart-open t)
+  (evil-leader/set-key "s" 'neotree-toggle)
+  (evil-define-key 'normal neotree-mode-map (kbd "TAB") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "SPC") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
+  (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide))
 
 
 ;; mode packages
@@ -289,7 +292,7 @@
   (add-hook 'after-make-frame-functions
             (lambda (frame)
               (message "made frame")
-              ;; (select-frame frame)
+              (select-frame frame)
               (when (display-graphic-p frame)
                 (set-frame-font "DejaVuSansMono-14")
                 (load-theme 'solarized t)))))
