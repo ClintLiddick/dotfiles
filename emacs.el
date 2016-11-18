@@ -219,7 +219,7 @@
 (use-package matlab-mode
   :pin melpa
   :mode "\\.m\\'")
-(use-package nginx-mode :mode "sites-available/.*'")
+(use-package nginx-mode :mode "/.*/sites-\\(?:available\\|enabled\\)/")
 (use-package yaml-mode
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
