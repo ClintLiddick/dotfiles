@@ -14,9 +14,9 @@ alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias sd='source devel/setup.bash'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
 
-if [ -f $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh ]; then
-    source $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh
-fi
+# if [ -f $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh ]; then
+    # source $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh
+# fi
 
 PATH_DIRS=(
     /opt/node-current/bin

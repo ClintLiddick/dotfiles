@@ -287,14 +287,13 @@
 (use-package color-theme-solarized
   :pin melpa
   :config
-  (when (display-graphic-p)
-    (load-theme 'solarized t))
-  (add-hook 'after-make-frame-functions
-            (lambda (frame)
-              (message "made frame")
-              (select-frame frame)
-              (when (display-graphic-p frame)
-                (set-frame-font "DejaVuSansMono-14")
-                (load-theme 'solarized t)))))
+  (load-theme 'solarized t)
+  (if (daemonp)
+      (add-hook 'after-make-frame-functions
+                (lambda (frame)
+                  (select-frame frame)
+                  (load-theme 'solarized t)
+                  (when (display-graphic-p frame)
+                    (set-frame-font "DejaVuSansMono-14"))))))
 
 ;;; emacs.el ends here
