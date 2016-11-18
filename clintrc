@@ -14,7 +14,7 @@ alias ext_monitor_off='xrandr --output HDMI2 --off'
 alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
 
-source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
+source $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh
 
 export WORKON_HOME=~/.envs
 source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
