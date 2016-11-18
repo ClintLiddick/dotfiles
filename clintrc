@@ -4,45 +4,57 @@ export TERM="xterm-256color"
 export EDITOR="emacsclient -t"
 export VISUAL="emacsclient -c -a emacs"
 
-alias dig='dig +search'
-alias sd='source devel/setup.bash'
 alias cb='catkin build'
-alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
+alias dig='dig +search'
 alias e='emacsclient -nw'
 alias ext_monitor='xrandr --output HDMI2 --right-of eDP1 --mode 1920x1080'
 alias ext_monitor_off='xrandr --output HDMI2 --off'
+alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
 alias rustup_web='curl https://sh.rustup.rs -sSf'
+alias sd='source devel/setup.bash'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
 
-source $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh
+if [ -f $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh ]; then
+    source $HOME/dotfiles/base16-shell/scripts/base16-solarized-light.sh
+fi
 
-export WORKON_HOME=~/.envs
-source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+PATH_DIRS=(
+    /opt/node-current/bin
+    /opt/arduino-1.6.9
+    ~/sdk/emsdk_portable/emscripten/master
+    ~/sdk/android-sdk-linux/tools
+    ~/sdk/android-sdk-linux/platform-tools
+    ~/.rvm/bin
+    ~/.cabal/bin
+    ~/node_modules/.bin
+    ~/.luarocks/bin
+    ~/.cargo/bin
+    ~/.local/bin
+    ~/bin
+)
 
-PATH_DIRS="~/.local/bin
-~/.cargo/bin
-~/.cabal/bin
-~/sdk/android-sdk-linux/platform-tools
-~/sdk/android-sdk-linux/tools
-~/sdk/emsdk_portable/emscripten/master
-/opt/arduino-1.6.9
-/opt/node-current/bin"
-
-for pd in $PATH_DIRS
-do
+for pd in $PATH_DIRS; do
     if [ -d $pd ]
     then
-        export PATH=$pd:$PATH
+        export PATH="$pd:$PATH"
     fi
 done
 
+# Setup Debian packaging
 export DEBEMAIL="clint@clintonliddick.com"
 export DEBFULLNAME="Clinton Liddick"
 
 alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 complete -F _quilt_completion $_quilt_complete_opt dquilt
 
-export RUST_SRC_PATH=/usr/local/src/rust/src
+# rustc source location for racer
+export RUST_SRC_PATH="$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+
+# Setup Python Virtualenv[wrapper]
+export WORKON_HOME=~/.envs
+if [ -f /usr/share/virtualenvwrapper/virtualenvwrapper.sh ]; then
+    source /usr/share/virtualenvwrapper/virtualenvwrapper.sh
+fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f /home/clint/sdk/google-cloud-sdk/path.bash.inc ]; then
