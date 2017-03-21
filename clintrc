@@ -2,17 +2,12 @@
 
 alias cb='catkin build'
 alias dig='dig +search'
+alias dumpcore='ulimit -c unlimited'
 alias e='emacsclient -nw'
 alias filemanager='xfe'
-alias weather='curl http://wttr.in/Pittsburgh'
-alias dig='dig +search'
-alias sd='source devel/setup.bash'
-alias cb='catkin build'
 alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
-alias dumpcore='ulimit -c unlimited'
-
-source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
-
+alias sd='source devel/setup.bash'
+alias weather='curl http://wttr.in/Pittsburgh'
 
 # Setup Debian packaging
 export DEBEMAIL="clint@clintonliddick.com"
@@ -22,7 +17,7 @@ alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 complete -F _quilt_completion $_quilt_complete_opt dquilt
 
 # rustc source location for racer
-export RUST_SRC_PATH="$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+# export RUST_SRC_PATH="$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f /home/clint/sdk/google-cloud-sdk/path.bash.inc ]; then
