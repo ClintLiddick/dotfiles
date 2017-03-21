@@ -1,0 +1,27 @@
+#!/bin/sh
+
+TERM="rxvt-unicode-256color"
+EDITOR="emacsclient -t"
+VISUAL="emacsclient -c -a emacs"
+
+PATH_DIRS=(
+    /opt/node-current/bin
+    /opt/arduino-1.6.9
+    ~/sdk/emsdk_portable/emscripten/master
+    ~/sdk/android-sdk-linux/tools
+    ~/sdk/android-sdk-linux/platform-tools
+    ~/.rvm/bin
+    ~/.cabal/bin
+    ~/node_modules/.bin
+    ~/.luarocks/bin
+    ~/.cargo/bin
+    ~/.local/bin
+    ~/bin
+)
+
+for pd in ${PATH_DIRS[*]}; do
+    if [ -d $pd ]
+    then
+        PATH="$pd:$PATH"
+    fi
+done

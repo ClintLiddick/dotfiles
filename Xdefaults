@@ -1,0 +1,3 @@
+!! rxvt-unicode !!
+
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=16,xft:Monospace:pixelsize=18,antialias=true:hinting=true

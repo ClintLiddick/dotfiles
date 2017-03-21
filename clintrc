@@ -1,9 +1,7 @@
 #!/bin/bash
 
-export TERM="xterm-256color"
-export EDITOR="emacsclient -t"
-export VISUAL="emacsclient -c -a emacs"
-
+alias cb='catkin build'
+alias dig='dig +search'
 alias e='emacsclient -nw'
 alias filemanager='xfe'
 alias weather='curl http://wttr.in/Pittsburgh'
@@ -16,18 +14,25 @@ alias dumpcore='ulimit -c unlimited'
 source $HOME/dotfiles/base16-shell/base16-solarized.light.sh
 
 
-if [ "$(hostname)" == 'flexo' ]; then
-
-    export WORKON_HOME=~/.envs
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
-
-export PATH=~/sdk/emsdk_portable/emscripten/master:/opt/node-current/bin:$PATH
-
-export DEBEMAIL="cliddick@cmu.edu"
+# Setup Debian packaging
+export DEBEMAIL="clint@clintonliddick.com"
 export DEBFULLNAME="Clinton Liddick"
 
 alias dquilt="quilt --quiltrc=${HOME}/.quiltrc-dpkg"
 complete -F _quilt_completion $_quilt_complete_opt dquilt
 
-export RUST_SRC_PATH=/usr/local/src/rust/src
+# rustc source location for racer
+export RUST_SRC_PATH="$HOME/.multirust/toolchains/nightly-x86_64-unknown-linux-gnu/lib/rustlib/src/rust/src"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f /home/clint/sdk/google-cloud-sdk/path.bash.inc ]; then
+  source '/home/clint/sdk/google-cloud-sdk/path.bash.inc'
+fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f /home/clint/sdk/google-cloud-sdk/completion.bash.inc ]; then
+  source '/home/clint/sdk/google-cloud-sdk/completion.bash.inc'
+fi
+
+# added by travis gem
+[ -f /home/clint/.travis/travis.sh ] && source /home/clint/.travis/travis.sh

@@ -2,7 +2,7 @@
 
 /usr/bin/ibus-daemon  -d -r -n awesome
 urxvtd -q -o -f
-dropbox start
+#dropbox start
 emacs --daemon
 
 exec awesome
