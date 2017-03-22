@@ -180,6 +180,7 @@
     :config
     (add-hook 'rust-mode-hook 'racer-mode))
   (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
+(use-package cargo)
 
 
 ;; AUCTeX (LaTeX)
@@ -217,7 +218,9 @@
 (use-package lua-mode
   :mode ("\\.lua\\'"
          "\\.t\\'"))  ; terra files
-(use-package markdown-mode :mode "\\.md\\'")
+(use-package markdown-mode
+  :mode "\\.md\\'"
+  :init (setq markdown-command "markdown2"))
 (use-package matlab-mode
   :pin melpa
   :mode "\\.m\\'")
@@ -226,6 +229,7 @@
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
          "\\.sls\\'"))  ; salt files
+(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 
 
 ;; misc packages
@@ -291,25 +295,8 @@
       (add-hook 'after-make-frame-functions
                 (lambda (frame)
                   (select-frame frame)
-                  ;; (load-theme 'solarized t)
+                  (load-theme 'solarized t)
                   (when (display-graphic-p frame)
-                    (set-frame-font "DejaVuSansMono-12"))))))
+                    (set-frame-font "DejaVuSansMono-14"))))))
 
 ;;; emacs.el ends here
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   (quote
-    ("8db4b03b9ae654d4a57804286eb3e332725c84d7cdab38463cb6b97d5762ad26" default)))
- '(package-selected-packages
-   (quote
-    (racer color-theme-solarized hl-todo yaml-mode nginx-mode matlab-mode markdown-mode dockerfile-mode cmake-mode neotree auctex rust-mode jedi magit git-commit company-web company-racer company-lua company-jedi company-irony-c-headers company-irony company-c-headers company projectile counsel ivy-hydra swiper ivy clang-format flycheck-rust flycheck-irony flycheck evil-nerd-commenter evil-leader spu use-package))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
