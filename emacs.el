@@ -180,7 +180,8 @@
     :pin melpa
     :config
     (add-hook 'rust-mode-hook 'racer-mode))
-  (evil-leader/set-key-for-mode 'rust-mode "f" 'rustfmt-format-buffer))
+  (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
+(use-package cargo)
 
 
 ;; AUCTeX (LaTeX)
@@ -218,7 +219,9 @@
 (use-package lua-mode
   :mode ("\\.lua\\'"
          "\\.t\\'"))  ; terra files
-(use-package markdown-mode :mode "\\.md\\'")
+(use-package markdown-mode
+  :mode "\\.md\\'"
+  :init (setq markdown-command "markdown2"))
 (use-package matlab-mode
   :pin melpa
   :mode "\\.m\\'")
@@ -227,6 +230,7 @@
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
          "\\.sls\\'"))  ; salt files
+(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 
 
 ;; misc packages

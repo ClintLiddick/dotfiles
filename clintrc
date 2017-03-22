@@ -7,8 +7,11 @@ export VISUAL="emacsclient -c -a emacs"
 alias cb='catkin build'
 alias dig='dig +search'
 alias e='emacsclient -nw'
-alias ext_monitor='xrandr --output HDMI2 --right-of eDP1 --mode 1920x1080'
-alias ext_monitor_off='xrandr --output HDMI2 --off'
+alias ext_monitor='xrandr --output eDP-1 --off --output DP-1 --auto'
+#--mode 2560x1080'
+alias ext_monitor_off='xrandr --output eDP-1 --auto --output DP-1 --off'
+alias present_monitor='xrandr --output HDMI-2 --right-of eDP-1 --mode 1920x1080'
+alias present_monitor_off='xrandr --output HDMI-2 --off'
 alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
 alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias sd='source devel/setup.bash'
@@ -21,19 +24,20 @@ alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
 PATH_DIRS=(
     /opt/node-current/bin
     /opt/arduino-1.6.9
-    ~/sdk/emsdk_portable/emscripten/master
-    ~/sdk/android-sdk-linux/tools
-    ~/sdk/android-sdk-linux/platform-tools
-    ~/.rvm/bin
-    ~/.cabal/bin
-    ~/node_modules/.bin
-    ~/.luarocks/bin
-    ~/.cargo/bin
-    ~/.local/bin
-    ~/bin
+    $HOME/sdk/emsdk_portable/emscripten/master
+    $HOME/sdk/android-sdk-linux/tools
+    $HOME/sdk/android-sdk-linux/platform-tools
+    $HOME/.rvm/bin
+    $HOME/.gem/ruby/2.3.0/bin
+    $HOME/.cabal/bin
+    $HOME/node_modules/.bin
+    $HOME/.luarocks/bin
+    $HOME/.cargo/bin
+    $HOME/.local/bin
+    $HOME/bin
 )
 
-for pd in $PATH_DIRS; do
+for pd in ${PATH_DIRS[@]}; do
     if [ -d $pd ]
     then
         export PATH="$pd:$PATH"
