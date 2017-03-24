@@ -3,6 +3,8 @@
 
 ;;; Code:
 
+;; don't put custom-set-variables in emacs.el
+(setq custom-file (make-temp-file "emacs-custom"))
 ;; setup package archives
 (require 'package)
 (setq package-enable-at-startup nil)
@@ -31,7 +33,6 @@
 ;; automatically update packages daily
 (use-package spu
   :defer
-  :pin melpa
   :config (spu-package-upgrade-daily))
 
 ;; evil - vi emulation
@@ -57,21 +58,24 @@
 ;; LaTeX - chktex
 ;; SQL - sqlint
 (use-package flycheck
-  :init 
-  (setq flycheck-gcc-language-standard "c++11")
-  (setq flycheck-clang-language-standard "c++11")
   :config
   (global-flycheck-mode)
   (use-package flycheck-irony)
   (add-hook 'flycheck-mode-hooqk 'flycheck-irony-setup)
-  (use-package flycheck-rust
-    :pin melpa))
+  (add-hook 'c++-mode-hook
+            (lambda()
+              (setq flycheck-gcc-language-standard "c++11")
+              (setq flycheck-clang-language-standard "c++11")))
+  (add-hook 'c-mode-hook
+            (lambda()
+              (setq flycheck-gcc-language-standard "c11")
+              (setq flycheck-clang-language-standard "c11")))
+  (use-package flycheck-rust))
 
 
 ;; C++
 ;; auto-formatting
 (use-package clang-format
-  :pin melpa
   :config
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
@@ -297,6 +301,6 @@
                   (select-frame frame)
                   (load-theme 'solarized t)
                   (when (display-graphic-p frame)
-                    (set-frame-font "DejaVuSansMono-14"))))))
+                    (set-frame-font "DejaVuSansMono-12"))))))
 
 ;;; emacs.el ends here
