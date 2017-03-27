@@ -7,7 +7,7 @@ volume_widget:set_align("right")
 
 function update_volume(widget)
    -- get Master volume
-   local fd = io.popen("amixer -c 1 sget Master") 
+   local fd = io.popen("amixer sget Master")
    local status = fd:read("*all")
    fd:close()
 
