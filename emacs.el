@@ -32,6 +32,7 @@
 
 ;; automatically update packages daily
 (use-package spu
+  :pin melpa
   :defer
   :config (spu-package-upgrade-daily))
 
@@ -70,12 +71,14 @@
             (lambda()
               (setq flycheck-gcc-language-standard "c11")
               (setq flycheck-clang-language-standard "c11")))
-  (use-package flycheck-rust))
+  (use-package flycheck-rust
+    :pin melpa))
 
 
 ;; C++
 ;; auto-formatting
 (use-package clang-format
+  :pin melpa
   :config
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
