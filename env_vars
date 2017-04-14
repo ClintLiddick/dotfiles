@@ -6,6 +6,7 @@ VISUAL="emacsclient -c -a emacs"
 
 PATH_DIRS=(
     /opt/node-current/bin
+    /opt/emsdk-portable
     /opt/arduino-1.6.9
     /usr/local/cuda-8.0/bin
     ~/sdk/emsdk_portable/emscripten/master
