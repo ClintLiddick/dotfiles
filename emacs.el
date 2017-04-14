@@ -299,15 +299,14 @@
 (if (display-graphic-p)
     (set-frame-font "DejaVuSansMono-12"))
 (setq color-themes '())
-(use-package color-theme-solarized
+(use-package zenburn-theme
   :pin melpa
   :config
-  ;; (load-theme 'solarized t)
   (if (daemonp)
       (add-hook 'after-make-frame-functions
                 (lambda (frame)
                   (select-frame frame)
-                  (load-theme 'solarized t)
+                  (load-theme 'zenburn t)
                   (when (display-graphic-p frame)
                     (set-frame-font "DejaVuSansMono-12"))))))
 
