@@ -145,7 +145,7 @@
   (use-package company-c-headers
     :pin melpa
     :config
-    (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")
+    (add-to-list 'company-c-headers-path-system "/usr/include/c++/5")
     (add-to-list 'company-backends 'company-c-headers))
 
   (use-package company-irony
@@ -253,11 +253,12 @@
 (setq column-number-mode t)
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
+(setq gdb-many-windows t)
 
 
 ;; indentation
 (setq-default indent-tabs-mode nil)
-(setq tab-width 2)
+(setq tab-width 4)
 (setq c-basic-offset tab-width)
 (setq c-default-style "linux")
 (setq cperl-indent-level tab-width)
