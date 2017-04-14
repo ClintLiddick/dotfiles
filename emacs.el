@@ -176,6 +176,8 @@
 ;; python
 (use-package jedi)
 (use-package jedi-core)
+(setq python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt -i")
 
 
 ;; rust
@@ -237,6 +239,8 @@
          "\\.yml\\'"
          "\\.sls\\'"))  ; salt files
 (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+(use-package protobuf-mode
+  :mode "\\.proto\\'")
 
 
 ;; misc packages
