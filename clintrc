@@ -1,11 +1,11 @@
 #!/bin/bash
 
-alias cb='catkin build'
+alias bb='bazel build ...'
 alias dig='dig +search'
 alias dumpcore='ulimit -c unlimited'
 alias e='emacsclient -nw'
-alias ext_monitor='xrandr --output eDP-1 --off --output DP-1 --auto'
-alias ext_monitor_off='xrandr --output eDP-1 --auto --output DP-1 --off'
+alias ext_monitor='xrandr --output DP-0 --off --output HDMI-0 --auto'
+alias ext_monitor_off='xrandr --output DP-0 --auto --output HDMI-0 --off'
 alias filemanager='xfe'
 alias present_monitor='xrandr --output HDMI-2 --right-of eDP-1 --mode 1920x1080'
 alias present_monitor_off='xrandr --output HDMI-2 --off'
@@ -13,6 +13,7 @@ alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.
 alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias sd='source devel/setup.bash'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
+alias tags='ctags -eR --exclude="bazel-*" --exclude=third_party .'
 alias weather='curl http://wttr.in/Pittsburgh'
 
 # Setup Debian packaging
