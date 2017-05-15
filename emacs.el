@@ -295,9 +295,9 @@
 
 
 ;; theme and font
-(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-12"))
+(add-to-list 'default-frame-alist '(font . "SourceCodePro-12"))
 (if (display-graphic-p)
-    (set-frame-font "DejaVuSansMono-12"))
+    (set-frame-font "SourceCodePro-12"))
 (setq color-themes '())
 (use-package zenburn-theme
   :pin melpa
@@ -308,6 +308,6 @@
                   (select-frame frame)
                   (load-theme 'zenburn t)
                   (when (display-graphic-p frame)
-                    (set-frame-font "DejaVuSansMono-12"))))))
+                    (set-frame-font "SourceCodePro-12"))))))
 
 ;;; emacs.el ends here
