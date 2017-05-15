@@ -14,6 +14,7 @@ alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias sd='source devel/setup.bash'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
 alias tags='ctags -eR --exclude="bazel-*" --exclude=third_party .'
+alias usecling='export PATH=/opt/cling/bin:$PATH'
 alias weather='curl http://wttr.in/Pittsburgh'
 
 # Setup Debian packaging
