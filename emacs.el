@@ -110,10 +110,9 @@
 (use-package ivy-hydra)
 (use-package counsel
   :init
-  (setq counsel-ag-base-command "rg --color=never --no-heading -H -e %s")
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c /" . counsel-ag)
+         ("C-c /" . counsel-rg)
          ("C-c l" . counsel-locate)))
 
 
