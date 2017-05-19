@@ -9,9 +9,9 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 (add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives
+             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 ;; manually install use-package package manager
@@ -22,7 +22,7 @@
 
 ;; configure use-package
 (setq use-package-always-ensure t)  ;; always download and install packages
-(setq use-package-always-pin "melpa-stable")  ;; prefer stable
+(setq use-package-always-pin "melpa")  ;; prefer latest
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
@@ -32,7 +32,6 @@
 
 ;; automatically update packages daily
 (use-package spu
-  :pin melpa
   :defer
   :config (spu-package-upgrade-daily))
 
@@ -61,24 +60,22 @@
 (use-package flycheck
   :config
   (global-flycheck-mode)
-  (use-package flycheck-irony)
-  (add-hook 'flycheck-mode-hooqk 'flycheck-irony-setup)
+  ;; (use-package flycheck-irony)
+  ;; (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
   (add-hook 'c++-mode-hook
             (lambda()
-              (setq flycheck-gcc-language-standard "c++11")
-              (setq flycheck-clang-language-standard "c++11")))
+              (setq flycheck-gcc-language-standard "c++14")
+              (setq flycheck-clang-language-standard "c++14")))
   (add-hook 'c-mode-hook
             (lambda()
               (setq flycheck-gcc-language-standard "c11")
               (setq flycheck-clang-language-standard "c11")))
-  (use-package flycheck-rust
-    :pin melpa))
+  (use-package flycheck-rust))
 
 
 ;; C++
 ;; auto-formatting
 (use-package clang-format
-  :pin melpa
   :config
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
@@ -86,16 +83,17 @@
   (evil-leader/set-key-for-mode 'c-mode "F" 'clang-format-region))
 
 ;; completion and search server
-(use-package irony
-  :config
-  (add-hook 'c++-mode-hook 'irony-mode)
-  (add-hook 'irony-mode-hook
-            (lambda ()
-              (define-key irony-mode-map [remap completion-at-point]
-                'irony-completion-at-point-async)
-              (define-key irony-mode-map [remap complete-symbol]
-                'irony-completion-at-point-async)))
-  (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
+;; (use-package irony
+;;   :config
+;;   (add-hook 'c++-mode-hook 'irony-mode)
+;;   (add-hook 'c-mode-hook 'irony-mode)
+;;   (add-hook 'irony-mode-hook
+;;             (lambda ()
+;;               (define-key irony-mode-map [remap completion-at-point]
+;;                 'irony-completion-at-point-async)
+;;               (define-key irony-mode-map [remap complete-symbol]
+;;                 'irony-completion-at-point-async)))
+;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 
 ;; ivy general completion
@@ -141,26 +139,25 @@
 
   ;; remove semantic so company-clang will actually be used
   (setq company-backends (delete 'company-semantic company-backends))
+  (setq company-backends (delete 'company-clang company-backends))
   ;; (use-package company-flx)
   (use-package company-c-headers
-    :pin melpa
     :config
-    (add-to-list 'company-c-headers-path-system "/usr/include/c++/5")
-    (add-to-list 'company-backends 'company-c-headers))
+    (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
+    (add-to-list 'company-backends 'company-etags)
+    (add-to-list 'company-backends 'company-c-headers)
 
-  (use-package company-irony
-    :config
-    (use-package company-irony-c-headers)
-    (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
+  ;; (use-package company-irony
+  ;;   :config
+  ;;   (use-package company-irony-c-headers)
+  ;;   (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
 
   (use-package company-jedi
     :config
     (add-to-list 'company-backends 'company-jedi))
 
-  (use-package company-lua
-    :pin melpa)
-  (use-package company-racer
-    :pin melpa)
+  (use-package company-lua)
+  (use-package company-racer)
   (use-package company-web)
   (use-package web-completion-data))
 
@@ -185,7 +182,6 @@
   :mode "\\.rs\\'"
   :config
   (use-package racer
-    :pin melpa
     :config
     (add-hook 'rust-mode-hook 'racer-mode))
   (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
@@ -231,7 +227,6 @@
   :mode "\\.md\\'"
   :init (setq markdown-command "markdown2"))
 (use-package matlab-mode
-  :pin melpa
   :mode "\\.m\\'")
 (use-package nginx-mode :mode "/.*/sites-\\(?:available\\|enabled\\)/")
 (use-package yaml-mode
@@ -300,7 +295,6 @@
     (set-frame-font "SourceCodePro-12"))
 (setq color-themes '())
 (use-package zenburn-theme
-  :pin melpa
   :config
   (if (daemonp)
       (add-hook 'after-make-frame-functions
