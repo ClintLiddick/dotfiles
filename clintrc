@@ -1,6 +1,7 @@
 #!/bin/bash
 
-alias bb='bazel build ...'
+alias bb='bazel build -- //... -//third_party/...'
+alias bt='bazel test -- //... -//third_party/...'
 alias dig='dig +search'
 alias dumpcore='ulimit -c unlimited'
 alias e='emacsclient -nw'
@@ -13,7 +14,7 @@ alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.
 alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias sd='source devel/setup.bash'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
-alias tags='ctags -eR --exclude="bazel-*" --exclude=third_party .'
+alias tags='ctags -eR --exclude="bazel-*" --exclude=third_party --exclude=venv .'
 alias usecling='export PATH=/opt/cling/bin:$PATH'
 alias weather='curl http://wttr.in/Pittsburgh'
 
