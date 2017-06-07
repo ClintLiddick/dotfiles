@@ -1,7 +1,9 @@
 #!/bin/bash
 
-alias bb='bazel build -- //... -//third_party/...'
-alias bt='bazel test -- //... -//third_party/...'
+alias al='arc lint --severity advice'
+alias bb='bazel build -- //... -//third_party/... //gpu/... //sensors/camera/... //config/data_mule //config/data_pony //video:EncoderModule //video/source:cuda_mapper -//gpu/camera/...'
+alias bdb='bazel build -c dbg -- //... -//third_party/... //gpu/... //sensors/camera/... //config/data_mule //config/data_pony //video:EncoderModule //video/source:cuda_mapper -//gpu/camera/...'
+alias bt='bazel test -- //... -//third_party/... //gpu/... //sensors/camera/... //config/data_mule //config/data_pony //video:EncoderModule //video/source:cuda_mapper -//gpu/camera/...'
 alias dig='dig +search'
 alias dumpcore='ulimit -c unlimited'
 alias e='emacsclient -nw'
@@ -14,7 +16,7 @@ alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.
 alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias sd='source devel/setup.bash'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
-alias tags='ctags -eR --exclude="bazel-*" --exclude=third_party --exclude=venv .'
+alias tags='ctags -eR --exclude="*.js" --exclude="bazel-*" --exclude=third_party --exclude=venv .'
 alias usecling='export PATH=/opt/cling/bin:$PATH'
 alias weather='curl http://wttr.in/Pittsburgh'
 
