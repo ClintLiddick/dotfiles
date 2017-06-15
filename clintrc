@@ -1,9 +1,9 @@
 #!/bin/bash
 
 alias al='arc lint --severity advice'
-alias bb='bazel build -- //... -//third_party/... //gpu/... //sensors/camera/... //config/data_mule //config/data_pony //video:EncoderModule //video/source:cuda_mapper -//gpu/camera/...'
-alias bdb='bazel build -c dbg -- //... -//third_party/... //gpu/... //sensors/camera/... //config/data_mule //config/data_pony //video:EncoderModule //video/source:cuda_mapper -//gpu/camera/...'
-alias bt='bazel test -- //... -//third_party/... //gpu/... //sensors/camera/... //config/data_mule //config/data_pony //video:EncoderModule //video/source:cuda_mapper -//gpu/camera/...'
+alias bb='bazel build'
+alias bdb='bazel build -c dbg'
+alias bt='bazel test'
 alias dig='dig +search'
 alias dumpcore='ulimit -c unlimited'
 alias e='emacsclient -nw'
