@@ -235,6 +235,7 @@
 (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 (use-package protobuf-mode
   :mode "\\.proto\\'")
+(add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 
 
 ;; misc packages
