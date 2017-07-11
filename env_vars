@@ -1,8 +1,14 @@
 #!/bin/bash
 
-TERM="rxvt-unicode-256color"
-EDITOR="emacsclient -t"
-VISUAL="emacsclient -c -a emacs"
+export TERM="rxvt-unicode-256color"
+export EDITOR="emacsclient -t"
+export VISUAL="emacsclient -c -a emacs"
+
+export HISTFILESIZE=
+export HISTSIZE=
+export HISTIMEFORMAT="[%F %T] "
+export HISTFILE=~/.bash_eternal_history
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 PATH_DIRS=(
     /opt/arduino-1.6.9
