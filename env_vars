@@ -10,6 +10,9 @@ export HISTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
+export AV=$HOME/av
+export PYTHONPATH=$AV/bazel-bin:$AV/bazel-genfiles:$AV/bazel-av:$AV:$PYTHONPATH
+
 PATH_DIRS=(
     /opt/arduino-1.6.9
     /opt/emsdk-portable
