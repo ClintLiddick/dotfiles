@@ -172,6 +172,9 @@
 ;; python
 (use-package jedi)
 (use-package jedi-core)
+(use-package yapfify
+  :config
+  (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
 (setq python-shell-interpreter "ipython"
       python-shell-interpreter-args "--simple-prompt -i")
 
@@ -235,6 +238,7 @@
 (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 (use-package protobuf-mode
   :mode "\\.proto\\'")
+(add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 
 
 ;; misc packages
