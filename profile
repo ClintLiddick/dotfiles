@@ -36,3 +36,6 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 . "$HOME/dotfiles/env_vars"
+
+
+export PATH="$HOME/.cargo/bin:$PATH"

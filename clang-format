@@ -3,10 +3,7 @@ BasedOnStyle:  Google
 AccessModifierOffset: -2
 AllowShortBlocksOnASingleLine: true
 BreakBeforeBinaryOperators: NonAssignment
-BreakBeforeBraces: Linux
+BreakBeforeBraces: Attach
 BreakBeforeTernaryOperators: false
 BreakConstructorInitializersBeforeComma: true
 CommentPragmas:  ''
-ConstructorInitializerAllOnOneLineOrOnePerLine: false
-CommentPragmas:  ''
-ConstructorInitializerAllOnOneLineOrOnePerLine: false

@@ -256,11 +256,11 @@
 
 ;; indentation
 (setq-default indent-tabs-mode nil)
-(setq tab-width 4)
+(setq tab-width 2)
 (setq c-basic-offset tab-width)
 (setq c-default-style "linux")
 (setq cperl-indent-level tab-width)
-(setq lua-indent-level 2)
+(setq lua-indent-level tab-width)
 
 
 ;; mouse
@@ -289,9 +289,11 @@
 
 
 ;; theme and font
-(add-to-list 'default-frame-alist '(font . "SourceCodePro-12"))
+;; (add-to-list 'default-frame-alist '(font . "SourceCodePro-12"))
+(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-10"))
 (if (display-graphic-p)
-    (set-frame-font "SourceCodePro-12"))
+    ;; (set-frame-font "SourceCodePro-12"))
+    (set-frame-font "DejaVuSansMono-10"))
 (setq color-themes '())
 (use-package zenburn-theme
   :config
@@ -301,6 +303,7 @@
                   (select-frame frame)
                   (load-theme 'zenburn t)
                   (when (display-graphic-p frame)
-                    (set-frame-font "SourceCodePro-12"))))))
+                    (set-frame-font "DejaVuSansMono-10"))))))
+                    ;; (set-frame-font "SourceCodePro-12"))))))
 
 ;;; emacs.el ends here
