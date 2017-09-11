@@ -22,12 +22,11 @@ alias al='arc lint --severity advice'
 alias bb='bazel build'
 alias bdb='bazel build -c dbg'
 alias bt='bazel test'
-alias log_dump='~/av/bazel-bin/common/logging/log_dump --manifest_path'
-alias log_replayer='~/av/bazel-bin/common/logging/log_replayer --manifest_path'
 alias runoff='~/av/bazel-bin/common/framework/stack_run --logtostderr --policy ~/av/experimental/clint/configs/clint_logging.cfg --offline --config'
 alias runon='~/av/bazel-bin/common/framework/stack_run --logtostderr -s --policy ~/av/experimental/clint/configs/clint_logging.cfg --config'
 alias scryon='~/av/bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry.cfg --stack_host localhost'
 alias scrycar='~/av/bazel-bin/visualization/scry/scry --config ~/av/config/mkz-g2/scry/onboard_bridge.cfg --stack_host car -p ~/av/config/mkz-g2/cars/mkz-02.platform'
+alias scryfilm='~/av/bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry_filming.cfg'
 alias scrytools='~/av/bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry_tools.cfg'
 
 # Setup Debian packaging
