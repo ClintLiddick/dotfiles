@@ -13,10 +13,13 @@ PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 export AV=$HOME/av
 export PYTHONPATH=$AV/bazel-bin:$AV/bazel-genfiles:$AV/bazel-av:$AV:$PYTHONPATH
 
+export GOPATH=$HOME/gopath
+
 PATH_DIRS=(
     /opt/arduino-1.6.9
     /opt/emsdk-portable
     /opt/node-current/bin
+    /usr/lib/go-1.8/bin
     /usr/local/cuda-8.0/bin
     ~/.cabal/bin
     ~/.cargo/bin
@@ -24,6 +27,8 @@ PATH_DIRS=(
     ~/.luarocks/bin
     ~/.rvm/bin
     ~/bin
+    $GOPATH
+    $GOPATH/bin
     ~/node_modules/.bin
     ~/sdk/android-sdk-linux/platform-tools
     ~/sdk/android-sdk-linux/tools
