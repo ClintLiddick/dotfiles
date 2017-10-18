@@ -45,9 +45,9 @@
   :config
   (evil-mode 1)
   (use-package evil-nerd-commenter
-    :bind (("M-;" . evilnc-comment-or-uncomment-lines)
-           :map evil-normal-state-map
-           ("/" . swiper))))
+    :bind (("M-;" . evilnc-comment-or-uncomment-lines))))
+           ;; :map evil-normal-state-map
+           ;; ("/" . swiper))))
 
 
 ;; flycheck syntax checking
@@ -80,7 +80,9 @@
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
   (evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
-  (evil-leader/set-key-for-mode 'c-mode "F" 'clang-format-region))
+  (evil-leader/set-key-for-mode 'c-mode "F" 'clang-format-region)
+  (evil-leader/set-key-for-mode 'glsl-mode "f" 'clang-format-buffer)
+  (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region))
 
 ;; completion and search server
 ;; (use-package irony
@@ -104,7 +106,7 @@
   (setq ivy-count-format "(%d/%d) ")
   :config
   (ivy-mode 1))
-(use-package swiper)
+;; (use-package swiper)
 (use-package ivy-hydra)
 (use-package counsel
   :init
@@ -175,7 +177,7 @@
 (use-package yapfify
   :config
   (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
-(setq python-shell-interpreter "ipython"
+(setq python-shell-interpreter "ipython3"
       python-shell-interpreter-args "--simple-prompt -i")
 
 
@@ -239,6 +241,9 @@
 (use-package protobuf-mode
   :mode "\\.proto\\'")
 (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
+(use-package glsl-mode
+  :mode "\\.glsl")
 
 
 ;; misc packages
@@ -256,6 +261,7 @@
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
 (setq gdb-many-windows t)
+(setq show-paren-delay 0)
 
 
 ;; indentation
