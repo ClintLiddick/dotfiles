@@ -98,6 +98,13 @@
 ;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 
+;; rtags C++ completion and navigation
+(use-package rtags
+  :config
+  ;; (define-key prelude-mode-map (kbd "C-c r") nil)
+  (rtags-enable-standard-keybindings))
+
+
 ;; ivy general completion
 (use-package ivy
   :diminish (ivy-mode . "")
@@ -133,26 +140,21 @@
   (setq company-idle-delay 0)
   (setq company-minimum-prefix-length 2)
 
-  ;; the company-clang and company-c-headers can usually be replaced by
-  ;; more powerful company-irony versions, but those require the
-  ;; cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=ON flag in order to work
-  ;; so we'll leave the original versions as fallback
-
-  ;; remove semantic so company-clang will actually be used
   (setq company-backends (delete 'company-semantic company-backends))
   (setq company-backends (delete 'company-clang company-backends))
-  ;; (use-package company-flx)
+
   (use-package company-c-headers
     :config
     (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
-    (add-to-list 'company-backends 'company-etags)
-    (add-to-list 'company-backends 'company-c-headers)
+  (add-to-list 'company-backends 'company-c-headers)
 
-  ;; (use-package company-irony
-  ;;   :config
-  ;;   (use-package company-irony-c-headers)
-  ;;   (add-to-list 'company-backends '(company-irony-c-headers company-irony)))
-
+  (use-package company-rtags
+    :config
+    (add-to-list 'company-backends 'company-rtags)
+    (define-key c-mode-base-map (kbd "M-,")
+      'rtags-find-references-at-point)
+    (define-key c-mode-base-map (kbd "M-.")
+      'rtags-find-symbol-at-point))
   (use-package company-jedi
     :config
     (add-to-list 'company-backends 'company-jedi))
