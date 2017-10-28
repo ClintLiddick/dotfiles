@@ -284,9 +284,9 @@
 
 
 ;; theme and font
-(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-14"))
+(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-10"))
 (if (display-graphic-p)
-    (set-frame-font "DejaVuSansMono-14"))
+    (set-frame-font "DejaVuSansMono-10"))
 (setq color-themes '())
 (use-package color-theme-solarized
   :pin melpa
@@ -298,6 +298,6 @@
                   (select-frame frame)
                   (load-theme 'solarized t)
                   (when (display-graphic-p frame)
-                    (set-frame-font "DejaVuSansMono-14"))))))
+                    (set-frame-font "DejaVuSansMono-10"))))))
 
 ;;; emacs.el ends here
