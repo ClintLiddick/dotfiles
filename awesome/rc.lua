@@ -227,7 +227,7 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- Clint's customization
     awful.key({ modkey,           }, "d", function () awful.util.spawn("dmenu_run") end),
-    awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock") end),
+    awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock --color=333333") end),
     awful.key({ modkey,           }, "g", function () awful.util.spawn("google-chrome") end),
     awful.key({ modkey, "Control" }, "w", function () awful.util.spawn("gksudo -m 'Are you sure you wish to restart networking?' service networking restart") end),
     awful.key({ modkey,           }, "s", function () awful.util.spawn("unity-control-center") end),
