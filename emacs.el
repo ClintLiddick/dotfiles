@@ -241,6 +241,8 @@
 (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 
 
+
+
 ;; misc packages
 (use-package hl-todo)
 (use-package undo-tree
@@ -256,6 +258,8 @@
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
 (setq gdb-many-windows t)
+(setq show-paren-delay 0)
+(add-hook 'scheme-mode-hook 'show-paren-mode)
 
 
 ;; indentation
@@ -293,21 +297,21 @@
 
 
 ;; theme and font
-;; (add-to-list 'default-frame-alist '(font . "SourceCodePro-12"))
-(add-to-list 'default-frame-alist '(font . "DejaVuSansMono-10"))
+(add-to-list 'default-frame-alist '(font . "SourceCodePro-12"))
+;; (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-10"))
 (if (display-graphic-p)
-    ;; (set-frame-font "SourceCodePro-12"))
-    (set-frame-font "DejaVuSansMono-10"))
-(setq color-themes '())
+    (set-frame-font "SourceCodePro-12"))
+    ;; (set-frame-font "DejaVuSansMono-10"))
+;; (setq color-themes '())
 (use-package zenburn-theme
-  :config
-  (if (daemonp)
-      (add-hook 'after-make-frame-functions
-                (lambda (frame)
-                  (select-frame frame)
-                  (load-theme 'zenburn t)
-                  (when (display-graphic-p frame)
-                    (set-frame-font "DejaVuSansMono-10"))))))
-                    ;; (set-frame-font "SourceCodePro-12"))))))
+ :config
+ (if (daemonp)
+     (add-hook 'after-make-frame-functions
+               (lambda (frame)
+                 (select-frame frame)
+                 (load-theme 'zenburn t)
+                 (when (display-graphic-p frame)
+                   ;; (set-frame-font "DejaVuSansMono-10"))))))
+                   (set-frame-font "SourceCodePro-12"))))))
 
 ;;; emacs.el ends here
