@@ -15,7 +15,7 @@ local menubar = require("menubar")
 require("debian.menu")
 
 -- Custom Widgets
-require("volume")
+--require("volume")
 require("battery")
 
 -- {{{ Error handling
@@ -65,15 +65,15 @@ local layouts =
 {
     --awful.layout.suit.floating,
     awful.layout.suit.tile,
-    awful.layout.suit.fair,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.spiral.dwindle,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
+    --awful.layout.suit.fair,
+    --awful.layout.suit.tile.left,
+    --awful.layout.suit.tile.bottom,
+    --awful.layout.suit.tile.top,
+    --awful.layout.suit.fair.horizontal,
+    --awful.layout.suit.spiral,
+    --awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.max,
+    --awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier
 }
 -- }}}
@@ -201,7 +201,7 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(batterywidget)
-    right_layout:add(volume_widget)
+    --right_layout:add(volume_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -228,7 +228,7 @@ globalkeys = awful.util.table.join(
     -- Clint's customization
     awful.key({ modkey,           }, "d", function () awful.util.spawn("dmenu_run") end),
     awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock") end),
-    awful.key({ modkey,           }, "g", function () awful.util.spawn("google-chrome") end),
+    awful.key({ modkey,           }, "g", function () awful.util.spawn("firefox") end),
     awful.key({ modkey, "Control" }, "w", function () awful.util.spawn("gksudo -m 'Are you sure you wish to restart networking?' service networking restart") end),
     awful.key({ modkey,           }, "s", function () awful.util.spawn("gnome-control-center") end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("emacsclient -c -a emacs") end),
