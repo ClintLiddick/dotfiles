@@ -8,7 +8,7 @@ export HISTFILESIZE=
 export HISTSIZE=
 export HISTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
-PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
 export AV=$HOME/av
 export PYTHONPATH=$AV/bazel-bin:$AV/bazel-genfiles:$AV/bazel-av:$AV:$PYTHONPATH
