@@ -70,6 +70,9 @@
             (lambda()
               (setq flycheck-gcc-language-standard "c11")
               (setq flycheck-clang-language-standard "c11")))
+  (use-package flycheck-ycmd
+    :config
+    (flycheck-ycmd-setup))
   (use-package flycheck-rust))
 
 
@@ -98,11 +101,15 @@
 ;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
 
 
-;; rtags C++ completion and navigation
-(use-package rtags
+;; YouCompleteMe
+(use-package ycmd
+  :init
+  ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_conf.py")
+  (set-variable 'ycmd-extra-conf-whitelist `("~/av/*"))
+  (set-variable 'ycmd-server-command `("python" ,(file-truename "~/src/ycmd/ycmd")))
   :config
-  ;; (define-key prelude-mode-map (kbd "C-c r") nil)
-  (rtags-enable-standard-keybindings))
+  (ycmd-setup)
+  (add-hook 'after-init-hook #'global-ycmd-mode))
 
 
 ;; ivy general completion
@@ -137,7 +144,7 @@
   :init (global-company-mode)
   :bind ("TAB" . company-indent-or-complete-common)
   :config
-  (setq company-idle-delay 0)
+  (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 2)
 
   (setq company-backends (delete 'company-semantic company-backends))
@@ -148,13 +155,11 @@
     (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
   (add-to-list 'company-backends 'company-c-headers)
 
-  (use-package company-rtags
+  (use-package company-ycmd
     :config
-    (add-to-list 'company-backends 'company-rtags)
-    (define-key c-mode-base-map (kbd "M-,")
-      'rtags-find-references-at-point)
-    (define-key c-mode-base-map (kbd "M-.")
-      'rtags-find-symbol-at-point))
+    (company-ycmd-setup))
+
+  ;; TODO: remove in favor of ycm jedi completion
   (use-package company-jedi
     :config
     (add-to-list 'company-backends 'company-jedi))
