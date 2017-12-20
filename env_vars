@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export TERM="rxvt-unicode-256color"
-export EDITOR="emacsclient -t"
+export EDITOR="emacsclient"
 export VISUAL="emacsclient -c -a emacs"
 
 export HISTFILESIZE=
@@ -10,8 +10,8 @@ export HISTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-export AV=$HOME/av
-export PYTHONPATH=$AV/bazel-bin:$AV/bazel-genfiles:$AV/bazel-av:$AV:$PYTHONPATH
+# export AV=$HOME/av
+# export PYTHONPATH=$AV/bazel-bin:$AV/bazel-genfiles:$AV/bazel-av:$AV:$PYTHONPATH
 
 export GOPATH=$HOME/gopath
 
