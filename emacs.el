@@ -268,7 +268,9 @@
 (setq browse-url-generic-program "google-chrome")
 (setq make-backup-files nil)
 (setq gdb-many-windows t)
+(show-paren-mode t)
 (setq show-paren-delay 0)
+(setq-default fill-column 100)
 
 
 ;; indentation
