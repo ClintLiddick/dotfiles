@@ -1,21 +1,25 @@
 #!/bin/bash
 
+# alias tags='ctags -eR --exclude="*.js" --exclude="bazel-*" --exclude=third_party --exclude=venv .'
 alias dig='dig +search'
 alias dumpcore='ulimit -c unlimited'
 alias e='emacsclient -nw'
+alias dockerclean='docker images | grep "<none>" | awk "{print $3}" | xargs docker rmi'
 alias dual_monitor='xrandr --output DP-0 --auto --output HDMI-0 --auto --right-of DP-0'
 alias ext_monitor='xrandr --output DP-0 --off --output HDMI-0 --auto'
 alias ext_monitor_off='xrandr --output DP-0 --auto --output HDMI-0 --off'
 alias filemanager='xfe'
+alias perfit='sudo perf record --call-graph dwarf'
 alias present_monitor='xrandr --output HDMI-2 --right-of eDP-1 --mode 1920x1080'
 alias present_monitor_off='xrandr --output HDMI-2 --off'
 alias rosmasterherb='export ROS_MASTER_URI=http://herb0.personalrobotics.ri.cmu.edu:11311'
+alias rtags='tools/actions/generate_compile_commands_json.py && rc -J .'
 alias rustup_web='curl https://sh.rustup.rs -sSf'
 alias sd='source devel/setup.bash'
+alias showperf='sudo perf report -g'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
 alias tags='tools/actions/generate_compile_commands_json.py'
-alias rtags='tools/actions/generate_compile_commands_json.py && rc -J .'
-# alias tags='ctags -eR --exclude="*.js" --exclude="bazel-*" --exclude=third_party --exclude=venv .'
+alias toclip='xsel -b -o | xclip'
 alias usecling='export PATH=/opt/cling/bin:$PATH'
 alias weather='curl http://wttr.in/Pittsburgh'
 
@@ -30,7 +34,7 @@ alias runon='~/av/bazel-bin/common/framework/stack_run --logtostderr -s --policy
 alias scryon='~/av/bazel-bin/visualization/scry/scry --config ~/av/config/scry_planner.cfg -p config/mkz-g2/cars/mkz-01.platform'
 alias scrystack='~/av/bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry.cfg --stack_host localhost'
 alias scryfilm='~/av/bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry_filming.cfg --offboard'
-alias scrytools='~/av/bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry_tools.cfg'
+alias scrytools='~/av/bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry_tools.cfg --offboard'
 
 # Setup Debian packaging
 export DEBEMAIL="clint@aurora.tech"
