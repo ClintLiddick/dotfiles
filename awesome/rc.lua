@@ -232,6 +232,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "w", function () awful.util.spawn("gksudo -m 'Are you sure you wish to restart networking?' service networking restart") end),
     awful.key({ modkey,           }, "s", function () awful.util.spawn("unity-control-center") end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("emacsclient -c -a emacs") end),
+    awful.key({ modkey,           }, "i", function () awful.util.spawn("/home/clint/.emacs_anywhere/bin/run") end),
     -- Volume
     awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE +3%") end),
     awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE -3%") end),
