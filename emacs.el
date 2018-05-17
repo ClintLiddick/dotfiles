@@ -87,26 +87,13 @@
   (evil-leader/set-key-for-mode 'glsl-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region))
 
-;; completion and search server
-;; (use-package irony
-;;   :config
-;;   (add-hook 'c++-mode-hook 'irony-mode)
-;;   (add-hook 'c-mode-hook 'irony-mode)
-;;   (add-hook 'irony-mode-hook
-;;             (lambda ()
-;;               (define-key irony-mode-map [remap completion-at-point]
-;;                 'irony-completion-at-point-async)
-;;               (define-key irony-mode-map [remap complete-symbol]
-;;                 'irony-completion-at-point-async)))
-;;   (add-hook 'irony-mode-hook 'irony-cdb-autosetup-compile-options))
-
 
 ;; YouCompleteMe
 (use-package ycmd
   :init
   ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_conf.py")
-  (set-variable 'ycmd-extra-conf-whitelist `("~/av/*"))
-  (set-variable 'ycmd-server-command `("python" ,(file-truename "~/src/ycmd/ycmd")))
+  (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*") (file-truename "~/av2/*")))
+  (set-variable 'ycmd-server-command (list "python3" (file-truename "~/src/ycmd/ycmd")))
   :config
   (ycmd-setup)
   (add-hook 'after-init-hook #'global-ycmd-mode))
@@ -265,7 +252,7 @@
 (global-linum-mode t)
 (setq linum-format "%d ")
 (setq column-number-mode t)
-(setq browse-url-generic-program "google-chrome")
+(setq browse-url-generic-program "firefox")
 (setq make-backup-files nil)
 (setq gdb-many-windows t)
 (show-paren-mode t)
