@@ -309,4 +309,72 @@
                   (when (display-graphic-p frame)
                     (set-frame-font "SourceCodePro-12"))))))
 
+
+(global-prettify-symbols-mode t)
+(add-hook
+ 'python-mode-hook
+ (lambda ()
+   (setq prettify-symbols-alist
+         '(;; Syntax
+           ;; ("def" .      #x2131) ; ℱ
+           ("==" .        #xff1d) ; ＝
+           ("!=" .        #x2260) ; ≠
+           ("not" .      #x2757)  ; ¬
+           ("in" .       #x2208)  ; ∈
+           ("not in" .   #x2209)  ; ∉
+           ("and" .      #x2227)  ; ∧
+           ("or" .       #x2228)  ; ∨
+           ("return" .   #x27fc)  ; ⟼
+           ("yield" .    #x27fb)  ; ⟻
+           ("for" .      #x2200)  ; ∀
+           ("int" .      #x2124)  ; ℤ
+           ("float" .    #x211d)  ; ℝ
+           ("str" .      #x1d54a) ; 𝕊
+           ("True" .     #x1d54b) ; 𝕋
+           ("False" .    #x1d53d) ; 𝔽
+           ("lambda" .   #x03BB)  ; λ
+           ("alpha" .    #x03B1)  ; α
+           ("beta" .     #x03B2)  ; β
+           ("gamma" .    #x03B3)  ; γ
+           ("delta" .    #x03B4)  ; δ
+           ("**2" .      #x00B2)  ; ²
+           ("**3" .      #x00B3)  ; ³
+           ("sqrt" .     #x221A))))) ; √
+
+(add-hook
+ 'c++-mode-hook
+ (lambda ()
+   (setq prettify-symbols-alist
+         '(;; Syntax
+           ("not" .       #x2757) ; ¬
+           ("return" .    #x27fc) ; ⟼
+           ("for" .       #x2200) ; ∀
+           ("true" .      #x1d54b) ; 𝕋 
+           ("false" .     #x1d53d) ; 𝔽
+           ("<-" .        #x2190) ; ←
+           ("->" .        #x2192) ; →
+           ("<--" .       #x27f5) ; ⟵
+           ("-->" .       #x27f6) ; ⟶
+           ("==" .        #xff1d) ; ＝
+           ("!=" .        #x2260) ; ≠
+           ("<=" .       #x2264) ; ≤
+           (">=" .       #x2265) ; ≥
+           ("&&" .       #x2227) ; ∧
+           ("||" .       #x2228) ; ∨
+           ("!" .        #x00AC) ; ¬
+           ;; ("nil" .      #x2205) ; ∅
+           ("..." .      #x2026) ; …
+           ("!!" .       #x203C) ; ‼
+           ;; ('there-exists #x2203) ; ∃
+           ;; ('element-of #x2208) ; ∈
+           ;; mathematical operators
+           ("sqrt" #x221A) ; √
+           ("lambda" .   #x03BB) ; λ
+           ("alpha" .    #x03B1) ; α
+           ("beta" .     #x03B2) ; β
+           ("gamma" .    #x03B3) ; γ
+           ("delta" .    #x03B4) ; δ
+           ))))
+                        
+
 ;;; emacs.el ends here
