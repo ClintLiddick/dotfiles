@@ -297,21 +297,25 @@
 
 
 ;; theme and font
-(add-to-list 'default-frame-alist '(font . "SourceCodePro-12"))
-;; (add-to-list 'default-frame-alist '(font . "DejaVuSansMono-10"))
+(defvar clint-font "SourceCodePro-12")
+;; (defvar clint-font "DejaVuSansMono-12")
+
+;; set my font as default for frames
+(add-to-list 'default-frame-alist '(font . clint-font))
+;; if opening as graphic display, set the frame font directly
 (if (display-graphic-p)
-    (set-frame-font "SourceCodePro-12"))
-    ;; (set-frame-font "DejaVuSansMono-10"))
-;; (setq color-themes '())
+    (set-frame-font clint-font))
+
 (use-package zenburn-theme
  :config
+ ;; if emacs is launched as background daemon, wait until frame is created
+ ;; to set graphic information
  (if (daemonp)
      (add-hook 'after-make-frame-functions
                (lambda (frame)
                  (select-frame frame)
                  (load-theme 'zenburn t)
                  (when (display-graphic-p frame)
-                   ;; (set-frame-font "DejaVuSansMono-10"))))))
-                   (set-frame-font "SourceCodePro-12"))))))
+                   (set-frame-font clint-font))))))
 
 ;;; emacs.el ends here
