@@ -11,12 +11,10 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 
--- Load Debian menu entries
-require("debian.menu")
-
 -- Custom Widgets
-require("volume")
-require("battery")
+-- require("volume")
+require("volumearc")
+-- require("battery")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -105,7 +103,6 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "Debian", debian.menu.Debian_menu.Debian },
                                     { "open terminal", terminal }
                                   }
                         })
@@ -117,7 +114,7 @@ mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
 -- }}}
 
--- {{{ Wibox
+-- {{{ wibox
 -- Create a textclock widget
 mytextclock = awful.widget.textclock()
 
@@ -189,7 +186,7 @@ for s = 1, screen.count() do
     mytasklist[s] = awful.widget.tasklist(s, awful.widget.tasklist.filter.currenttags, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = awful.wibox({ position = "top", screen = s })
+    mywibox[s] = awful.wibar({ position = "top", screen = s })
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
@@ -200,8 +197,9 @@ for s = 1, screen.count() do
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
-    right_layout:add(batterywidget)
-    right_layout:add(volume_widget)
+    -- right_layout:add(batterywidget)
+    -- right_layout:add(volume_widget)
+    -- right_layout:add(volumearc_widget)
     right_layout:add(mytextclock)
     right_layout:add(mylayoutbox[s])
 
@@ -227,8 +225,8 @@ root.buttons(awful.util.table.join(
 globalkeys = awful.util.table.join(
     -- Clint's customization
     awful.key({ modkey,           }, "d", function () awful.util.spawn("dmenu_run") end),
-    awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock") end),
-    awful.key({ modkey,           }, "g", function () awful.util.spawn("firefox -P 'Aurora'") end),
+    awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock -c 333333") end),
+    awful.key({ modkey,           }, "g", function () awful.util.spawn("firefox -P Aurora") end),
     awful.key({ modkey, "Control" }, "w", function () awful.util.spawn("gksudo -m 'Are you sure you wish to restart networking?' service networking restart") end),
     awful.key({ modkey,           }, "s", function () awful.util.spawn("unity-control-center") end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("emacsclient -c -a emacs") end),
