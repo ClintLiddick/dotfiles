@@ -15,8 +15,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 
 -- Custom libraries
--- local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
--- local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
+local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -222,8 +222,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
-            -- batteryarc_widget,
-            -- volumearc_widget,
+            batteryarc_widget,
+            volumearc_widget,
             mytextclock,
             s.mylayoutbox,
         },
