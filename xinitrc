@@ -1,5 +1,6 @@
 #!/bin/bash
 
+xrdb -merge ~/.Xresources
 /usr/bin/ibus-daemon  -d -r -n awesome
 urxvtd -q -o -f
 dropbox start

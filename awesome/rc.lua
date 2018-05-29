@@ -15,8 +15,8 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 
 -- Custom libraries
-local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
-local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
+-- local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
+-- local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -187,7 +187,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "📅", "Chat" }, s, awful.layout.layouts[1])
+    awful.tag({ "1", "2", "3", "4", "5", "6", "7", "Cal", "Chat" }, s, awful.layout.layouts[1])
 
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
@@ -222,8 +222,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
-            batteryarc_widget,
-            volumearc_widget,
+            -- batteryarc_widget,
+            -- volumearc_widget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -246,7 +246,7 @@ globalkeys = gears.table.join(
     {description = "run demnu launcher", group = "clint"}),
   awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock -c 333333") end,
     {description = "lock screen", group = "clint"}),
-  awful.key({ modkey,           }, "g", function () awful.util.spawn("firefox -P Aurora") end,
+  awful.key({ modkey,           }, "g", function () awful.util.spawn("firefox") end,
     {description = "open browser", group = "clint"}),
   awful.key({ modkey,           }, "s", function () awful.util.spawn("unity-control-center") end,
     {description = "system settings", group = "clint"}),
