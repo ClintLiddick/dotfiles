@@ -5,6 +5,6 @@ xrdb -merge ~/.Xresources
 urxvtd -q -o -f
 dropbox start
 # TODO: delaying this until after startup so I get other xinit/console settings
-# emacs --daemon
+emacs --daemon
 
 exec awesome

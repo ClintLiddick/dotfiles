@@ -27,7 +27,6 @@
   (require 'use-package))
 (require 'bind-key)
 (require 'diminish)
-(use-package cl)
 
 
 ;; automatically update packages daily
@@ -135,26 +134,26 @@
   (setq company-minimum-prefix-length 2)
 
   (setq company-backends (delete 'company-semantic company-backends))
-  (setq company-backends (delete 'company-clang company-backends))
+  (setq company-backends (delete 'company-clang company-backends)))
 
-  (use-package company-c-headers
-    :config
-    (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
-  (add-to-list 'company-backends 'company-c-headers)
+(use-package company-c-headers
+  :config
+  (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
+(add-to-list 'company-backends 'company-c-headers)
 
-  (use-package company-ycmd
-    :config
-    (company-ycmd-setup))
+(use-package company-ycmd
+  :config
+  (company-ycmd-setup))
 
-  ;; TODO: remove in favor of ycm jedi completion
-  (use-package company-jedi
-    :config
-    (add-to-list 'company-backends 'company-jedi))
+;; TODO: remove in favor of ycm jedi completion
+(use-package company-jedi
+  :config
+  (add-to-list 'company-backends 'company-jedi))
 
-  (use-package company-lua)
-  (use-package company-racer)
-  (use-package company-web)
-  (use-package web-completion-data))
+(use-package company-lua)
+(use-package company-racer)
+(use-package company-web)
+(use-package web-completion-data)
 
 
 ;; git
@@ -179,10 +178,10 @@
 (use-package rust-mode
   :mode "\\.rs\\'"
   :config
-  (use-package racer
-    :config
-    (add-hook 'rust-mode-hook 'racer-mode))
   (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
+(use-package racer
+:config
+(add-hook 'rust-mode-hook 'racer-mode))
 (use-package cargo)
 
 
