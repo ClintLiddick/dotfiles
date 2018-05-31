@@ -294,9 +294,9 @@
 
 
 ;; theme and font
-(add-to-list 'default-frame-alist '(font . "SourceCodePro-12"))
+(add-to-list 'default-frame-alist '(font . "SourceCodePro-10"))
 (if (display-graphic-p)
-    (set-frame-font "SourceCodePro-12"))
+    (set-frame-font "SourceCodePro-10"))
 (setq color-themes '())
 (use-package zenburn-theme
   :config
@@ -306,7 +306,7 @@
                   (select-frame frame)
                   (load-theme 'zenburn t)
                   (when (display-graphic-p frame)
-                    (set-frame-font "SourceCodePro-12"))))))
+                    (set-frame-font "SourceCodePro-10"))))))
 
 
 (global-prettify-symbols-mode t)
