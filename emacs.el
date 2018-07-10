@@ -185,6 +185,11 @@
 (use-package cargo)
 
 
+;; haskell
+(use-package haskell-mode
+  :mode ("\\.hs\\'" "\\.ls\\'"))
+
+
 ;; AUCTeX (LaTeX)
 (use-package tex
   :ensure auctex
@@ -220,6 +225,7 @@
 (use-package lua-mode
   :mode ("\\.lua\\'"
          "\\.t\\'"))  ; terra files
+(use-package groovy-mode)
 (use-package markdown-mode
   :mode "\\.md\\'"
   :init (setq markdown-command "markdown2"))
@@ -240,7 +246,9 @@
 
 
 ;; misc packages
-(use-package hl-todo)
+(use-package hl-todo
+  :config
+  (global-hl-todo-mode 1))
 (use-package undo-tree
   :diminish (undo-tree-mode . ""))
 (use-package with-editor)
@@ -359,8 +367,8 @@
            ("<=" .       #x2264)  ; ≤
            (">=" .       #x2265)  ; ≥
            ("++" .       #x29fa)  ; ⧺
-           ("&&" .       #x2227)  ; ∧
-           ("||" .       #x2228)  ; ∨
+           ;; ("&&" .       #x2227)  ; ∧
+           ;; ("||" .       #x2228)  ; ∨
            ("!" .        #x00AC)  ; ¬
            ;; ("nil" .      #x2205)  ; ∅
            ("..." .      #x2026)  ; …
