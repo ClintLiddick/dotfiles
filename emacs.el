@@ -302,10 +302,12 @@
 
 
 ;; theme and font
-(add-to-list 'default-frame-alist '(font . "SourceCodePro-10"))
+(defvar clint-font (if (equal (system-name) "marvin")
+                       "SourceCodePro-10"
+                       "SourceCodePro-12"))
 (if (display-graphic-p)
-    (set-frame-font "SourceCodePro-10"))
-(setq color-themes '())
+    (set-frame-font clint-font))
+(defvar color-themes '())
 (use-package zenburn-theme
   :config
   (if (daemonp)
@@ -314,7 +316,7 @@
                   (select-frame frame)
                   (load-theme 'zenburn t)
                   (when (display-graphic-p frame)
-                    (set-frame-font "SourceCodePro-10"))))))
+                    (set-frame-font clint-font))))))
 
 
 (global-prettify-symbols-mode t)
