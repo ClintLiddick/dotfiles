@@ -36,6 +36,9 @@ alias scryon='./bazel-bin/visualization/scry/scry --config ~/av/config/scry_plan
 alias scrystack='./bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry.cfg --stack_host localhost'
 alias scryfilm='./bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry_filming.cfg --offboard'
 alias scrytools='./bazel-bin/visualization/scry/scry --config ~/av/experimental/clint/configs/clint_scry_tools.cfg --offboard'
+alias vpn='globalprotect connect --portal aurorainnovation.gpcloudservice.com'
+alias vpnoff='globalprotect disconnect'
+alias vpnstatus='globalprotect show --status'
 
 # Setup Debian packaging
 export DEBEMAIL="clint@aurora.tech"
