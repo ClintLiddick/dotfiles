@@ -9,27 +9,46 @@ URxvt.url-select.underline: true
  URxvt*xftAntialias: true
 
 !! Zenburn colorscheme
- URxvt*background: #3f3f3f
- URxvt*foreground: #dcdccc
- URxvt*cursorColor: #aaaaaa
- URxvt*colorUL: #366060
- URxvt*underlineColor: #dfaf8f
- URxvt*color0: #3f3f3f
- URxvt*color1: #cc9393
- URxvt*color2: #7f9f7f
- URxvt*color3: #d0bf8f
- URxvt*color4: #6ca0a3
- URxvt*color5: #dc8cc3
- URxvt*color6: #93e0e3
- URxvt*color7: #dcdccc
- URxvt*color8: #000000
- URxvt*color9: #dca3a3
- URxvt*color10: #bfebbf
- URxvt*color11: #f0dfaf
- URxvt*color12: #8cd0d3
- URxvt*color13: #dc8cc3
- URxvt*color14: #93e0e3
- URxvt*color15: #ffffff
+#define _black #000000
+#define _charcoal #3f3f3f
+#define _gray #aaaaaa
+#define _milk_white #dcdccc
+#define _white #ffffff
+
+#define _puce_red #cc9393
+#define _kobi_pink #dc8cc3
+#define _pale_chestnut_pink #dca3a3
+#define _tan #d0bf8f
+#define _pancho_orange #dfaf8f
+#define _pale_goldenrod #f0dfaf
+#define _snowy_mint #bfebbf
+#define _bermuda_green #8cd0d3
+#define _spectra_green #366060
+#define _envy_green #7f9f7f
+#define _cadet_blue #6ca0a3
+#define _charlotte_blue #93e0e3
+
+ URxvt*background: _charcoal
+ URxvt*foreground: _milk_white
+ URxvt*cursorColor: _gray
+ URxvt*colorUL: _spectra_green
+ URxvt*underlineColor: _pancho_orange
+ URxvt*color0: _charcoal
+ URxvt*color1: _puce_red
+ URxvt*color2: _pale_goldenrod
+ URxvt*color3: _tan
+ URxvt*color4: _cadet_blue
+ URxvt*color5: _kobi_pink
+ URxvt*color6: _charlotte_blue
+ URxvt*color7: _milk_white
+ URxvt*color8: _black
+ URxvt*color9: _pale_chestnut_pink
+ URxvt*color10: _snowy_mint
+ URxvt*color11: _pale_goldenrod
+ URxvt*color12: _bermuda_green
+ URxvt*color13: _kobi_pink
+ URxvt*color14: _charlotte_blue
+ URxvt*color15: _white
 
 
 !! Solarized color scheme for the X Window System
@@ -69,7 +88,7 @@ URxvt.url-select.underline: true
 !#define S_base00        #839496
 !#define S_base0         #657b83
 !#define S_base1         #586e75
-!#define S_base2         #073642
+! #define S_base2         #073642
 !#define S_base3         #002b36
 !
 !
