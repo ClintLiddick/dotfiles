@@ -235,9 +235,11 @@
 (use-package yaml-mode
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
+         "\\CROSSTOOL\\'"
          "\\.sls\\'"))  ; salt files
 (add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 (use-package protobuf-mode
+  :load-path "~/dotfiles/third_party/"
   :mode "\\.proto\\'")
 (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
