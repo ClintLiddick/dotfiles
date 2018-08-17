@@ -4,14 +4,15 @@ export TERM="rxvt-unicode-256color"
 export EDITOR="emacsclient"
 export VISUAL="emacsclient -c -a emacs"
 
-export HISTFILESIZE=
-export HISTSIZE=
+export HISTFILESIZE=-1  # do not truncate
+export HISTSIZE=-1  # save all
 export HISTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
-export PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
 
-# export AV=$HOME/av
-# export PYTHONPATH=$AV/bazel-bin:$AV/bazel-genfiles:$AV/bazel-av:$AV:$PYTHONPATH
+# https://unix.stackexchange.com/questions/18212/bash-history-ignoredups-and-erasedups-setting-conflict-with-common-history
+export HISTCONTROL=ignoreboth:erasedups
+shopt -s histappend
+export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND";
 
 export GOPATH=$HOME/gopath
 
