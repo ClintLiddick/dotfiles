@@ -6,4 +6,3 @@ dropbox start
 emacs --daemon
 
 /usr/bin/dbus-launch --exit-with-session awesome
-exec awesome
