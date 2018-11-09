@@ -112,4 +112,9 @@ _pip_completion()
 complete -o default -F _pip_completion pip
 # pip bash completion end
 
+# kubectl/kubernetes bash completion
+if [[ -n $(which kubectl) ]]; then
+    source <(kubectl completion bash)
+fi
+
 . $HOME/dotfiles/clintrc
