@@ -18,6 +18,7 @@ export GOPATH=$HOME/gopath
 
 PATH_DIRS=(
     /opt/arduino-1.6.9
+    /opt/darktable/bin
     /opt/emsdk-portable
     /opt/node-current/bin
     /usr/lib/go-1.8/bin
@@ -36,9 +37,18 @@ PATH_DIRS=(
     ~/sdk/emsdk_portable/emscripten/master
 )
 
+function find_in_path () {
+    echo $PATH | grep "\(^\|:\)$1\(:\|$\)"
+}
+
+
 for pd in ${PATH_DIRS[*]}; do
-    if [ -d $pd ]
-    then
+    if [[ -d $pd && -z $(find_in_path "${pd}") ]]; then
         PATH="$pd:$PATH"
     fi
 done
+
+export PATH
+
+unset -v PATH_DIRS
+unset -f find_in_path
