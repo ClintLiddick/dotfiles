@@ -56,11 +56,13 @@
 ;; Javascript - eslint
 ;; LaTeX - chktex
 ;; SQL - sqlint
+;; Shell - shellcheck
 (use-package flycheck
   :config
   (global-flycheck-mode)
   ;; (use-package flycheck-irony)
   ;; (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
+  (setq flycheck-shellcheck-follow-sources nil)  ; Old version of shellcheck
   (add-hook 'c++-mode-hook
             (lambda()
               (setq flycheck-gcc-language-standard "c++14")
@@ -69,9 +71,9 @@
             (lambda()
               (setq flycheck-gcc-language-standard "c11")
               (setq flycheck-clang-language-standard "c11")))
-  (use-package flycheck-ycmd
-    :config
-    (flycheck-ycmd-setup))
+  ;; (use-package flycheck-ycmd
+  ;;   :config
+  ;;   (flycheck-ycmd-setup))
   (use-package flycheck-rust))
 
 
@@ -88,14 +90,14 @@
 
 
 ;; YouCompleteMe
-(use-package ycmd
-  :init
-  ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_conf.py")
-  (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*") (file-truename "~/av2/*")))
-  (set-variable 'ycmd-server-command (list "python3" (file-truename "~/src/ycmd/ycmd")))
-  :config
-  (ycmd-setup)
-  (add-hook 'after-init-hook #'global-ycmd-mode))
+;; (use-package ycmd
+;;   :init
+;;   ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_conf.py")
+;;   (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*") (file-truename "~/av2/*")))
+;;   (set-variable 'ycmd-server-command (list "python3" (file-truename "~/src/ycmd/ycmd")))
+;;   :config
+;;   (ycmd-setup)
+;;   (add-hook 'after-init-hook #'global-ycmd-mode))
 
 
 ;; ivy general completion
@@ -121,7 +123,14 @@
   :init
   (setq projectile-completion-system 'ivy)
   :config
-  (projectile-global-mode))
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  (projectile-register-project-type
+   'bazel
+   '("WORKSPACE")
+   :compile "bazel build "
+   :test "bazel test "
+   :run "bazel run "))
 
 
 ;; company code autocomplete
@@ -141,9 +150,9 @@
   (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
 (add-to-list 'company-backends 'company-c-headers)
 
-(use-package company-ycmd
-  :config
-  (company-ycmd-setup))
+;; (use-package company-ycmd
+;;   :config
+;;   (company-ycmd-setup))
 
 ;; TODO: remove in favor of ycm jedi completion
 (use-package company-jedi
