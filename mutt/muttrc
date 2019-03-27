@@ -1,0 +1,33 @@
+set from = "clint@aurora.tech"
+set realname = "Clint Liddick"
+
+set imap_user = "clint@aurora.tech"
+set imap_pass = $AURORA_MUTT_PASSWORD
+set smtp_url = "smtp://clint@aurora.tech@smtp.gmail.com:587/"
+set smtp_pass = $AURORA_MUTT_PASSWORD
+set smtp_authenticators = "gssapi:login"
+set imap_keepalive = 900
+set ssl_starttls = yes
+set ssl_force_tls = yes
+
+set folder = "imaps://imap.gmail.com:993"
+
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set record="+[Gmail]/Sent Mail"
+
+set header_cache = ~/.mutt/cache/headers
+set message_cachedir = ~/.mutt/cache/bodies
+set certificate_file = ~/.mutt/certificates
+set mailcap_path = "~/.mutt/mailcap"
+
+set move = no
+set sort = threads
+set sort_aux = reverse-date
+set menu_scroll
+
+auto_view text/html
+alternative_order text/plain text/enriched text/html  # save HTML for last
+
+# Custom
+bind index G imap-fetch-mail

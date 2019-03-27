@@ -1,0 +1,4 @@
+text/html; lynx -display_charset %{charset} -dump -stdin; copiousoutput;
+image/png; eog %s; test=test -n ${DISPLAY:-""};
+image/png; img2txt -f utf8 %s; copiousoutput;
+

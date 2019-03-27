@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# e.g. export AURORA_MUTT_PASSWORD=...
+pwds=`gpg2 --decrypt ~/.app_passwords`
+eval "$pwds"
+exec /usr/bin/mutt "$@"
