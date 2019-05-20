@@ -133,7 +133,9 @@
    '("WORKSPACE")
    :compile "bazel build "
    :test "bazel test "
-   :run "bazel run "))
+   :run "bazel run "
+   :test-prefix "test_"
+   :test-suffix "_test"))
 
 
 ;; company code autocomplete
