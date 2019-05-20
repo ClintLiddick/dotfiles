@@ -81,10 +81,13 @@
 ;; auto-formatting
 (use-package clang-format
   :config
+  (setq clang-format-executable "~/.local/bin/clang-format")
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
   (evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c-mode "F" 'clang-format-region)
+  (evil-leader/set-key-for-mode 'protobuf-mode "f" 'clang-format-buffer)
+  (evil-leader/set-key-for-mode 'protobuf-mode "F" 'clang-format-region)
   (evil-leader/set-key-for-mode 'glsl-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region))
 
