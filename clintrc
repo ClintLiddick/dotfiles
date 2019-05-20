@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # alias tags='ctags -eR --exclude="*.js" --exclude="bazel-*" --exclude=third_party --exclude=venv .'
+alias coinflip='if [[ $(( RANDOM % 2 )) -eq 0 ]]; then echo "heads"; else echo "tails"; fi'
 alias dig='dig +search'
 alias dumpcore='ulimit -c unlimited'
 alias e='emacsclient -nw'
