@@ -7,18 +7,15 @@
 (setq custom-file (make-temp-file "emacs-custom"))
 ;; setup package archives
 (require 'package)
-(setq package-enable-at-startup nil)
+(package-initialize)
+;;(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
-(add-to-list 'package-archives
-             '("melpa-stable" . "https://stable.melpa.org/packages/") t)
-(package-initialize)
 
 ;; manually install use-package package manager
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
-
 
 ;; configure use-package
 (setq use-package-always-ensure t)  ;; always download and install packages
@@ -26,13 +23,8 @@
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
+(use-package cl)
 (use-package diminish)
-
-
-;; automatically update packages daily
-(use-package spu
-  :defer
-  :config (spu-package-upgrade-daily))
 
 ;; evil - vi emulation
 (use-package evil-leader
@@ -44,9 +36,9 @@
   :config
   (evil-mode 1)
   (use-package evil-nerd-commenter
-    :bind (("M-;" . evilnc-comment-or-uncomment-lines))))
-           ;; :map evil-normal-state-map
-           ;; ("/" . swiper))))
+    :bind (("M-;" . evilnc-comment-or-uncomment-lines)
+           :map evil-normal-state-map
+           ("/" . swiper))))
 
 
 ;; flycheck syntax checking
@@ -137,7 +129,6 @@
    :test-prefix "test_"
    :test-suffix "_test"))
 
-
 ;; company code autocomplete
 (use-package company
   :defer
@@ -164,13 +155,14 @@
   :config
   (add-to-list 'company-backends 'company-jedi))
 
-(use-package company-lua)
-(use-package company-racer)
-(use-package company-web)
-(use-package web-completion-data)
+;;(use-package company-lua)
+;;(use-package company-racer)
+;;(use-package company-web)
+;;(use-package web-completion-data)
 
 
 ;; git
+(use-package with-editor)
 (use-package git-commit)
 (use-package magit
   :config
@@ -178,9 +170,9 @@
   :bind ("C-x g" . magit-status))
 
 
-;; python
-(use-package jedi)
-(use-package jedi-core)
+;;;; python
+;;(use-package jedi)
+;;(use-package jedi-core)
 (use-package yapfify
   :config
   (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
@@ -189,35 +181,35 @@
 
 
 ;; rust
-(use-package rust-mode
-  :mode "\\.rs\\'"
-  :config
-  (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
-(use-package racer
-:config
-(add-hook 'rust-mode-hook 'racer-mode))
-(use-package cargo)
+;;(use-package rust-mode
+;;  :mode "\\.rs\\'"
+;;  :config
+;;  (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
+;;(use-package racer
+;;:config
+;;(add-hook 'rust-mode-hook 'racer-mode))
+;;(use-package cargo)
 
 
 ;; haskell
-(use-package haskell-mode
-  :mode ("\\.hs\\'" "\\.ls\\'"))
+;;(use-package haskell-mode
+;;  :mode ("\\.hs\\'" "\\.ls\\'"))
 
 
 ;; AUCTeX (LaTeX)
-(use-package tex
-  :ensure auctex
-  :init
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq-default TeX-master nil)
-  (setq reftex-plug-into-AUCTeX t)
-  (setq TeX-PDF-mode t)
-  :config
-  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-  (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
+;;(use-package tex
+;;  :ensure auctex
+;;  :init
+;;  (setq TeX-auto-save t)
+;;  (setq TeX-parse-self t)
+;;  (setq-default TeX-master nil)
+;;  (setq reftex-plug-into-AUCTeX t)
+;;  (setq TeX-PDF-mode t)
+;;  :config
+;;  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+;;  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;;  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+;;  (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
 
 
 ;; neotree code directory tree viewer
@@ -232,44 +224,42 @@
 
 
 ;; mode packages
-(use-package cmake-mode
-  :mode ("CMakeLists\\.txt\\'"
-         "\\.cmake\\'"))
+;;(use-package cmake-mode
+;;  :mode ("CMakeLists\\.txt\\'"
+;;         "\\.cmake\\'"))
 (use-package dockerfile-mode :mode "Dockerfile\\'")
-(use-package lua-mode
-  :mode ("\\.lua\\'"
-         "\\.t\\'"))  ; terra files
+;;(use-package lua-mode
+;;  :mode ("\\.lua\\'"
+;;         "\\.t\\'"))  ; terra files
 (use-package groovy-mode)
   ;; :mode "av-.*\\[a-z\\]\\'")
 ;; (add-to-list 'auto-mode-alist '("av-.*\\[a-z\\]\\'" . groovy-mode))
 (use-package markdown-mode
   :mode "\\.md\\'"
   :init (setq markdown-command "markdown2"))
-(use-package matlab-mode
-  :mode "\\.m\\'")
+;;(use-package matlab-mode
+;;  :mode "\\.m\\'")
 (use-package nginx-mode :mode "/.*/sites-\\(?:available\\|enabled\\)/")
 (use-package yaml-mode
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
          "\\CROSSTOOL\\'"
+         "\\.cfg\\'"
          "\\.sls\\'"))  ; salt files
-(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+;;(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 (use-package protobuf-mode
-  :load-path "~/dotfiles/third_party/"
+  ;; :load-path "~/dotfiles/third_party/"
   :mode "\\.proto\\'")
 (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
-(use-package glsl-mode
-  :mode "\\.glsl")
+;;(use-package glsl-mode
+;;  :mode "\\.glsl")
 
 
 ;; misc packages
-(use-package hl-todo
-  :config
-  (global-hl-todo-mode 1))
-(use-package undo-tree
-  :diminish (undo-tree-mode . ""))
-(use-package with-editor)
+;;(use-package hl-todo
+;;  :config
+;;  (global-hl-todo-mode 1))
 
 
 ;; misc configuration
@@ -336,73 +326,5 @@
                   (load-theme 'zenburn t)
                   (when (display-graphic-p frame)
                     (set-frame-font clint-font))))))
-
-
-(global-prettify-symbols-mode t)
-;; (add-hook
-;;  'python-mode-hook
-;;  (lambda ()
-;;    (setq prettify-symbols-alist
-;;          '(;; Syntax
-;;            ;; ("def" .      #x2131) ; ℱ
-;;            ("==" .        #xff1d) ; ＝
-;;            ("!=" .        #x2260) ; ≠
-;;            ("not" .      #x2757)  ; ¬
-;;            ("in" .       #x2208)  ; ∈
-;;            ("not in" .   #x2209)  ; ∉
-;;            ("and" .      #x2227)  ; ∧
-;;            ("or" .       #x2228)  ; ∨
-;;            ("return" .   #x27fc)  ; ⟼
-;;            ("yield" .    #x27fb)  ; ⟻
-;;            ("for" .      #x2200)  ; ∀
-;;            ("int" .      #x2124)  ; ℤ
-;;            ("float" .    #x211d)  ; ℝ
-;;            ("str" .      #x1d54a) ; 𝕊
-;;            ("True" .     #x1d54b) ; 𝕋
-;;            ("False" .    #x1d53d) ; 𝔽
-;;            ("lambda" .   #x03BB)  ; λ
-;;            ("alpha" .    #x03B1)  ; α
-;;            ("beta" .     #x03B2)  ; β
-;;            ("gamma" .    #x03B3)  ; γ
-;;            ("delta" .    #x03B4)  ; δ
-;;            ("**2" .      #x00B2)  ; ²
-;;            ("**3" .      #x00B3)  ; ³
-;;            ("sqrt" .     #x221A))))) ; √
-
-;; (add-hook
-;;  'c++-mode-hook
-;;  (lambda ()
-;;    (setq prettify-symbols-alist
-;;          '(;; Syntax
-;;            ("not" .      #x2757)  ; ¬
-;;            ("return" .   #x27fc)  ; ⟼
-;;            ;; ("for" .      #x2200)  ; ∀
-;;            ("true" .     #x1d54b) ; 𝕋
-;;            ("false" .    #x1d53d) ; 𝔽
-;;            ("<-" .       #x2190)  ; ←
-;;            ("->" .       #x2192)  ; →
-;;            ("<--" .      #x27f5)  ; ⟵
-;;            ("-->" .      #x27f6)  ; ⟶
-;;            ("==" .       #xff1d)  ; ＝
-;;            ("!=" .       #x2260)  ; ≠
-;;            ("<=" .       #x2264)  ; ≤
-;;            (">=" .       #x2265)  ; ≥
-;;            ("++" .       #x29fa)  ; ⧺
-;;            ;; ("&&" .       #x2227)  ; ∧
-;;            ;; ("||" .       #x2228)  ; ∨
-;;            ("!" .        #x00AC)  ; ¬
-;;            ;; ("nil" .      #x2205)  ; ∅
-;;            ("..." .      #x2026)  ; …
-;;            ("!!" .       #x203C)  ; ‼
-;;            ;; ("exists" .   #x2203)  ; ∃
-;;            ;; ("element-of" . #x2208) ; ∈
-;;            ("sqrt" .     #x221A)  ; √
-;;            ("lambda" .   #x03BB)  ; λ
-;;            ("alpha" .    #x03B1)  ; α
-;;            ("beta" .     #x03B2)  ; β
-;;            ("gamma" .    #x03B3)  ; γ
-;;            ("delta" .    #x03B4)  ; δ
-;;            ))))
-
 
 ;;; emacs.el ends here
