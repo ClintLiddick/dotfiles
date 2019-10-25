@@ -1,0 +1,10 @@
+---
+- git_config:
+    name: user.name
+    scope: global
+    value: Clint Liddick
+
+- git_config:
+    name: alias.lol
+    scope: global
+    value: "log --graph --abbrev-commit --all --decorate --pretty=format:'%C(auto)%h %d %s - [%aN]'"

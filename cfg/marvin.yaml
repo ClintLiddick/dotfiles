@@ -1,0 +1,7 @@
+---
+- hosts: marvin
+  roles:
+    - linux
+    - software-dev
+    - rust
+    - private

@@ -1,0 +1,27 @@
+---
+- shell: which rustup
+  register: has_rustup
+
+- get_url:
+    url: https://sh.rustup.rs
+    dest: /tmp/rustup.sh
+    mode: 0755
+  when: has_rustup.rc != 0
+
+- command: /tmp/rustup.sh -y 
+  when: has_rustup.rc != 0
+
+- shell: which cargo
+  register: has_cargo
+
+- command: rustup update
+  when: has_cargo.rc != 0
+
+- command: rustup default stable
+  when: has_cargo.rc != 0
+
+- shell: which rg
+  register: has_ripgrep
+
+- command: cargo install ripgrep
+  when: has_ripgrep.rc != 0

@@ -1,0 +1,28 @@
+---
+- apt:
+    name: rxvt-unicode-256color
+  become: yes
+
+- file:
+    state: link
+    src: "/home/{{ ansible_user }}/dotfiles/{{ item }}"
+    path: "/home/{{ ansible_user }}/.{{ item }}"
+  loop:
+    - bash_profile
+    - bashrc
+    - clang-format
+    - emacs.el
+    - profile
+    - vimrc
+    - xinitrc
+    - xsession
+
+- file:
+    state: link
+    src: "/home/{{ ansible_user }}/dotfiles/Xresources.{{ inventory_hostname }}"
+    path: "/home/{{ ansible_user }}/.Xresources"
+
+- file:
+    state: link
+    src: "/home/{{ ansible_user }}/dotfiles/awesome"
+    path: "/home/{{ ansible_user }}/.config/awesome"
