@@ -17,3 +17,8 @@ if [ -n "$BASH_VERSION" ]; then
 fi
 
 . "$HOME/dotfiles/env_vars"
+
+if [ -f "$HOME/.env_vars_private" ]; then
+    . "$HOME/.env_vars_private"
+fi
+

@@ -1,12 +1,15 @@
 ---
-- apt:
+- name: install rxvt unicode terminal
+  apt:
     name: rxvt-unicode-256color
   become: yes
 
-- file:
+- name: create dotfile symlinks
+  file:
     state: link
     src: "/home/{{ ansible_user }}/dotfiles/{{ item }}"
     path: "/home/{{ ansible_user }}/.{{ item }}"
+    force: yes
   loop:
     - bash_profile
     - bashrc
@@ -17,12 +20,14 @@
     - xinitrc
     - xsession
 
-- file:
+- name: create Xresources symlink
+  file:
     state: link
     src: "/home/{{ ansible_user }}/dotfiles/Xresources.{{ inventory_hostname }}"
     path: "/home/{{ ansible_user }}/.Xresources"
 
-- file:
+- name: create awesome config symlink
+  file:
     state: link
     src: "/home/{{ ansible_user }}/dotfiles/awesome"
     path: "/home/{{ ansible_user }}/.config/awesome"

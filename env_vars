@@ -17,27 +17,14 @@ export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_C
 export GOPATH=$HOME/gopath
 
 PATH_DIRS=(
-    /opt/arduino-1.6.9
-    /opt/darktable/bin
-    /opt/emsdk-portable
-    /opt/node-current/bin
-    /usr/lib/go-1.8/bin
-    /usr/local/cuda-8.0/bin
-    ~/.cabal/bin
-    ~/.cargo/bin
     ~/.local/bin
-    ~/.luarocks/bin
-    ~/.rvm/bin
-    ~/bin
+    ~/.cargo/bin
+    /opt/darktable/bin
     $GOPATH
     $GOPATH/bin
-    ~/node_modules/.bin
-    ~/sdk/android-sdk-linux/platform-tools
-    ~/sdk/android-sdk-linux/tools
-    ~/sdk/emsdk_portable/emscripten/master
 )
 
-function find_in_path () {
+find_in_path() {
     echo $PATH | grep "\(^\|:\)$1\(:\|$\)"
 }
 
