@@ -26,7 +26,7 @@
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
-(require 'diminish)
+(use-package diminish)
 
 
 ;; automatically update packages daily
@@ -71,9 +71,9 @@
             (lambda()
               (setq flycheck-gcc-language-standard "c11")
               (setq flycheck-clang-language-standard "c11")))
-  ;; (use-package flycheck-ycmd
-  ;;   :config
-  ;;   (flycheck-ycmd-setup))
+  (use-package flycheck-ycmd
+    :config
+    (flycheck-ycmd-setup))
   (use-package flycheck-rust))
 
 
@@ -93,14 +93,14 @@
 
 
 ;; YouCompleteMe
-;; (use-package ycmd
-;;   :init
-;;   ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_conf.py")
-;;   (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*") (file-truename "~/av2/*")))
-;;   (set-variable 'ycmd-server-command (list "python3" (file-truename "~/src/ycmd/ycmd")))
-;;   :config
-;;   (ycmd-setup)
-;;   (add-hook 'after-init-hook #'global-ycmd-mode))
+(use-package ycmd
+  :init
+  ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_extra_conf.py")
+  (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*") (file-truename "~/av2/*")))
+  (set-variable 'ycmd-server-command (list "python3" (file-truename "~/src/ycmd/ycmd")))
+  :config
+  (ycmd-setup)
+  (add-hook 'after-init-hook #'global-ycmd-mode))
 
 
 ;; ivy general completion
@@ -155,9 +155,9 @@
   (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
 (add-to-list 'company-backends 'company-c-headers)
 
-;; (use-package company-ycmd
-;;   :config
-;;   (company-ycmd-setup))
+(use-package company-ycmd
+  :config
+  (company-ycmd-setup))
 
 ;; TODO: remove in favor of ycm jedi completion
 (use-package company-jedi
@@ -240,6 +240,8 @@
   :mode ("\\.lua\\'"
          "\\.t\\'"))  ; terra files
 (use-package groovy-mode)
+  ;; :mode "av-.*\\[a-z\\]\\'")
+;; (add-to-list 'auto-mode-alist '("av-.*\\[a-z\\]\\'" . groovy-mode))
 (use-package markdown-mode
   :mode "\\.md\\'"
   :init (setq markdown-command "markdown2"))
@@ -290,6 +292,7 @@
 (setq c-default-style "linux")
 (setq cperl-indent-level tab-width)
 (setq lua-indent-level 2)
+(setq yaml-indent-offset 2)
 
 
 ;; mouse
@@ -336,70 +339,70 @@
 
 
 (global-prettify-symbols-mode t)
-(add-hook
- 'python-mode-hook
- (lambda ()
-   (setq prettify-symbols-alist
-         '(;; Syntax
-           ;; ("def" .      #x2131) ; ℱ
-           ("==" .        #xff1d) ; ＝
-           ("!=" .        #x2260) ; ≠
-           ("not" .      #x2757)  ; ¬
-           ("in" .       #x2208)  ; ∈
-           ("not in" .   #x2209)  ; ∉
-           ("and" .      #x2227)  ; ∧
-           ("or" .       #x2228)  ; ∨
-           ("return" .   #x27fc)  ; ⟼
-           ("yield" .    #x27fb)  ; ⟻
-           ("for" .      #x2200)  ; ∀
-           ("int" .      #x2124)  ; ℤ
-           ("float" .    #x211d)  ; ℝ
-           ("str" .      #x1d54a) ; 𝕊
-           ("True" .     #x1d54b) ; 𝕋
-           ("False" .    #x1d53d) ; 𝔽
-           ("lambda" .   #x03BB)  ; λ
-           ("alpha" .    #x03B1)  ; α
-           ("beta" .     #x03B2)  ; β
-           ("gamma" .    #x03B3)  ; γ
-           ("delta" .    #x03B4)  ; δ
-           ("**2" .      #x00B2)  ; ²
-           ("**3" .      #x00B3)  ; ³
-           ("sqrt" .     #x221A))))) ; √
+;; (add-hook
+;;  'python-mode-hook
+;;  (lambda ()
+;;    (setq prettify-symbols-alist
+;;          '(;; Syntax
+;;            ;; ("def" .      #x2131) ; ℱ
+;;            ("==" .        #xff1d) ; ＝
+;;            ("!=" .        #x2260) ; ≠
+;;            ("not" .      #x2757)  ; ¬
+;;            ("in" .       #x2208)  ; ∈
+;;            ("not in" .   #x2209)  ; ∉
+;;            ("and" .      #x2227)  ; ∧
+;;            ("or" .       #x2228)  ; ∨
+;;            ("return" .   #x27fc)  ; ⟼
+;;            ("yield" .    #x27fb)  ; ⟻
+;;            ("for" .      #x2200)  ; ∀
+;;            ("int" .      #x2124)  ; ℤ
+;;            ("float" .    #x211d)  ; ℝ
+;;            ("str" .      #x1d54a) ; 𝕊
+;;            ("True" .     #x1d54b) ; 𝕋
+;;            ("False" .    #x1d53d) ; 𝔽
+;;            ("lambda" .   #x03BB)  ; λ
+;;            ("alpha" .    #x03B1)  ; α
+;;            ("beta" .     #x03B2)  ; β
+;;            ("gamma" .    #x03B3)  ; γ
+;;            ("delta" .    #x03B4)  ; δ
+;;            ("**2" .      #x00B2)  ; ²
+;;            ("**3" .      #x00B3)  ; ³
+;;            ("sqrt" .     #x221A))))) ; √
 
-(add-hook
- 'c++-mode-hook
- (lambda ()
-   (setq prettify-symbols-alist
-         '(;; Syntax
-           ("not" .      #x2757)  ; ¬
-           ("return" .   #x27fc)  ; ⟼
-           ;; ("for" .      #x2200)  ; ∀
-           ("true" .     #x1d54b) ; 𝕋
-           ("false" .    #x1d53d) ; 𝔽
-           ("<-" .       #x2190)  ; ←
-           ("->" .       #x2192)  ; →
-           ("<--" .      #x27f5)  ; ⟵
-           ("-->" .      #x27f6)  ; ⟶
-           ("==" .       #xff1d)  ; ＝
-           ("!=" .       #x2260)  ; ≠
-           ("<=" .       #x2264)  ; ≤
-           (">=" .       #x2265)  ; ≥
-           ("++" .       #x29fa)  ; ⧺
-           ;; ("&&" .       #x2227)  ; ∧
-           ;; ("||" .       #x2228)  ; ∨
-           ("!" .        #x00AC)  ; ¬
-           ;; ("nil" .      #x2205)  ; ∅
-           ("..." .      #x2026)  ; …
-           ("!!" .       #x203C)  ; ‼
-           ;; ("exists" .   #x2203)  ; ∃
-           ;; ("element-of" . #x2208) ; ∈
-           ("sqrt" .     #x221A)  ; √
-           ("lambda" .   #x03BB)  ; λ
-           ("alpha" .    #x03B1)  ; α
-           ("beta" .     #x03B2)  ; β
-           ("gamma" .    #x03B3)  ; γ
-           ("delta" .    #x03B4)  ; δ
-           ))))
+;; (add-hook
+;;  'c++-mode-hook
+;;  (lambda ()
+;;    (setq prettify-symbols-alist
+;;          '(;; Syntax
+;;            ("not" .      #x2757)  ; ¬
+;;            ("return" .   #x27fc)  ; ⟼
+;;            ;; ("for" .      #x2200)  ; ∀
+;;            ("true" .     #x1d54b) ; 𝕋
+;;            ("false" .    #x1d53d) ; 𝔽
+;;            ("<-" .       #x2190)  ; ←
+;;            ("->" .       #x2192)  ; →
+;;            ("<--" .      #x27f5)  ; ⟵
+;;            ("-->" .      #x27f6)  ; ⟶
+;;            ("==" .       #xff1d)  ; ＝
+;;            ("!=" .       #x2260)  ; ≠
+;;            ("<=" .       #x2264)  ; ≤
+;;            (">=" .       #x2265)  ; ≥
+;;            ("++" .       #x29fa)  ; ⧺
+;;            ;; ("&&" .       #x2227)  ; ∧
+;;            ;; ("||" .       #x2228)  ; ∨
+;;            ("!" .        #x00AC)  ; ¬
+;;            ;; ("nil" .      #x2205)  ; ∅
+;;            ("..." .      #x2026)  ; …
+;;            ("!!" .       #x203C)  ; ‼
+;;            ;; ("exists" .   #x2203)  ; ∃
+;;            ;; ("element-of" . #x2208) ; ∈
+;;            ("sqrt" .     #x221A)  ; √
+;;            ("lambda" .   #x03BB)  ; λ
+;;            ("alpha" .    #x03B1)  ; α
+;;            ("beta" .     #x03B2)  ; β
+;;            ("gamma" .    #x03B3)  ; γ
+;;            ("delta" .    #x03B4)  ; δ
+;;            ))))
 
 
 ;;; emacs.el ends here
