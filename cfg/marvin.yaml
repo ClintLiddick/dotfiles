@@ -2,6 +2,7 @@
 - hosts: marvin
   roles:
     - linux
+    - home-backups
     - software-dev
     - rust
     - private

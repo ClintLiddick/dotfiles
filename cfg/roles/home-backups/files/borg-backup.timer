@@ -1,0 +1,10 @@
+[Unit]
+Description=Trigger Borg backup command
+
+[Timer]
+# Daily at 3 AM
+OnCalendar=*-*-* 3:*:*
+Unit=borg-backup.target
+
+[Install]
+WantedBy=timers.target
