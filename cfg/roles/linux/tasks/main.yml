@@ -1,7 +1,11 @@
 ---
-- name: install rxvt unicode terminal
+- name: install packages
   apt:
-    name: rxvt-unicode-256color
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - acpi
+    - rxvt-unicode-256-color
   become: yes
 
 - name: create dotfile symlinks
