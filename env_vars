@@ -4,38 +4,10 @@ export TERM="rxvt-unicode-256color"
 export EDITOR="emacsclient"
 export VISUAL="emacsclient -c -a emacs"
 
+export HISTCONTROL=ignoredups:erasedups
 export HISTFILESIZE=-1  # do not truncate
 export HISTSIZE=-1  # save all
 export HISTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 
-# https://unix.stackexchange.com/questions/18212/bash-history-ignoredups-and-erasedups-setting-conflict-with-common-history
-export HISTCONTROL=ignoreboth:erasedups
-shopt -s histappend
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND";
-
-export GOPATH=$HOME/gopath
-
-PATH_DIRS=(
-    ~/.local/bin
-    ~/.cargo/bin
-    /opt/darktable/bin
-    $GOPATH
-    $GOPATH/bin
-)
-
-find_in_path() {
-    echo $PATH | grep "\(^\|:\)$1\(:\|$\)"
-}
-
-
-for pd in ${PATH_DIRS[*]}; do
-    if [[ -d $pd && -z $(find_in_path "${pd}") ]]; then
-        PATH="$pd:$PATH"
-    fi
-done
-
-export PATH
-
-unset -v PATH_DIRS
-unset -f find_in_path
+export PATH=$HOME/.cargo/bin:$HOME/.local/bin:/opt/darktable/bin:$PATH
