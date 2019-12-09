@@ -327,4 +327,7 @@
                   (when (display-graphic-p frame)
                     (set-frame-font clint-font))))))
 
+
+(global-prettify-symbols-mode t)
+
 ;;; emacs.el ends here
