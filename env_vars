@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export TERM="rxvt-unicode-256color"
-export EDITOR="emacsclient"
+export EDITOR="emacsclient --alternate-editor=vim"
 export VISUAL="emacsclient -c -a emacs"
 
 export HISTCONTROL=ignoredups:erasedups
