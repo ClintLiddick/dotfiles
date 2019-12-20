@@ -1,14 +1,22 @@
 ---
-- file:
+- name: create ~/src directory
+  file:
     dest: "/home/{{ansible_user}}/src"
     state: directory
 
 
 # make uninstall
 # ./autogen.sh
-# ./congiure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
+# ./configure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
 # make -j8 && make install
-- git:
+- name: checkout emacs source
+  git:
     dest: "/home/{{ansible_user}}/src/emacs"
     repo: https://git.savannah.gnu.org/git/emacs.git
     version: emacs-26.3
+
+- name: install emacs build deps
+  apt:
+    name: emacs
+    state: build-dep
+  become: yes

@@ -1,10 +1,48 @@
 ---
-- git_config:
+- name: set git user.name
+  git_config:
     name: user.name
     scope: global
     value: Clint Liddick
 
-- git_config:
+- name: set git user.email
+  git_config:
+    name: user.email
+    scope: global
+    value: "{{email}}"
+
+- name: set git lol alias
+  git_config:
     name: alias.lol
     scope: global
     value: "log --graph --abbrev-commit --all --decorate --pretty=format:'%C(auto)%h %d %s - [%aN]'"
+
+- name: set git email server
+  git_config:
+    name: sendemail.smtpserver
+    scope: global
+    value: smtp.gmail.com
+
+- name: set git email server port
+  git_config:
+    name: sendemail.smtpserverport
+    scope: global
+    value: "587"
+
+- name: set git email encryption
+  git_config:
+    name: sendemail.smtpencryption
+    scope: global
+    value: tls
+
+- name: set git email user
+  git_config:
+    name: sendemail.smtpuser
+    scope: global
+    value: "{{email}}"
+
+- name: set private git email password
+  git_config:
+    name: sendemail.smtppass
+    scope: global
+    value: "{{git_email_password}}"

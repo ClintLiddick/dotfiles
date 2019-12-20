@@ -1,5 +1,5 @@
 ---
-- hosts: clint-laptop
+- hosts: clint-dell
   roles:
     - linux
     - software-dev-min

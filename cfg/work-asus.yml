@@ -1,0 +1,8 @@
+---
+- hosts: clint-laptop
+  roles:
+    - linux
+    - software-dev-min
+    - software-dev-power
+    - rust
+    - private
