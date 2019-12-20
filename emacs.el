@@ -7,10 +7,11 @@
 (setq custom-file (make-temp-file "emacs-custom"))
 ;; setup package archives
 (require 'package)
-(package-initialize)
+;;(package-initialize)
 ;;(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
+(package-initialize)
 
 ;; manually install use-package package manager
 (unless (package-installed-p 'use-package)
@@ -250,8 +251,8 @@
 (use-package protobuf-mode
   ;; :load-path "~/dotfiles/third_party/"
   :mode "\\.proto\\'")
-(add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
+;; (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
+;; (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
 ;;(use-package glsl-mode
 ;;  :mode "\\.glsl")
 
