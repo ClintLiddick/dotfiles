@@ -3,6 +3,7 @@
   roles:
     - linux
     - home-backups
-    - software-dev
+    - software-dev-min
+    - software-dev-power
     - rust
     - private

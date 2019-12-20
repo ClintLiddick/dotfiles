@@ -1,0 +1,14 @@
+---
+- file:
+    dest: "/home/{{ansible_user}}/src"
+    state: directory
+
+
+# make uninstall
+# ./autogen.sh
+# ./congiure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
+# make -j8 && make install
+- git:
+    dest: "/home/{{ansible_user}}/src/emacs"
+    repo: https://git.savannah.gnu.org/git/emacs.git
+    version: emacs-26.3

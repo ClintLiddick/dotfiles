@@ -5,7 +5,8 @@
   vars:
     packages:
     - acpi
-    - rxvt-unicode-256-color
+    - nmon
+    - rxvt-unicode-256color
   become: yes
 
 - name: create dotfile symlinks
