@@ -27,6 +27,9 @@
 (use-package cl)
 (use-package diminish)
 
+;; determine whether or not on work computer
+(defconst work-computer (equal (system-name) "clint-laptop"))
+
 ;; evil - vi emulation
 (use-package evil-leader
   :config
@@ -50,12 +53,14 @@
 ;; LaTeX - chktex
 ;; SQL - sqlint
 ;; Shell - shellcheck
+;; Protobuf - protoc
 (use-package flycheck
   :config
   (global-flycheck-mode)
   ;; (use-package flycheck-irony)
   ;; (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
   (setq flycheck-shellcheck-follow-sources nil)  ; Old version of shellcheck
+  (if work-computer (setq flycheck-protoc-import-path '("/home/clint/av")))
   (add-hook 'c++-mode-hook
             (lambda()
               (setq flycheck-gcc-language-standard "c++14")
@@ -89,7 +94,7 @@
 (use-package ycmd
   :init
   ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_extra_conf.py")
-  (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*") (file-truename "~/av2/*")))
+  (if work-computer (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*"))))
   (set-variable 'ycmd-server-command (list "python3" (file-truename "~/src/ycmd/ycmd")))
   :config
   (ycmd-setup)
@@ -249,10 +254,10 @@
          "\\.sls\\'"))  ; salt files
 ;;(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
 (use-package protobuf-mode
-  ;; :load-path "~/dotfiles/third_party/"
+  :load-path "/home/clint/dotfiles/third_party/"
   :mode "\\.proto\\'")
-;; (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
-;; (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
+(add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
 ;;(use-package glsl-mode
 ;;  :mode "\\.glsl")
 
