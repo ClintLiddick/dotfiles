@@ -317,9 +317,8 @@
 
 
 ;; theme and font
-(defvar clint-font (if (equal (system-name) "marvin")
-                       "SourceCodePro-10"
-                       "SourceCodePro-12"))
+(defconst clint-font "SourceCodePro-10")
+
 (if (display-graphic-p)
     (set-frame-font clint-font))
 (defvar color-themes '())

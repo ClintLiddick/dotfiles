@@ -1,4 +1,4 @@
-URxvt*font: xft:DejaVu Sans Mono:pixelsize=16,xft:Monospace:pixelsize=18,antialias=true:hinting=true
+URxvt*font: xft:DejaVu Sans Mono:pixelsize=14,xft:Monospace:pixelsize=18,antialias=true:hinting=true
 URxvt.saveLines: 20000
 URxvt.perl-ext-common: default,matcher
 URxvt.url-launcher: /usr/bin/xdg-open
