@@ -5,12 +5,14 @@
   ignore_errors: yes
 
 - name: download rustup installer
+  when: has_rustup.rc != 0
   get_url:
     url: https://sh.rustup.rs
     dest: /tmp/rustup.sh
     mode: 0755
 
 - name: run rustup installer
+  when: has_rustup.rc != 0
   command: /tmp/rustup.sh -y --no-modify-path --default-toolchain stable
   args:
     creates: "/home/{{ ansible_user }}/.cargo/bin/cargo"
