@@ -5,6 +5,7 @@
   vars:
     packages:
     - acpi
+    - moreutils
     - nmon
     - rxvt-unicode-256color
   become: yes
