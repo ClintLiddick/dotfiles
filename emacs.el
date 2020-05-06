@@ -3,12 +3,10 @@
 
 ;;; Code:
 
-;; don't put custom-set-variables in emacs.el
+;; don't pollute emacs.el with custom-set-variables
 (setq custom-file (make-temp-file "emacs-custom"))
 ;; setup package archives
 (require 'package)
-;;(package-initialize)
-;;(setq package-enable-at-startup nil)
 (add-to-list 'package-archives
              '("melpa" . "https://melpa.org/packages/") t)
 (package-initialize)
@@ -20,7 +18,7 @@
 
 ;; configure use-package
 (setq use-package-always-ensure t)  ;; always download and install packages
-(setq use-package-always-pin "melpa")  ;; prefer latest
+(setq use-package-always-pin "melpa")  ;; prefer latest, not stable
 (eval-when-compile
   (require 'use-package))
 (require 'bind-key)
@@ -30,19 +28,30 @@
 ;; determine whether or not on work computer
 (defconst work-computer (equal (system-name) "clint-laptop"))
 
-;; evil - vi emulation
-(use-package evil-leader
+;; evil-leader: fast \-prefixed shortcuts
+(use-package evil-leader  ; must come before (use-package evil)
   :config
   (global-evil-leader-mode)
   (evil-leader/set-key "f" 'indent-according-to-mode)
   (evil-leader/set-key "F" 'indent-region))
+
+;; evil: vi emulation. I'm that kind of heathen.
 (use-package evil
   :config
   (evil-mode 1)
+  ;; evilnc: fast code comment/uncomment
   (use-package evil-nerd-commenter
+    :config
     :bind (("M-;" . evilnc-comment-or-uncomment-lines)
            :map evil-normal-state-map
            ("/" . swiper))))
+
+(evil-leader/set-key
+  "\\" 'evilnc-comment-or-uncomment-lines  ;; single \
+  "ci" 'evilnc-comment-or-uncomment-lines
+  "cc" 'evilnc-copy-and-comment-lines
+  "cp" 'evilnc-comment-or-uncomment-paragraphs
+  "cr" 'comment-or-uncomment-region)
 
 
 ;; flycheck syntax checking
@@ -59,7 +68,6 @@
   (global-flycheck-mode)
   ;; (use-package flycheck-irony)
   ;; (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
-  (setq flycheck-shellcheck-follow-sources nil)  ; Old version of shellcheck
   (if work-computer (setq flycheck-protoc-import-path '("/home/clint/av")))
   (add-hook 'c++-mode-hook
             (lambda()
@@ -69,17 +77,12 @@
             (lambda()
               (setq flycheck-gcc-language-standard "c11")
               (setq flycheck-clang-language-standard "c11")))
-  (use-package flycheck-ycmd
-    :config
-    (flycheck-ycmd-setup))
   (use-package flycheck-rust))
 
 
-;; C++
-;; auto-formatting
+;; C/C++ formatting
 (use-package clang-format
   :config
-  ;; (setq clang-format-executable "~/.local/bin/clang-format")
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
   (evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
@@ -90,18 +93,7 @@
   (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region))
 
 
-;; YouCompleteMe
-(use-package ycmd
-  :init
-  ;; (set-variable 'ycmd-global-config "~/dotfiles/ycmd_extra_conf.py")
-  (if work-computer (set-variable 'ycmd-extra-conf-whitelist (list (file-truename "~/av/*"))))
-  (set-variable 'ycmd-server-command (list "python3" (file-truename "~/src/ycmd/ycmd")))
-  :config
-  (ycmd-setup)
-  (add-hook 'after-init-hook #'global-ycmd-mode))
-
-
-;; ivy general completion
+;; ivy minibuffer completion
 (use-package ivy
   :diminish (ivy-mode . "")
   :init
@@ -109,8 +101,9 @@
   (setq ivy-count-format "(%d/%d) ")
   :config
   (ivy-mode 1))
-;; (use-package swiper)
-(use-package ivy-hydra)
+;; swiper: ivy package for in-file text/regex searching
+(use-package swiper)
+;; counsel: ivy package for file searching
 (use-package counsel
   :init
   :bind (("M-x" . counsel-M-x)
@@ -119,103 +112,97 @@
          ("C-c l" . counsel-locate)))
 
 
-;; projectile project interaction
+;; projectile: project interaction
 (use-package projectile
-  :init
-  (setq projectile-completion-system 'ivy)
+  :init (setq projectile-completion-system 'ivy)
   :config
   (projectile-mode +1)
   (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
   (projectile-register-project-type
    'bazel
-   '("WORKSPACE")
+   '("WORKSPACE")  ;; identifier file for a bazel project type
    :compile "bazel build "
    :test "bazel test "
    :run "bazel run "
    :test-prefix "test_"
    :test-suffix "_test"))
 
-;; company code autocomplete
+;; company: code autocomplete
 (use-package company
   :defer
   :init (global-company-mode)
   :bind ("TAB" . company-indent-or-complete-common)
   :config
   (setq company-idle-delay 0.1)
-  (setq company-minimum-prefix-length 2)
-
-  (setq company-backends (delete 'company-semantic company-backends))
-  (setq company-backends (delete 'company-clang company-backends)))
+  (setq company-minimum-prefix-length 2))
+;; (setq company-backends (delete 'company-semantic company-backends))
+;; (setq company-backends (delete 'company-clang company-backends)))
 
 (use-package company-c-headers
   :config
+  (add-to-list 'company-c-headers-path-system "/usr/include/c++/8")
+  (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")
   (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
 (add-to-list 'company-backends 'company-c-headers)
 
-(use-package company-ycmd
-  :config
-  (company-ycmd-setup))
-
-;; TODO: remove in favor of ycm jedi completion
 (use-package company-jedi
   :config
   (add-to-list 'company-backends 'company-jedi))
 
 ;;(use-package company-lua)
-;;(use-package company-racer)
+;;(use-package company-racer)  ;; rust
 ;;(use-package company-web)
 ;;(use-package web-completion-data)
 
 
-;; git
-(use-package with-editor)
-(use-package git-commit)
-(use-package magit
+;; git helper packages
+(use-package with-editor)  ;; invoke emacs from command line with temp files
+(use-package git-commit)  ;; use emacs to author git commit messages
+(use-package magit  ;; superpowered git interface
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
   :bind ("C-x g" . magit-status))
+(evil-leader/set-key "g" 'magit-status)
 
 
-;;;; python
-;;(use-package jedi)
-;;(use-package jedi-core)
+;; yapf: python formatting
 (use-package yapfify
   :config
   (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
-(setq python-shell-interpreter "ipython3"
-      python-shell-interpreter-args "--simple-prompt -i")
+;; set default python interpreter
+(setq python-shell-interpreter "python3")
 
 
-;; rust
-;;(use-package rust-mode
-;;  :mode "\\.rs\\'"
-;;  :config
-;;  (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
-;;(use-package racer
-;;:config
-;;(add-hook 'rust-mode-hook 'racer-mode))
-;;(use-package cargo)
+;; ;; rust
+;; (use-package rust-mode
+;;   :mode "\\.rs\\'"
+;;   :config
+;;   (evil-leader/set-key-for-mode 'rust-mode "f" 'rust-format-buffer))
+;; (use-package racer
+;;   :config
+;;   (add-hook 'rust-mode-hook 'racer-mode))
+;; (use-package cargo)
 
 
-;; haskell
-;;(use-package haskell-mode
-;;  :mode ("\\.hs\\'" "\\.ls\\'"))
+;; ;; haskell
+;; (use-package haskell-mode
+;;   :mode ("\\.hs\\'" "\\.ls\\'"))
 
 
-;; AUCTeX (LaTeX)
-;;(use-package tex
-;;  :ensure auctex
-;;  :init
-;;  (setq TeX-auto-save t)
-;;  (setq TeX-parse-self t)
-;;  (setq-default TeX-master nil)
-;;  (setq reftex-plug-into-AUCTeX t)
-;;  (setq TeX-PDF-mode t)
-;;  :config
-;;  (add-hook 'LaTeX-mode-hook 'visual-line-mode)
-;;  (add-hook 'LaTeX-mode-hook 'flyspell-mode)
-;;  (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
-;;  (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
+;; ;; AUCTeX (LaTeX)
+;; (use-package tex
+;;   :ensure auctex
+;;   :init
+;;   (setq TeX-auto-save t)
+;;   (setq TeX-parse-self t)
+;;   (setq-default TeX-master nil)
+;;   (setq reftex-plug-into-AUCTeX t)
+;;   (setq TeX-PDF-mode t)
+;;   :config
+;;   (add-hook 'LaTeX-mode-hook 'visual-line-mode)
+;;   (add-hook 'LaTeX-mode-hook 'flyspell-mode)
+;;   (add-hook 'LaTeX-mode-hook 'LaTeX-math-mode)
+;;   (add-hook 'LaTeX-mode-hook 'turn-on-reftex))
 
 
 ;; neotree code directory tree viewer
@@ -229,48 +216,39 @@
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide))
 
 
-;; mode packages
-;;(use-package cmake-mode
-;;  :mode ("CMakeLists\\.txt\\'"
-;;         "\\.cmake\\'"))
-(use-package dockerfile-mode :mode "Dockerfile\\'")
-;;(use-package lua-mode
-;;  :mode ("\\.lua\\'"
-;;         "\\.t\\'"))  ; terra files
+;; file mode packages
+
+(use-package dockerfile-mode :mode "Dockerfile.*\\'")
 (use-package groovy-mode)
-  ;; :mode "av-.*\\[a-z\\]\\'")
-;; (add-to-list 'auto-mode-alist '("av-.*\\[a-z\\]\\'" . groovy-mode))
 (use-package markdown-mode
   :mode "\\.md\\'"
-  :init (setq markdown-command "markdown2"))
-;;(use-package matlab-mode
-;;  :mode "\\.m\\'")
-(use-package nginx-mode :mode "/.*/sites-\\(?:available\\|enabled\\)/")
+  :init (setq markdown-command "markdown2"))  ;; python3-markdown2
+(use-package nginx-mode
+  :mode "/.*/sites-\\(?:available\\|enabled\\)/")
 (use-package yaml-mode
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
-         "\\CROSSTOOL\\'"
-         "\\.cfg\\'"
-         "\\.sls\\'"))  ; salt files
-;;(add-to-list 'auto-mode-alist '("\\.launch\\'" . xml-mode))
+         "\\.cfg\\'"))
 (use-package protobuf-mode
   :load-path "/home/clint/dotfiles/third_party/"
   :mode "\\.proto\\'")
+;; Bazel files are basically Python
 (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
-;;(use-package glsl-mode
-;;  :mode "\\.glsl")
-
-
-;; misc packages
-;;(use-package hl-todo
-;;  :config
-;;  (global-hl-todo-mode 1))
+;; (use-package cmake-mode
+;;   :mode ("CMakeLists\\.txt\\'"
+;;          "\\.cmake\\'"))
+;; (use-package lua-mode
+;;  :mode ("\\.lua\\'"
+;;         "\\.t\\'"))  ;; terra files
+;; (use-package glsl-mode
+;;   :mode "\\.glsl")
 
 
 ;; misc configuration
-(setq diff-switches "-u") ; unified diffs
-(global-linum-mode t)
+
+(setq diff-switches "-u")  ;; unified diffs
+(global-linum-mode t)  ;; always show line numbrs
 (setq linum-format "%d ")
 (setq column-number-mode t)
 (setq browse-url-generic-program "firefox")
@@ -282,6 +260,7 @@
 
 
 ;; indentation
+
 (setq-default indent-tabs-mode nil)
 (setq tab-width 4)
 (setq c-basic-offset tab-width)
@@ -291,7 +270,7 @@
 (setq yaml-indent-offset 2)
 
 
-;; mouse
+;; enable mouse in terminals
 (use-package xt-mouse
   :config (xterm-mouse-mode t))
 
@@ -317,9 +296,10 @@
 
 
 ;; theme and font
-(defconst clint-font (if work-computer
-                         "SourceCodePro-10"
-                       "SourceCodePro-12"))
+(defconst clint-font
+  (if work-computer
+      "SourceCodePro-10"
+    "SourceCodePro-12"))
 
 (if (display-graphic-p)
     (set-frame-font clint-font))
@@ -333,7 +313,6 @@
                   (load-theme 'zenburn t)
                   (when (display-graphic-p frame)
                     (set-frame-font clint-font))))))
-
 
 (global-prettify-symbols-mode t)
 
