@@ -3,8 +3,6 @@
 
 ;;; Code:
 
-;; don't pollute emacs.el with custom-set-variables
-(setq custom-file (make-temp-file "emacs-custom"))
 ;; setup package archives
 (require 'package)
 (add-to-list 'package-archives
@@ -17,20 +15,35 @@
   (package-install 'use-package))
 
 ;; configure use-package
-(setq use-package-always-ensure t)  ;; always download and install packages
-(setq use-package-always-pin "melpa")  ;; prefer latest, not stable
+
+;; always download and install use-package packages
+(setq use-package-always-ensure t)
+;; prefer latest, not stable
+(setq use-package-always-pin "melpa")
 (eval-when-compile
   (require 'use-package))
-(require 'bind-key)
+
+;; core packages
 (use-package cl)
+(require 'bind-key)
 ;; allow minor modes to be hidden on mode bar
 (use-package diminish)
+
+;; automatically update packages weekly
+(use-package auto-package-update
+  :config
+  (setq auto-package-update-delete-old-versions t)
+  (setq auto-package-update-hide-results t)
+  ;; update unprompted but not at startup to prevent login hangs from daemon
+  ;; startup blocking on networked updates
+  (auto-package-update-at-time "13:00"))
 
 ;; determine whether or not on work computer
 (defconst work-computer (equal (system-name) "clint-laptop"))
 
 ;; evil-leader: fast \-prefixed shortcuts
-(use-package evil-leader  ; must come before (use-package evil)
+;; must come before (use-package evil)
+(use-package evil-leader
   :config
   (global-evil-leader-mode)
   (evil-leader/set-key "f" 'indent-according-to-mode)
@@ -53,6 +66,56 @@
   "cc" 'evilnc-copy-and-comment-lines
   "cp" 'evilnc-comment-or-uncomment-paragraphs
   "cr" 'comment-or-uncomment-region)
+
+
+;; git helper packages
+
+;; invoke emacs from command line with temp files
+(use-package with-editor)
+;; use emacs to author git commit messages
+(use-package git-commit)
+;; superpowered git interface
+(use-package magit
+  :config
+  (setq magit-completing-read-function 'ivy-completing-read)
+  :bind ("C-x g" . magit-status))
+(evil-leader/set-key "g" 'magit-status)
+
+
+;; ivy minibuffer completion
+(use-package ivy
+  :diminish (ivy-mode . "")
+  :init
+  (setq ivy-use-virtual-buffers t)
+  (setq ivy-count-format "(%d/%d) ")
+  :config
+  (ivy-mode 1))
+;; swiper: ivy package for in-file text/regex searching
+(use-package swiper)
+;; counsel: ivy package for file searching
+(use-package counsel
+  :init
+  :bind (("M-x" . counsel-M-x)
+         ("C-x C-f" . counsel-find-file)
+         ("C-c /" . counsel-rg)
+         ("C-c l" . counsel-locate)))
+
+
+;; projectile: project interaction
+(use-package projectile
+  :init (setq projectile-completion-system 'ivy)
+  :config
+  (projectile-mode +1)
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  ;; Add "bazel" project type
+  (projectile-register-project-type
+   'bazel
+   '("WORKSPACE")  ;; identifier file for a bazel project type
+   :compile "bazel build "
+   :test "bazel test "
+   :run "bazel run "
+   :test-prefix "test_"
+   :test-suffix "_test"))
 
 
 ;; flycheck syntax checking
@@ -93,40 +156,11 @@
   (evil-leader/set-key-for-mode 'glsl-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region))
 
-
-;; ivy minibuffer completion
-(use-package ivy
-  :diminish (ivy-mode . "")
-  :init
-  (setq ivy-use-virtual-buffers t)
-  (setq ivy-count-format "(%d/%d) ")
+;; yapf: python formatting
+(use-package yapfify
   :config
-  (ivy-mode 1))
-;; swiper: ivy package for in-file text/regex searching
-(use-package swiper)
-;; counsel: ivy package for file searching
-(use-package counsel
-  :init
-  :bind (("M-x" . counsel-M-x)
-         ("C-x C-f" . counsel-find-file)
-         ("C-c /" . counsel-rg)
-         ("C-c l" . counsel-locate)))
+  (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
 
-
-;; projectile: project interaction
-(use-package projectile
-  :init (setq projectile-completion-system 'ivy)
-  :config
-  (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
-  (projectile-register-project-type
-   'bazel
-   '("WORKSPACE")  ;; identifier file for a bazel project type
-   :compile "bazel build "
-   :test "bazel test "
-   :run "bazel run "
-   :test-prefix "test_"
-   :test-suffix "_test"))
 
 ;; company: code autocomplete
 (use-package company
@@ -136,8 +170,6 @@
   :config
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 2))
-;; (setq company-backends (delete 'company-semantic company-backends))
-;; (setq company-backends (delete 'company-clang company-backends)))
 
 (use-package company-c-headers
   :config
@@ -154,24 +186,6 @@
 ;;(use-package company-racer)  ;; rust
 ;;(use-package company-web)
 ;;(use-package web-completion-data)
-
-
-;; git helper packages
-(use-package with-editor)  ;; invoke emacs from command line with temp files
-(use-package git-commit)  ;; use emacs to author git commit messages
-(use-package magit  ;; superpowered git interface
-  :config
-  (setq magit-completing-read-function 'ivy-completing-read)
-  :bind ("C-x g" . magit-status))
-(evil-leader/set-key "g" 'magit-status)
-
-
-;; yapf: python formatting
-(use-package yapfify
-  :config
-  (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
-;; set default python interpreter
-(setq python-shell-interpreter "python3")
 
 
 ;; ;; rust
@@ -192,7 +206,6 @@
 
 ;; ;; AUCTeX (LaTeX)
 ;; (use-package tex
-;;   :ensure auctex
 ;;   :init
 ;;   (setq TeX-auto-save t)
 ;;   (setq TeX-parse-self t)
@@ -220,24 +233,32 @@
 ;; file mode packages
 
 (use-package dockerfile-mode :mode "Dockerfile.*\\'")
+
 (use-package groovy-mode)
+
 (use-package markdown-mode
   :mode "\\.md\\'"
   :init
   (setq markdown-command "markdown2")  ;; python3-markdown2
   (add-hook 'markdown-mode-hook (lambda () (set-fill-column 80))))
+
 (use-package nginx-mode
   :mode "/.*/sites-\\(?:available\\|enabled\\)/")
+
 (use-package yaml-mode
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
          "\\.cfg\\'"))
+
 (use-package protobuf-mode
+  ;; use my own latest version of protobuf-mode.el from the Protobuf sources.
   :load-path "/home/clint/dotfiles/third_party/"
   :mode "\\.proto\\'")
+
 ;; Bazel files are basically Python
 (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
+
 ;; (use-package cmake-mode
 ;;   :mode ("CMakeLists\\.txt\\'"
 ;;          "\\.cmake\\'"))
@@ -257,9 +278,13 @@
 (setq browse-url-generic-program "firefox")
 (setq make-backup-files nil)
 (setq gdb-many-windows t)
-(show-paren-mode t)
+(show-paren-mode t)  ;; highlight matching braces
 (setq show-paren-delay 0)
 (setq-default fill-column 100)
+;; don't pollute emacs.el with custom-set-variables
+(setq custom-file (make-temp-file "emacs-custom"))
+;; set default python interpreter
+(setq python-shell-interpreter "python3")
 
 
 ;; indentation
