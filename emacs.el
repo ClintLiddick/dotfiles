@@ -23,6 +23,7 @@
   (require 'use-package))
 (require 'bind-key)
 (use-package cl)
+;; allow minor modes to be hidden on mode bar
 (use-package diminish)
 
 ;; determine whether or not on work computer
@@ -222,7 +223,9 @@
 (use-package groovy-mode)
 (use-package markdown-mode
   :mode "\\.md\\'"
-  :init (setq markdown-command "markdown2"))  ;; python3-markdown2
+  :init
+  (setq markdown-command "markdown2")  ;; python3-markdown2
+  (add-hook 'markdown-mode-hook (lambda () (set-fill-column 80))))
 (use-package nginx-mode
   :mode "/.*/sites-\\(?:available\\|enabled\\)/")
 (use-package yaml-mode
