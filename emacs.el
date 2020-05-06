@@ -317,7 +317,9 @@
 
 
 ;; theme and font
-(defconst clint-font "SourceCodePro-10")
+(defconst clint-font (if work-computer
+                         "SourceCodePro-10"
+                       "SourceCodePro-12"))
 
 (if (display-graphic-p)
     (set-frame-font clint-font))
