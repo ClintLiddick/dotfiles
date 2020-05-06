@@ -47,7 +47,7 @@ fi
 
 export GIT_PS1_SHOWDIRTYSTATE=true
 if [ "$color_prompt" = yes ]; then
-    PROMPT_COMMAND='__git_ps1 "${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\w\[\e[0;31m\]" "\[\e[00m\]\$ "'
+    PROMPT_COMMAND='__git_ps1 "${VIRTUAL_ENV:+(${VIRTUAL_ENV##*/})}${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\w\[\e[0;31m\]" "\[\e[00m\]\$ "'
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
