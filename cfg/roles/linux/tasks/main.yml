@@ -8,6 +8,7 @@
     - moreutils
     - nmon
     - rxvt-unicode-256color
+    - scrot
   become: yes
 
 - name: create dotfile symlinks

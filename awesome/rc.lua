@@ -254,6 +254,10 @@ globalkeys = gears.table.join(
     {description = "editor", group = "clint"}),
   awful.key({ modkey,           }, "i", function () awful.util.spawn("/home/clint/.emacs_anywhere/bin/run") end,
     {description = "editor inserter", group = "clint"}),
+  awful.key({ }, "Print", function () awful.util.spawn("scrot") end,
+    {description = "print screen", group = "screen"}),
+  awful.key({ modkey, }, "Print", function () awful.util.spawn("scrot --focused") end,
+    {description = "print focused window", group = "screen"}),
 
     -- Volume
   awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE +3%") end,
