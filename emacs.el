@@ -285,6 +285,7 @@
 (setq custom-file (make-temp-file "emacs-custom"))
 ;; set default python interpreter
 (setq python-shell-interpreter "python3")
+(setq dired-listing-switches "-alh")
 
 
 ;; indentation
