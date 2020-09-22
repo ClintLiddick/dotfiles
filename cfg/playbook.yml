@@ -1,0 +1,25 @@
+---
+- hosts: marvin
+  roles:
+    - linux
+    - home-backups
+    - software-dev-min
+    - software-dev-power
+    - rust
+    - private
+
+- hosts: clint-laptop
+  roles:
+    - linux
+    - software-dev-min
+    - software-dev-power
+    - rust
+    - private
+
+- hosts: clint-dell
+  roles:
+    - linux
+    - software-dev-min
+    - software-dev-power
+    - rust
+    - private

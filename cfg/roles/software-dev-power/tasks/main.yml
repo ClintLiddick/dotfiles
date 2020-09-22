@@ -1,22 +1,60 @@
 ---
+- name: add Zeal docs PPA
+  when: ansible_facts['distribution'] == "Ubuntu"
+  apt_repository:
+    repo: ppa:zeal-developers/ppa
+  become: yes
+
+- name: install software build deps packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+      - emacs
+      - git
+    state: build-dep
+  become: yes
+
+- name: install packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+      - python3-pip
+      - zeal
+  become: yes
+
+- name: pip upgrade
+  pip:
+    executable: pip3
+    extra_args: "--upgrade"
+    name: "{{ package }}"
+  vars:
+    packages:
+      - pip
+      - setuptools
+
 - name: create ~/src directory
   file:
     dest: "/home/{{ansible_user}}/src"
     state: directory
 
-
 # make uninstall
 # ./autogen.sh
 # ./configure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
 # make -j8 && make install
-- name: checkout emacs source
+- name: checkout Emacs source
   git:
     dest: "/home/{{ansible_user}}/src/emacs"
     repo: https://git.savannah.gnu.org/git/emacs.git
     version: emacs-26.3
 
-- name: install emacs build deps
-  apt:
-    name: emacs
-    state: build-dep
-  become: yes
+# make prefix=$HOME/.local profile
+# make prefix=$HOME/.local PROFILE=BUILD install
+- name: checkout Git source
+  git:
+    dest: "/home/{{ansible_user}}/src/git"
+    repo: https://github.com/git/git
+    version: v2.28.0
