@@ -2,13 +2,32 @@
 - name: install packages
   apt:
     name: "{{ packages }}"
+    update_cache: true
   vars:
     packages:
     - acpi
+    - awesome
+    - firefox
+    - gnupg2
+    - i3lock
     - moreutils
     - nmon
+    - paperkey
+    - python3-apt
+    - python3-gpg
     - rxvt-unicode-256color
     - scrot
+  become: yes
+
+- name: create display manager custom XSession config
+  copy:
+    dest: /usr/share/xsessions/xsession.desktop
+    content: |
+      [Desktop Entry]
+      Name=XSession
+      Comment=This session uses the custom xsession file
+      Exec=/etc/X11/Xsession
+      Type=Application
   become: yes
 
 - name: create dotfile symlinks
@@ -27,6 +46,12 @@
     - xinitrc
     - xsession
 
+- name: create xsessionrc symlink
+  file:
+    state: link
+    src: "/home/{{ ansible_user }}/dotfiles/xsessionrc.{{ inventory_hostname }}"
+    path: "/home/{{ ansible_user }}/.xsessionrc"
+
 - name: create Xresources symlink
   file:
     state: link
@@ -38,3 +63,15 @@
     state: link
     src: "/home/{{ ansible_user }}/dotfiles/awesome"
     path: "/home/{{ ansible_user }}/.config/awesome"
+
+- name: check if Dropbox installed
+  shell: which dropbox
+  register: has_dropbox
+  ignore_errors: yes
+
+- name: install Dropbox
+  when: has_dropbox.rc != 0
+  apt:
+    deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+  become: yes
+

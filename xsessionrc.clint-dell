@@ -11,7 +11,7 @@
 # synclient CoastingSpeed=0
 
 # Disable Asus trackpad by default
-xinput disable "ELAN1200:00 04F3:3049 Touchpad"
+# xinput disable "ELAN1200:00 04F3:3049 Touchpad"
 
 # Set default backlight
 # xbacklight -set 50

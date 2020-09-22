@@ -1,22 +1,88 @@
 ---
+- name: add Zeal docs PPA
+  when: ansible_facts['distribution'] == "Ubuntu"
+  apt_repository:
+    repo: ppa:zeal-developers/ppa
+  become: yes
+
+# TODO(clint) does not seem to work
+- name: install software build deps packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+      - emacs
+      - git
+    state: build-dep
+  become: yes
+
+- name: install packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+      - python3-pip
+      - zeal
+  become: yes
+
+- name: pip upgrade
+  pip:
+    executable: pip3
+    extra_args: "--upgrade"
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - pip
+      - setuptools
+  become: yes
+
 - name: create ~/src directory
   file:
     dest: "/home/{{ansible_user}}/src"
     state: directory
 
-
-# make uninstall
 # ./autogen.sh
 # ./configure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
 # make -j8 && make install
-- name: checkout emacs source
+- name: checkout Emacs source
   git:
     dest: "/home/{{ansible_user}}/src/emacs"
-    repo: https://git.savannah.gnu.org/git/emacs.git
+    repo: https://github.com/emacs-mirror/emacs.git
     version: emacs-26.3
 
-- name: install emacs build deps
-  apt:
-    name: emacs
-    state: build-dep
-  become: yes
+# make prefix=$HOME/.local
+# make prefix=$HOME/.local install
+- name: checkout Git source
+  git:
+    dest: "/home/{{ansible_user}}/src/git"
+    repo: https://github.com/git/git
+    version: v2.28.0
+
+- name: checkout Adobe Source Code Pro
+  git:
+    dest: "/home/{{ansible_user}}/src/source-code-pro"
+    repo: https://github.com/adobe-fonts/source-code-pro
+    version: release
+
+- name: make ~/.fonts directory
+  file:
+    state: directory
+    path: "/home/{{ ansible_user }}/.fonts"
+
+- name: download Adobe Source Code Pro roman font
+  get_url:
+    url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
+    dest: "/home/{{ ansible_user }}/.fonts"
+  register: sourcecodepro_roman
+
+- name: download Adobe Source Code Pro italic font
+  get_url:
+    url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
+    dest: "/home/{{ ansible_user }}/.fonts"
+  register: sourcecodepro_italic
+
+- name: update font cache
+  when: sourcecodepro_roman.changed or sourcecodepro_italic.changed
+  command: fc-cache -rv

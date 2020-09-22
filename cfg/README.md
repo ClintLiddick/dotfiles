@@ -1,3 +1,3 @@
 ## Running
 
-    ansible-playbook -i hosts.yml <host>.yml
+    ansible-playbook -i hosts.yml -l <host> playbook.yml
