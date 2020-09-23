@@ -24,7 +24,6 @@
   (require 'use-package))
 
 ;; core packages
-(use-package cl)
 (require 'bind-key)
 ;; allow minor modes to be hidden on mode bar
 (use-package diminish)
@@ -236,8 +235,6 @@
 
 (use-package groovy-mode)
 
-(use-package lua-mode)
-
 (use-package markdown-mode
   :mode "\\.md\\'"
   :init
@@ -264,9 +261,6 @@
 ;; (use-package cmake-mode
 ;;   :mode ("CMakeLists\\.txt\\'"
 ;;          "\\.cmake\\'"))
-;; (use-package lua-mode
-;;  :mode ("\\.lua\\'"
-;;         "\\.t\\'"))  ;; terra files
 ;; (use-package glsl-mode
 ;;   :mode "\\.glsl")
 

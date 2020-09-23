@@ -53,7 +53,7 @@
   git:
     dest: "/home/{{ansible_user}}/src/emacs"
     repo: https://github.com/emacs-mirror/emacs.git
-    version: emacs-26.3
+    version: emacs-27.1
 
 # make prefix=$HOME/.local
 # make prefix=$HOME/.local install
