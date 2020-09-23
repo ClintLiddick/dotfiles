@@ -27,6 +27,7 @@
 (require 'bind-key)
 ;; allow minor modes to be hidden on mode bar
 (use-package diminish)
+(use-package persistent-soft)
 
 ;; automatically update packages weekly
 (use-package auto-package-update
@@ -321,13 +322,11 @@
 
 
 ;; theme and font
-(defconst clint-font
-  (if work-computer
-      "SourceCodeVariable-10"
-    "SourceCodeVariable-12"))
+(use-package unicode-fonts   ;; allow fallback fonts
+  :ensure t
+  :config (unicode-fonts-setup))
+(prefer-coding-system 'utf-8)
 
-(if (display-graphic-p)
-    (set-frame-font clint-font))
 (defvar color-themes '())
 (use-package zenburn-theme
   :config
@@ -335,9 +334,8 @@
       (add-hook 'after-make-frame-functions
                 (lambda (frame)
                   (select-frame frame)
-                  (load-theme 'zenburn t)
-                  (when (display-graphic-p frame)
-                    (set-frame-font clint-font))))))
+                  (load-theme 'zenburn t)))
+    (load-theme 'zenburn t)))
 
 (global-prettify-symbols-mode t)
 

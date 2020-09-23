@@ -5,6 +5,11 @@ Xcursor.theme: oxy-obsidian-hc
 ! Xcursor.size: 16  ! 32,48,64
 
 !
+! Applications
+!
+emacs.font: Source Code Variable-14
+
+!
 ! Terminal
 !
 

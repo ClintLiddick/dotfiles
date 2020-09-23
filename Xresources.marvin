@@ -1,3 +1,18 @@
+!
+! Cursor
+!
+! Xcursor.theme: oxy-obsidian-hc
+! Xcursor.size: 16  ! 32,48,64
+
+!
+! Applications
+!
+emacs.font: Source Code Variable-12
+
+!
+! Terminal
+!
+
 URxvt*font: xft:DejaVu Sans Mono:pixelsize=14,xft:Monospace:pixelsize=14,antialias=true:hinting=true
 URxvt.saveLines: 20000
 URxvt.perl-ext-common: default,matcher
