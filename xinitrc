@@ -9,9 +9,4 @@ else
     emacs --daemon
 fi
 
-if which zeal; then
-    # set to start minimized
-    zeal
-fi
-
 /usr/bin/dbus-launch --exit-with-session awesome
