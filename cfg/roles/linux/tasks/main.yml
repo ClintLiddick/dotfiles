@@ -20,7 +20,9 @@
     - rxvt-unicode-256color
     - scrot
     - suckless-tools
+    - tree
     - xinput
+    - xfe
   become: yes
 
 - name: create display manager custom XSession config
@@ -78,4 +80,3 @@
   apt:
     deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
   become: yes
-

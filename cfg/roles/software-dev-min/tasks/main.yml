@@ -46,3 +46,8 @@
     name: sendemail.smtppass
     scope: global
     value: "{{git_email_password}}"
+
+- name: install simple vimrc
+  get_url:
+    url: https://clintonliddick.com/vimrc
+    dest: "/home/{{ ansible_user }}/.vimrc"
