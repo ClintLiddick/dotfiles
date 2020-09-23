@@ -8,11 +8,14 @@
     - acpi
     - awesome
     - firefox
+    - fonts-noto
     - gnupg2
     - i3lock
+    - libnotify-bin
     - moreutils
     - mosh
     - nmon
+    - oxygen-cursor-theme-extra
     - paperkey
     - pavucontrol
     - python3-apt
