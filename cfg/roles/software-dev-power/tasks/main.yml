@@ -24,6 +24,8 @@
   vars:
     packages:
       - python3-pip
+      - xclip
+      - xdotool
       - zeal
   become: yes
 

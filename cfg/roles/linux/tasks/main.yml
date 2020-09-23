@@ -11,12 +11,16 @@
     - gnupg2
     - i3lock
     - moreutils
+    - mosh
     - nmon
     - paperkey
+    - pavucontrol
     - python3-apt
     - python3-gpg
     - rxvt-unicode-256color
     - scrot
+    - suckless-tools
+    - xinput
   become: yes
 
 - name: create display manager custom XSession config
