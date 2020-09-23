@@ -236,6 +236,8 @@
 
 (use-package groovy-mode)
 
+(use-package lua-mode)
+
 (use-package markdown-mode
   :mode "\\.md\\'"
   :init
