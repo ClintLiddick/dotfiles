@@ -15,7 +15,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 
 -- Custom libraries
--- local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
+local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 
 -- {{{ Error handling
@@ -223,7 +223,7 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
             batteryarc_widget,
-            -- volumearc_widget,
+            volumearc_widget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -248,12 +248,14 @@ globalkeys = gears.table.join(
     {description = "lock screen", group = "clint"}),
   awful.key({ modkey,           }, "g", function () awful.util.spawn("firefox") end,
     {description = "open browser", group = "clint"}),
-  awful.key({ modkey,           }, "s", function () awful.util.spawn("unity-control-center") end,
+  awful.key({ modkey,           }, "s", function () awful.util.spawn("gnome-control-center") end,
     {description = "system settings", group = "clint"}),
   awful.key({ modkey,           }, "e", function () awful.util.spawn("emacsclient -c -a emacs") end,
     {description = "editor", group = "clint"}),
   awful.key({ modkey,           }, "i", function () awful.util.spawn("/home/clint/.emacs_anywhere/bin/run") end,
     {description = "editor inserter", group = "clint"}),
+  awful.key({ modkey,           }, "z", function () awful.util.spawn("zeal") end,
+    {description = "zeal", group = "clint"}),
   awful.key({ }, "Print", function () awful.util.spawn("scrot") end,
     {description = "print screen", group = "screen"}),
   awful.key({ modkey, }, "Print", function () awful.util.spawn("scrot --focused") end,
@@ -266,6 +268,27 @@ globalkeys = gears.table.join(
     {description = "lower", group = "volume"}),
   awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute bluez_sink.04_52_C7_C2_6E_DE toggle") end,
     {description = "mute", group = "volume"}),
+
+   -- -- Volume Keys
+   -- awful.key({}, "XF86AudioLowerVolume", function ()
+   --   awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
+   -- end),
+   -- awful.key({}, "XF86AudioRaiseVolume", function ()
+   --   awful.util.spawn("amixer -q -D pulse sset Master 5%+", false)
+   -- end),
+   -- awful.key({}, "XF86AudioMute", function ()
+   --   awful.util.spawn("amixer -D pulse set Master 1+ toggle", false)
+   -- end),
+   -- -- Media Keys
+   -- awful.key({}, "XF86AudioPlay", function()
+   --   awful.util.spawn("playerctl play-pause", false)
+   -- end),
+   -- awful.key({}, "XF86AudioNext", function()
+   --   awful.util.spawn("playerctl next", false)
+   -- end),
+   -- awful.key({}, "XF86AudioPrev", function()
+   --   awful.util.spawn("playerctl previous", false)
+   -- end),
 
     -- Brightness
   awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end,
