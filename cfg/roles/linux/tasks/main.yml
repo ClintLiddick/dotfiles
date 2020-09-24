@@ -75,6 +75,12 @@
     src: "/home/{{ ansible_user }}/dotfiles/awesome"
     path: "/home/{{ ansible_user }}/.config/awesome"
 
+- name: create /mnt/usb directory
+  file:
+    state: directory
+    path: /mnt/usb
+  become: yes
+
 - name: check if Dropbox installed
   shell: which dropbox
   register: has_dropbox
