@@ -229,6 +229,16 @@
   (evil-define-key 'normal neotree-mode-map (kbd "RET") 'neotree-enter)
   (evil-define-key 'normal neotree-mode-map (kbd "q") 'neotree-hide))
 
+;; Zeal documenation
+(use-package zeal-at-point
+  :config
+  (evil-leader/set-key "d" 'zeal-at-point)
+  (add-to-list 'zeal-at-point-mode-alist '(c-mode . ("c")))
+  (add-to-list 'zeal-at-point-mode-alist '(c++-mode . ("cpp" "c")))
+  (add-to-list 'zeal-at-point-mode-alist '(python-mode . ("python3" "numpy" "pandas" "flask")))
+  (add-to-list 'zeal-at-point-mode-alist '(sh-mode . ("bash")))
+  (add-to-list 'zeal-at-point-mode-alist '(yaml-mode . ("ansible"))))
+
 
 ;; file mode packages
 
