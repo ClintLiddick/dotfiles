@@ -15,6 +15,7 @@
     - moreutils
     - mosh
     - nmon
+    - okular
     - oxygen-cursor-theme-extra
     - paperkey
     - pavucontrol
@@ -23,6 +24,7 @@
     - python3-gpg
     - rxvt-unicode-256color
     - scrot
+    - speedtest-cli
     - suckless-tools
     - tree
     - xinput
