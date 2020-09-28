@@ -3,6 +3,9 @@
 
 ;;; Code:
 
+;; Set Python3 as default
+(setq py-python-command "/usr/bin/python3")
+
 ;; setup package archives
 (require 'package)
 (add-to-list 'package-archives
