@@ -6,6 +6,9 @@
 ;; Set Python3 as default
 (setq py-python-command "/usr/bin/python3")
 
+;; determine whether or not on work computer
+(defconst work-computer (equal (system-name) "clint-dell"))
+
 ;; setup package archives
 (require 'package)
 (add-to-list 'package-archives
@@ -39,10 +42,7 @@
   (setq auto-package-update-hide-results t)
   ;; update unprompted but not at startup to prevent login hangs from daemon
   ;; startup blocking on networked updates
-  (auto-package-update-at-time "13:00"))
-
-;; determine whether or not on work computer
-(defconst work-computer (equal (system-name) "clint-laptop"))
+  (auto-package-update-at-time "12:30"))
 
 ;; evil-leader: fast \-prefixed shortcuts
 ;; must come before (use-package evil)
@@ -176,10 +176,12 @@
 
 (use-package company-c-headers
   :config
-  (add-to-list 'company-c-headers-path-system "/usr/include/c++/8")
-  (add-to-list 'company-c-headers-path-system "/usr/include/c++/6")
-  (add-to-list 'company-c-headers-path-system "/usr/include/c++/5"))
-(add-to-list 'company-backends 'company-c-headers)
+  (let ((default-directory "/usr/include/c++")
+        (gcc-versions '("5" "6" "7" "8" "9")))
+    (dolist (cpp-ver gcc-versions)
+      (add-to-list 'company-c-headers-path-system (expand-file-name cpp-ver))))
+  (if work-computer (add-to-list 'company-c-headers-path-user "/home/clint/av"))
+  (add-to-list 'company-backends 'company-c-headers))
 
 (use-package company-jedi
   :config
