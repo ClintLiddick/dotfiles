@@ -69,6 +69,7 @@
     dest: "/home/{{ansible_user}}/src/emacs"
     repo: https://github.com/emacs-mirror/emacs.git
     version: emacs-27.1
+    depth: 1
 
 # make prefix=$HOME/.local
 # make prefix=$HOME/.local install
@@ -77,6 +78,7 @@
     dest: "/home/{{ansible_user}}/src/git"
     repo: https://github.com/git/git
     version: v2.28.0
+    depth: 1
 
 - name: make ~/.fonts directory
   file:
