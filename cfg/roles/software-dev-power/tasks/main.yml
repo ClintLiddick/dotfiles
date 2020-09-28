@@ -28,7 +28,6 @@
       - clang-format
       - cppcheck
       - iperf3
-      - python3-flake8
       - python3-pip
       - python3-venv
       - shellcheck
@@ -46,6 +45,15 @@
     packages:
       - pip
       - setuptools
+  become: yes
+
+- name: install python packages
+  pip:
+    executable: pip3
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - flake8
   become: yes
 
 - name: create ~/src directory
