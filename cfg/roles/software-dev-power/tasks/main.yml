@@ -24,8 +24,8 @@
   vars:
     packages:
       - checkinstall
-      - clang
-      - clang-format
+      - clang-10
+      - clang-format-10
       - cppcheck
       - iperf3
       - python3-pip

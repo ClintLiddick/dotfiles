@@ -23,6 +23,7 @@
     - python3-apt
     - python3-gpg
     - rxvt-unicode-256color
+    - screen
     - scrot
     - speedtest-cli
     - suckless-tools
