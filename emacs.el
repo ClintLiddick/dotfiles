@@ -180,18 +180,45 @@
         (gcc-versions '("5" "6" "7" "8" "9")))
     (dolist (cpp-ver gcc-versions)
       (add-to-list 'company-c-headers-path-system (expand-file-name cpp-ver))))
-  (if work-computer (add-to-list 'company-c-headers-path-user "/home/clint/av"))
-  (add-to-list 'company-backends 'company-c-headers))
+  (if work-computer
+      (add-to-list 'company-c-headers-path-user "/home/clint/av")
+    (add-to-list 'company-c-headers-path-user "/home/clint/personal_projects")))
 
-(use-package company-jedi
-  :config
-  (add-to-list 'company-backends 'company-jedi))
-
+(use-package company-jedi)
 ;;(use-package company-lua)
 ;;(use-package company-racer)  ;; rust
 ;;(use-package company-web)
 ;;(use-package web-completion-data)
 
+;; Only a single backend or backend "group" is active at a time, so backends must be "set" per mode
+;; rather than "appended" in general
+(defun clint/company-cish-modes-hook ()
+  (setq company-backends '((
+                            company-c-headers
+                            company-capf
+                            company-clang
+                            company-keywords
+                            company-dabbrev-code))))
+
+(defun clint/company-text-modes-hook ()
+  (setq company-backends '((
+                            company-ispell
+                            company-dabbrev
+                            ))))
+
+(add-hook 'c-mode-hook 'clint/company-cish-modes-hook)
+(add-hook 'c++-mode-hook 'clint/company-cish-modes-hook)
+
+(add-hook 'fundamental-mode-hook 'clint/company-text-modes-hook)
+(add-hook 'markdown-mode-hook 'clint/company-text-modes-hook)
+
+(add-hook 'python-mode-hook (lambda ()
+                              (setq company-backends '((
+                                                        company-jedi
+                                                        company-capf
+                                                        company-keywords
+                                                        company-dabbrev-code
+                                                        )))))
 
 ;; ;; rust
 ;; (use-package rust-mode
