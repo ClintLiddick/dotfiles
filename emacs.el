@@ -120,6 +120,10 @@
    :test-prefix "test_"
    :test-suffix "_test"))
 
+(defconst clint/extra-include-base
+  (if work-computer
+      "/home/clint/av"
+    "/home/clint/personal_projects"))
 
 ;; flycheck syntax checking
 ;; Python - flake8
@@ -135,7 +139,7 @@
   (global-flycheck-mode)
   ;; (use-package flycheck-irony)
   ;; (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
-  (if work-computer (setq flycheck-protoc-import-path '("/home/clint/av")))
+  (setq flycheck-protoc-import-path '(clint/extra-include-base))
   (add-hook 'c++-mode-hook
             (lambda()
               (setq flycheck-gcc-language-standard "c++14")
@@ -143,9 +147,9 @@
   (add-hook 'c-mode-hook
             (lambda()
               (setq flycheck-gcc-language-standard "c11")
-              (setq flycheck-clang-language-standard "c11")))
-  (use-package flycheck-rust))
+              (setq flycheck-clang-language-standard "c11"))))
 
+(use-package flycheck-rust)
 
 ;; C/C++ formatting
 (use-package clang-format
@@ -172,7 +176,10 @@
   :bind ("TAB" . company-indent-or-complete-common)
   :config
   (setq company-idle-delay 0.1)
-  (setq company-minimum-prefix-length 2))
+  (setq company-minimum-prefix-length 2)
+  (setq company-clang-arguments (list
+                                 (concat "-I" clint/extra-include-base)
+                                 (concat "-I" (expand-file-name "bazel-bin" clint/extra-include-base)))))
 
 (use-package company-c-headers
   :config
@@ -180,9 +187,7 @@
         (gcc-versions '("5" "6" "7" "8" "9")))
     (dolist (cpp-ver gcc-versions)
       (add-to-list 'company-c-headers-path-system (expand-file-name cpp-ver))))
-  (if work-computer
-      (add-to-list 'company-c-headers-path-user "/home/clint/av")
-    (add-to-list 'company-c-headers-path-user "/home/clint/personal_projects")))
+  (add-to-list 'company-c-headers-path-user clint/extra-include-base))
 
 (use-package company-jedi)
 ;;(use-package company-lua)
