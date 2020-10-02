@@ -221,6 +221,15 @@
                               (setq company-backends '((
                                                         company-jedi
                                                         company-capf
+                                                        company-files
+                                                        company-keywords
+                                                        company-dabbrev-code
+                                                        )))))
+
+(add-hook 'sh-mode-hook (lambda ()
+                              (setq company-backends '((
+                                                        company-capf
+                                                        company-files
                                                         company-keywords
                                                         company-dabbrev-code
                                                         )))))
