@@ -26,6 +26,7 @@
       - checkinstall
       - clang-10
       - clang-format-10
+      - colordiff
       - cppcheck
       - iperf3
       - python3-pip
