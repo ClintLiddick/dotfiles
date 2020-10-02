@@ -57,6 +57,13 @@
       - flake8
   become: yes
 
+- name: add user to development groups
+  user:
+    name: "{{ ansible_user }}"
+    append: yes
+    groups:
+      - dialout
+
 - name: create ~/src directory
   file:
     dest: "/home/{{ansible_user}}/src"
