@@ -11,6 +11,7 @@
     - fonts-noto
     - gnupg2
     - i3lock
+    - kcolorchooser
     - libnotify-bin
     - moreutils
     - mosh
@@ -24,6 +25,7 @@
     - python3-gpg
     - rxvt-unicode-256color
     - screen
+    - screenruler
     - scrot
     - speedtest-cli
     - suckless-tools
