@@ -3,6 +3,9 @@
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
 alias alert='notify-send --urgency=low "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+# alias switchclip='xsel -p -o | xsel -b'
+alias clip2mid='xsel -b -o | xsel -p -i'
+alias clip2v='xsel -p -o | xsel -b -i'
 alias coinflip='if [[ $(( RANDOM % 2 )) -eq 0 ]]; then echo "heads"; else echo "tails"; fi'
 alias dig='dig +search'
 alias dockerclean='docker images | rg "<none>" | awk '\''{ print $3 }'\'' | xargs docker rmi'
@@ -15,7 +18,6 @@ alias maximum_power='lscpu -p=cpu | grep "[0-9]" | parallel sudo cpufreq-set -g 
 alias perfit='sudo perf record --call-graph dwarf'
 alias showperf='sudo perf report -g'
 alias showpings='sudo tcpdump -i wlan0 icmp and icmp[icmptype]=icmp-echo'
-alias switchclip='xsel -p -o | xsel -b'
 alias toclip='xsel -b -o | xclip'
 alias usecling='export PATH=/opt/cling/bin:$PATH'
 alias weather='curl http://wttr.in/Cupertino'
