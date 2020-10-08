@@ -7,6 +7,7 @@
     packages:
     - acpi
     - awesome
+    - cpufrequtils
     - firefox
     - fonts-noto
     - gnupg2
