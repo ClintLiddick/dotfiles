@@ -24,8 +24,6 @@
   vars:
     packages:
       - checkinstall
-      - clang-10
-      - clang-format-10
       - colordiff
       - cppcheck
       - iperf3
@@ -35,6 +33,26 @@
       - xclip
       - xdotool
       - zeal
+  become: yes
+
+- name: install Ubuntu packages
+  when: ansible_facts['distribution'] == "Ubuntu"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - clang-10
+    - clang-format-10
+  become: yes
+
+- name: install Debian packages
+  when: ansible_facts['distribution'] == "Debian"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - clang-7
+    - clang-format-7
   become: yes
 
 - name: pip upgrade

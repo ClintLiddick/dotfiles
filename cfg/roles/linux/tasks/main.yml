@@ -8,7 +8,6 @@
     - acpi
     - awesome
     - cpufrequtils
-    - firefox
     - fonts-noto
     - gnupg2
     - i3lock
@@ -18,7 +17,6 @@
     - mosh
     - nmon
     - okular
-    - oxygen-cursor-theme-extra
     - paperkey
     - pavucontrol
     - pigz
@@ -26,7 +24,6 @@
     - python3-gpg
     - rxvt-unicode-256color
     - screen
-    - screenruler
     - scrot
     - speedtest-cli
     - suckless-tools
@@ -35,6 +32,27 @@
     - xfe
     - xsel
     - zip
+  become: yes
+
+- name: install Ubuntu packages
+  when: ansible_facts['distribution'] == "Ubuntu"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - firefox
+    - oxygen-cursor-theme-extra
+    - screenruler  # no Debian equivalent after jessie
+  become: yes
+
+- name: install Debian packages
+  when: ansible_facts['distribution'] == "Debian"
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - firefox-esr
+    - oxygencursors
   become: yes
 
 - name: create display manager custom XSession config
