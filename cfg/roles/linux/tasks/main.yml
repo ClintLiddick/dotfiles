@@ -10,7 +10,9 @@
     - cpufrequtils
     - fonts-noto
     - gnupg2
+    - gthumb
     - i3lock
+    - imagemagick
     - kcolorchooser
     - libnotify-bin
     - moreutils

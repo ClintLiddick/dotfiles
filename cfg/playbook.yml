@@ -6,6 +6,7 @@
     - software-dev-min
     - software-dev-power
     - rust
+    - photography
     - private
 
 - hosts: clint-laptop
