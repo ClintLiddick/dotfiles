@@ -1,9 +1,0 @@
----
-- hosts: marvin
-  roles:
-    - linux
-    - home-backups
-    - software-dev-min
-    - software-dev-power
-    - rust
-    - private
