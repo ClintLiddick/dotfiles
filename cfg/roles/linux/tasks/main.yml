@@ -23,6 +23,7 @@
     - paperkey
     - pavucontrol
     - pigz
+    - printer-driver-cups-pdf
     - python3-apt
     - python3-gpg
     - rxvt-unicode-256color
