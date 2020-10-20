@@ -1,0 +1,34 @@
+---
+- name: install GPG packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+    - gnupg2
+    - paperkey
+    - python3-gpg
+    - qrencode
+  become: yes
+
+# autoreconf --verbose --install --force
+# ./configure --prefix=$HOME/.local --without-qt
+# make -j 8
+# make install
+# make uninstall
+- name: checkout zbar source
+  git:
+    dest: "/home/{{ansible_user}}/src/zbar"
+    repo: https://github.com/mchehab/zbar.git
+    version: 0.23.1
+    depth: 1
+    force: yes
+
+- name: install gnupg configuration
+  copy:
+    dest: "/home/{{ ansible_user }}/.gnupg/gpg.conf"
+    mode: 0600
+    content: |
+      personal-digest-preferences SHA256
+      cert-digest-algo SHA256
+      default-preference-list SHA512 SHA384 SHA256 SHA224 AES256 AES192 AES CAST5 ZLIB BZIP2 ZIP Uncompressed

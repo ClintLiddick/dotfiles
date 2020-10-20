@@ -1,0 +1,14 @@
+---
+- name: create ~/src directory
+  file:
+    dest: "/home/{{ansible_user}}/src"
+    state: directory
+
+- name: install build-essential packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+      - build-essential
+  become: yes

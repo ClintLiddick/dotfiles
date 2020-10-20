@@ -2,6 +2,7 @@
 - hosts: marvin
   roles:
     - linux
+    - gpg
     - home-backups
     - software-dev-min
     - software-dev-power

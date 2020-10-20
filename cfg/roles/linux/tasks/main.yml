@@ -10,7 +10,6 @@
     - cpufrequtils
     - cups
     - fonts-noto
-    - gnupg2
     - gthumb
     - i3lock
     - imagemagick
@@ -20,7 +19,6 @@
     - mosh
     - nmon
     - okular
-    - paperkey
     - pavucontrol
     - pigz
     - printer-driver-cups-pdf
