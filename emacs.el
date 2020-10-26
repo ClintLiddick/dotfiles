@@ -325,6 +325,8 @@
 
 ;; misc configuration
 
+(setq initial-scratch-message nil)
+(setq initial-major-mode 'markdown-mode)
 (setq diff-switches "-u")  ;; unified diffs
 (global-linum-mode t)  ;; always show line numbrs
 (setq linum-format "%d ")
