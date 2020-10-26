@@ -1,17 +1,38 @@
 # This file is sourced by Xsession(5), not executed.
 
-# # Enable TrackPoint middle-click scrolling
-# xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation" 1
-# xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Button" 2
-# xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Timeout" 200
-# # TrackPoint middle-click horizontal scrolling
-# xinput set-prop "TPPS/2 IBM TrackPoint" "Evdev Wheel Emulation Axes" 6 7 4 5
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Natural Scrolling Enabled" 1
 
-# Disable scroll inertia
-# synclient CoastingSpeed=0
-
-# Disable Asus trackpad by default
-# xinput disable "ELAN1200:00 04F3:3049 Touchpad"
-
-# Set default backlight
-# xbacklight -set 50
+#Device 'SYNA2393:00 06CB:7A13 Touchpad':
+#	Device Enabled (172):	1
+#	Coordinate Transformation Matrix (174):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+#	libinput Tapping Enabled (322):	0
+#	libinput Tapping Enabled Default (323):	0
+#	libinput Tapping Drag Enabled (324):	1
+#	libinput Tapping Drag Enabled Default (325):	1
+#	libinput Tapping Drag Lock Enabled (326):	0
+#	libinput Tapping Drag Lock Enabled Default (327):	0
+#	libinput Tapping Button Mapping Enabled (328):	1, 0
+#	libinput Tapping Button Mapping Default (329):	1, 0
+#	libinput Natural Scrolling Enabled (306):	1
+#	libinput Natural Scrolling Enabled Default (307):	0
+#	libinput Disable While Typing Enabled (330):	1
+#	libinput Disable While Typing Enabled Default (331):	1
+#	libinput Scroll Methods Available (308):	1, 1, 0
+#	libinput Scroll Method Enabled (309):	1, 0, 0
+#	libinput Scroll Method Enabled Default (310):	1, 0, 0
+#	libinput Click Methods Available (332):	1, 1
+#	libinput Click Method Enabled (333):	1, 0
+#	libinput Click Method Enabled Default (334):	1, 0
+#	libinput Middle Emulation Enabled (335):	0
+#	libinput Middle Emulation Enabled Default (336):	0
+#	libinput Accel Speed (313):	0.000000
+#	libinput Accel Speed Default (314):	0.000000
+#	libinput Left Handed Enabled (318):	0
+#	libinput Left Handed Enabled Default (319):	0
+#	libinput Send Events Modes Available (291):	1, 1
+#	libinput Send Events Mode Enabled (292):	0, 0
+#	libinput Send Events Mode Enabled Default (293):	0, 0
+#	Device Node (294):	"/dev/input/event18"
+#	Device Product ID (295):	1739, 31251
+#	libinput Drag Lock Buttons (320):	<no items>
+#	libinput Horizontal Scroll Enabled (321):	1
