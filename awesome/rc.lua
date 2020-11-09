@@ -257,8 +257,6 @@ globalkeys = gears.table.join(
     {description = "editor", group = "clint"}),
   awful.key({ modkey,           }, "i", function () awful.util.spawn("/home/clint/.emacs_anywhere/bin/run") end,
     {description = "editor inserter", group = "clint"}),
-  awful.key({ modkey,           }, "z", function () awful.util.spawn("zeal") end,
-    {description = "zeal", group = "clint"}),
   awful.key({ }, "Print", function () awful.util.spawn("scrot") end,
     {description = "print screen", group = "screen"}),
   awful.key({ modkey, }, "Print", function () awful.util.spawn("scrot --focused") end,
