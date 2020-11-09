@@ -316,6 +316,8 @@
 (add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
 (add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
 
+(use-package terraform-mode)
+
 ;; (use-package cmake-mode
 ;;   :mode ("CMakeLists\\.txt\\'"
 ;;          "\\.cmake\\'"))
