@@ -1,7 +1,8 @@
 ---
 - hosts: marvin
   roles:
-    - linux
+    - linux-headless
+    - linux-gui
     - gpg
     - home-backups
     - software-dev-min
@@ -12,8 +13,19 @@
 
 - hosts: clint-dell
   roles:
-    - linux
+    - linux-headless
+    - linux-gui
     - software-dev-min
     - software-dev-power
     - rust
     - private
+
+- hosts: builder
+  roles:
+    - linux-headless
+    - software-dev-min
+  tasks:
+    - name: clone dotfile repo
+      git:
+        dest: "/home/{{ ansible_user }}/dotfiles"
+        repo: https://github.com/clintliddick/dotfiles

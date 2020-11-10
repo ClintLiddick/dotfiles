@@ -1,0 +1,41 @@
+---
+- name: install packages
+  apt:
+    name: "{{ packages }}"
+    update_cache: true
+  vars:
+    packages:
+    - acpi
+    - cpufrequtils
+    - imagemagick
+    - jq
+    - moreutils
+    - mosh
+    - nmon
+    - pigz
+    - python3-apt
+    - python3-gpg
+    - screen
+    - speedtest-cli
+    - tree
+    - zip
+  become: yes
+
+- name: create dotfile symlinks
+  file:
+    state: link
+    src: "/home/{{ ansible_user }}/dotfiles/{{ item }}"
+    path: "/home/{{ ansible_user }}/.{{ item }}"
+    force: yes
+  loop:
+    - bash_profile
+    - bashrc
+    - clang-format
+    - emacs.el
+    - profile
+    - vimrc
+
+- name: install simple vimrc
+  get_url:
+    url: https://clintonliddick.com/vimrc
+    dest: "/home/{{ ansible_user }}/.vimrc"

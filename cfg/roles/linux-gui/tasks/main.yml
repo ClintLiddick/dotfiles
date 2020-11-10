@@ -5,36 +5,23 @@
     update_cache: true
   vars:
     packages:
-    - acpi
     - awesome
-    - cpufrequtils
     - cups
     - fonts-noto
     - gthumb
     - i3lock
-    - imagemagick
     - kcolorchooser
     - libnotify-bin
-    - moreutils
-    - mosh
-    - nmon
     - okular
     - pavucontrol
-    - pigz
     - printer-driver-cups-pdf
-    - python3-apt
-    - python3-gpg
     - rxvt-unicode-256color
-    - screen
     - scrot
-    - speedtest-cli
     - suckless-tools
-    - tree
     - vlc
     - xinput
     - xfe
     - xsel
-    - zip
   become: yes
 
 - name: install Ubuntu packages
@@ -58,6 +45,15 @@
     - oxygencursors
   become: yes
 
+- name: "add {{ ansible_user }} to admin groups"
+  user:
+    name: "{{ ansible_user }}"
+    append: yes
+    groups:
+      - lpadmin
+      - dialout
+  become: yes
+
 - name: create display manager custom XSession config
   copy:
     dest: /usr/share/xsessions/xsession.desktop
@@ -76,12 +72,6 @@
     path: "/home/{{ ansible_user }}/.{{ item }}"
     force: yes
   loop:
-    - bash_profile
-    - bashrc
-    - clang-format
-    - emacs.el
-    - profile
-    - vimrc
     - xinitrc
     - xsession
 
@@ -118,13 +108,4 @@
   when: has_dropbox.rc != 0
   apt:
     deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
-  become: yes
-
-- name: "add {{ ansible_user }} to admin groups"
-  user:
-    name: "{{ ansible_user }}"
-    append: yes
-    groups:
-      - lpadmin
-      - dialout
   become: yes
