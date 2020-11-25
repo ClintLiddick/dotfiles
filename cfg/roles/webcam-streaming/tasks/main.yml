@@ -1,0 +1,117 @@
+---
+# TODO(clint) does this setup require custom build?
+# - name: add OBS Apt repo
+#   when: ansible_facts['distribution'] == "Ubuntu"
+#   apt_repository:
+#     repo: ppa:obsproject/obs-studio
+#     update_cache: yes
+#   become: yes
+
+- name: install packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - ffmpeg
+    - v4l-utils
+    # - obs-studio=26.0.2-0obsproject1~bionic
+    # OBS Studio build deps from:
+    - build-essential
+    - checkinstall
+    - cmake
+    - git
+    - libmbedtls-dev
+    - libasound2-dev
+    - libavcodec-dev
+    - libavdevice-dev
+    - libavfilter-dev
+    - libavformat-dev
+    - libavutil-dev
+    - libcurl4-openssl-dev
+    - libfdk-aac-dev
+    - libfontconfig-dev
+    - libfreetype6-dev
+    - libgl1-mesa-dev
+    - libjack-jackd2-dev
+    - libjansson-dev
+    - libluajit-5.1-dev
+    - libpulse-dev
+    - libqt5x11extras5-dev
+    - libspeexdsp-dev
+    - libswresample-dev
+    - libswscale-dev
+    - libudev-dev
+    - libv4l-dev
+    - libvlc-dev
+    - libx11-dev
+    - libx264-dev
+    - libxcb-shm0-dev
+    - libxcb-xinerama0-dev
+    - libxcomposite-dev
+    - libxinerama-dev
+    - pkg-config
+    - python3-dev
+    - qtbase5-dev
+    - libqt5svg5-dev
+    - swig
+    - libxcb-randr0-dev
+    - libxcb-xfixes0-dev
+    - libx11-xcb-dev
+    - libxcb1-dev
+    - libxss-dev
+  become: yes
+
+# sudo dkms add -m v4l2loopback -v  0.12.5 .
+# sudo dkms build -m v4l2loopback -v  0.12.5
+# sudo dkms install -m v4l2loopback -v  0.12.5
+# sudo modprobe v4l2loopback card_label="OBS Virtual Camera" exclusive_caps=1
+- name: clone v4l2loopback
+  git:
+    dest: "/home/{{ ansible_user }}/src/v4l2loopback"
+    repo: https://github.com/umlaeute/v4l2loopback.git
+    depth: 1
+    version: v0.12.5
+
+# mkdir build && cd build
+# cmake -DUNIX_STRUCTURE=1 -DCMAKE_INSTALL_PREFIX=/usr ..
+# make -j4
+# sudo checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
+- name: clone obs-studio sources
+  git:
+    dest: "/home/{{ ansible_user }}/src/obs-studio"
+    repo: https://github.com/obsproject/obs-studio.git
+    version: 26.0.2
+    depth: 1
+
+# diff --git a/CMakeLists.txt b/CMakeLists.txt
+# index 15e6bc1..247d90c 100644
+# --- a/CMakeLists.txt
+# +++ b/CMakeLists.txt
+# @@ -45,8 +45,8 @@ endif()
+#  set_target_properties(v4l2sink PROPERTIES PREFIX "")
+ 
+#  install(TARGETS v4l2sink
+# -	LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}/obs-plugins)
+# +	LIBRARY DESTINATION ${CMAKE_INSTALL_PREFIX}/obs-studio/plugins/v4l2sink/bin/64bit)
+ 
+#  install(DIRECTORY locale/
+# -	DESTINATION "${CMAKE_INSTALL_DATAROOTDIR}/obs/obs-plugins/v4l2sink/locale")
+# +	DESTINATION "${CMAKE_INSTALL_PREFIX}/obs-studio/plugins/v4l2sink/data/locale")
+ 
+# mkdir build && cd build
+# cmake -DLIBOBS_INCLUDE_DIR="../../obs-studio/libobs" -DCMAKE_INSTALL_PREFIX=/usr -G Ninja ..
+# cmake --build .
+# cmake --build . --target install
+- name: clone obs-v4l2sink plugin
+  git:
+    dest: "/home/{{ ansible_user }}/src/obs-v4l2sink"
+    repo: https://github.com/CatxFish/obs-v4l2sink.git
+    depth: 1
+
+- name: install StreamFX OBS plugin
+  unarchive:
+    src: https://github.com/Xaymar/obs-StreamFX/releases/download/0.9.1/streamfx-ubuntu-18.04-0.9.1.0-ad245401.zip
+    remote_src: yes
+    dest: "/home/{{ ansible_user }}/.config/obs-studio"
+
+# TODO(clint) https://github.com/umlaeute/v4l2loopback#load-the-module-at-boot
