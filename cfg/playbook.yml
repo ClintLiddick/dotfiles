@@ -19,6 +19,7 @@
     - software-dev-power
     - rust
     - private
+    - webcam-streaming
 
 - hosts: builder
   roles:
