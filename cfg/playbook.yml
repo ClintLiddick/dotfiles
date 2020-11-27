@@ -10,6 +10,30 @@
     - rust
     - photography
     - private
+  tasks:
+    - name: configure home NAS Autofs master config
+      copy:
+        dest: /etc/auto.master.d/home_nas.autofs
+        content: |
+          /mnt/nas	/etc/auto.home_nas  --timeout 3600
+      become: yes
+      notify:
+        - reload autofs
+    - name: configure Autofs home NAS
+      copy:
+        dest: /etc/auto.home_nas
+        content: |
+          photos	-rw,soft	192.168.2.75:/volume1/photos
+          media	-rw,soft	192.168.2.75:/volume1/media
+      become: yes
+      notify:
+        - reload autofs
+  handlers:
+    - name: reload autofs
+      service:
+        name: autofs.service
+        state: reloaded
+      become: yes
 
 - hosts: clint-dell
   roles:

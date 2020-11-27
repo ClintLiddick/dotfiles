@@ -5,6 +5,7 @@
     update_cache: true
   vars:
     packages:
+    - autofs
     - awesome
     - cups
     - fonts-noto
