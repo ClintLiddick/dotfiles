@@ -114,4 +114,7 @@ if [[ -n $(which kubectl) ]]; then
     source <(kubectl completion bash)
 fi
 
+# Cause AWS Go SDK and Terraform to read ~/.aws/config file
+export AWS_SDK_LOAD_CONFIG=1
+
 . $HOME/dotfiles/clintrc
