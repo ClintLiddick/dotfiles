@@ -44,6 +44,16 @@
     - rust
     - private
     - webcam-streaming
+  tasks:
+    - lineinfile:
+        path: /etc/pulse/default.pa
+        regexp: ^#?.*load-module module-bluetooth-discover.*
+        line: load-module module-bluetooth-discover auto_switch=2
+      become: yes
+      notify: restart pulseaudio
+  handlers:
+    - name: restart pulseaudio
+      shell: pulseaudio -k && pulseaudio -D && pulseaudio --check
 
 - hosts: builder
   roles:

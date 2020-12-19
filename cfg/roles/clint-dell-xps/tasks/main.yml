@@ -1,0 +1,5 @@
+---
+lineinfile:
+  path: /etc/pulse/default.pa
+  regexp: ^load-module module-bluetooth-discover\s*$
+  line: load-module module-bluetooth-discover auto_switch=2
