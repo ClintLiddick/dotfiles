@@ -107,6 +107,7 @@
     dest: "/home/{{ ansible_user }}/src/obs-v4l2sink"
     repo: https://github.com/CatxFish/obs-v4l2sink.git
     depth: 1
+    force: yes
 
 - name: install StreamFX OBS plugin
   unarchive:
