@@ -156,6 +156,8 @@
 
 ;; yapf: python formatting
 (use-package yapfify
+  :custom
+  (yapfify-executable (if work-computer "/opt/aurora/bin/yapf.par" "yapf"))
   :config
   (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
 
