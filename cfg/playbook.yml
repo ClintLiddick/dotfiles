@@ -25,6 +25,7 @@
         content: |
           photos	-rw,soft	192.168.2.75:/volume1/photos
           media	-rw,soft	192.168.2.75:/volume1/media
+          backups	-rw,soft	192.168.2.75:/volume1/backups
       become: yes
       notify:
         - reload autofs

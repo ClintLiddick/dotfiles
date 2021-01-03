@@ -2,9 +2,6 @@
 Description=Run Borg backup command
 Wants=borg-backup.timer
 
-Requires=mnt-nas-backup.mount
-After=mnt-nas-backup.mount
-
 [Service]
 EnvironmentFile=/usr/local/etc/borg/env.conf
 ExecStart=/usr/local/sbin/backup_with_borg

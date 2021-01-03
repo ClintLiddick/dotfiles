@@ -1,29 +1,18 @@
 ---
-- name: install NSF packages
-  apt:
-    name: nfs-common
-    update_cache: true
-  become: yes
 - name: install NAS backups mount
-  copy:
-    src: mnt-nas-backups.mount
-    dest: /etc/systemd/system/mnt-nas-backups.mount
-    mode: 0644
-  become: yes
-- name: mount NAS backups mount
-  systemd:
-    name: mnt-nas-backups.mount
-    enabled: yes
-    daemon_reload: yes
+  file:
+    path: /etc/systemd/system/mnt-nas-backups.mount
+    state: absent
   become: yes
 
 - name: install borg-backup
   get_url:
-    url: "https://github.com/borgbackup/borg/releases/download/1.1.10/borg-linux64"
-    checksum: "sha256:6338d67aad4b5cd327b25ea363e30f0ed4abc425ce2d6a597c75a67a876ef9af"
+    url: "https://github.com/borgbackup/borg/releases/download/1.1.15/borg-linux64"
+    checksum: "sha256:9e87a2b19a6d1034abedf3265bbf5f063238246fc56e6087b6ec4a21f29b4239"
     dest: /usr/local/bin/borg
     mode: 0755
   become: yes
+
 - name: install backup script
   copy:
     src: backup_with_borg.sh
@@ -37,12 +26,14 @@
     dest: /etc/systemd/system/
     mode: 0644
   become: yes
+
 - name: install borg backup target
   copy:
     src: borg-backup.target
     dest: /etc/systemd/system/
     mode: 0644
   become: yes
+
 - name: install borg backup timer
   copy:
     src: borg-backup.timer
@@ -54,12 +45,14 @@
   systemd:
     daemon_reload: yes
   become: yes
+
 - name: enable borg backup timer
   systemd:
     name: borg-backup.timer
     enabled: yes
     state: started
   become: yes
+
 - name: enable borg backup service
   systemd:
     name: borg-backup.service

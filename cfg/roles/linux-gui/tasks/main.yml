@@ -15,6 +15,7 @@
     - i3lock
     - kcolorchooser
     - libnotify-bin
+    - nfs-common
     - okular
     - pavucontrol
     - printer-driver-cups-pdf
