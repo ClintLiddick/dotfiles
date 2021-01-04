@@ -35,9 +35,12 @@ local volumearc_widget = wibox.container.mirror(volumearc, { horizontal = true }
 local update_graphic = function(widget, stdout, _, _, _)
     local mute = string.match(stdout, "%[(o%D%D?)%]")
     local volume = string.match(stdout, "(%d?%d?%d)%%")
-    volume = tonumber(string.format("% 3d", volume))
 
-    widget.value = volume / 100;
+    if volume ~= nil then
+      volume = tonumber(string.format("% 3d", volume))
+      widget.value = volume / 100;
+    end
+
     if mute == "off" then
         widget.colors = { beautiful.widget_red }
     else
