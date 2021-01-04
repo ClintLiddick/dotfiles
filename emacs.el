@@ -300,6 +300,8 @@
 (use-package yaml-mode
   :mode ("\\.yaml\\'"
          "\\.yml\\'"
+         "\\.stack\\'"
+         "\\.platform\\'"
          "\\.cfg\\'"))
 
 (use-package protobuf-mode
