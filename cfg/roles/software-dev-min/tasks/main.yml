@@ -24,4 +24,4 @@
   git_config:
     name: alias.lol
     scope: global
-    value: "log --graph --abbrev-commit --all --decorate --pretty=format:'%C(auto)%h %d %s - [%aN]'"
+    value: "log --graph --abbrev-commit --all --decorate --date=format:%F --pretty=format:'%C(auto)%h %d %s - [%aN %cd]'"
