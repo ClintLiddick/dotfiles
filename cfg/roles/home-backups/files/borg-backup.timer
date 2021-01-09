@@ -3,7 +3,7 @@ Description=Trigger Borg backup command
 
 [Timer]
 # Daily at 3 AM
-OnCalendar=*-*-* 3:*:*
+OnCalendar=*-*-* 03:00:00
 Unit=borg-backup.target
 
 [Install]
