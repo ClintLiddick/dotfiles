@@ -29,6 +29,11 @@
       become: yes
       notify:
         - reload autofs
+    - name: Set x-www-browser
+      community.general.alternatives:
+        name: x-www-browser
+        path: /usr/bin/firefox
+      become: yes
   handlers:
     - name: reload autofs
       service:
@@ -46,13 +51,18 @@
     - private
     - webcam-streaming
   tasks:
-    # TODO: whole if/else block?
-    - lineinfile:
+    - name: enable Bluetooth module in Pulseaudio
+      lineinfile:
         path: /etc/pulse/default.pa
         regexp: ^#?.*load-module module-bluetooth-discover.*
         line: load-module module-bluetooth-discover
       become: yes
       notify: restart pulseaudio
+    - name: Set x-www-browser
+      community.general.alternatives:
+        name: x-www-browser
+        path: /usr/bin/google-chrome
+      become: yes
   handlers:
     - name: restart pulseaudio
       shell: pulseaudio -k && pulseaudio -D && pulseaudio --check

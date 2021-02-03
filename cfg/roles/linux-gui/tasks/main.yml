@@ -21,6 +21,7 @@
     - printer-driver-cups-pdf
     - pulseaudio-module-bluetooth
     - rxvt-unicode-256color
+    - sensible-utils
     - scrot
     - suckless-tools
     - vlc

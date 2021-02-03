@@ -1,6 +1,11 @@
+## Setup
+
+    $ sudo pip3 install ansible
+    $ ansible-galaxy collection install community.general
+
 ## Running
 
-    ansible-playbook -i hosts.yml -l <host> -K playbook.yml
+    $ ansible-playbook -i hosts.yml -l <host> -K playbook.yml
 
 ### Only certain tasks
 
