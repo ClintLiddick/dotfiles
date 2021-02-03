@@ -227,6 +227,9 @@
                                                         company-dabbrev-code
                                                         )))))
 
+;; go
+(use-package go-mode)
+
 ;; ;; rust
 ;; (use-package rust-mode
 ;;   :mode "\\.rs\\'"
