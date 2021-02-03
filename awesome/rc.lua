@@ -106,7 +106,7 @@ myawesomemenu = {
 }
 
 mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                    { "browser", "firefox" },
+                                    { "browser", "sensible-browser" },
                                     { "editor", "emacsclient -c -a emacs" },
                                     { "files", "xfe" },
                                     { "terminal", terminal }
@@ -249,7 +249,7 @@ globalkeys = gears.table.join(
     {description = "run demnu launcher", group = "clint"}),
   awful.key({ modkey, "Mod1"    }, "l", function () awful.util.spawn("i3lock -c 333333") end,
     {description = "lock screen", group = "clint"}),
-  awful.key({ modkey,           }, "g", function () awful.util.spawn("firefox") end,
+  awful.key({ modkey,           }, "g", function () awful.util.spawn("sensible-browser") end,
     {description = "open browser", group = "clint"}),
   awful.key({ modkey,           }, "s", function () awful.util.spawn("gnome-control-center") end,
     {description = "system settings", group = "clint"}),
