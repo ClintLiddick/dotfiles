@@ -45,6 +45,15 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+# git bash completion
+if [ -f ~/src/git/contrib/completion/git-completion.bash ]; then
+    source ~/src/git/contrib/completion/git-completion.bash
+fi
+
+if [ -f ~/src/git/contrib/completion/git-prompt.sh ]; then
+    source ~/src/git/contrib/completion/git-prompt.sh
+fi
+
 export GIT_PS1_SHOWDIRTYSTATE=true
 if [ "$color_prompt" = yes ]; then
     PROMPT_COMMAND='__git_ps1 "${VIRTUAL_ENV:+(${VIRTUAL_ENV##*/})}${debian_chroot:+($debian_chroot)}\[\e[01;32m\]\w\[\e[0;31m\]" "\[\e[00m\]\$ "'

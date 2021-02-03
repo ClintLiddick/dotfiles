@@ -129,6 +129,9 @@
 
 # make prefix=$HOME/.local
 # make prefix=$HOME/.local install
+# cd contrib/subtree
+# make prefix=$HOME/.local
+# make prefix=$HOME/.local install
 - name: checkout Git source
   git:
     dest: "/home/{{ansible_user}}/src/git"
