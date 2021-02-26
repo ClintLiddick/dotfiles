@@ -18,6 +18,7 @@
     - screen
     - speedtest-cli
     - tree
+    - lynx
     - zip
   become: yes
 
