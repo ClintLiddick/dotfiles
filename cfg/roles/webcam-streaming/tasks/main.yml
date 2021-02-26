@@ -4,7 +4,6 @@
 #   when: ansible_facts['distribution'] == "Ubuntu"
 #   apt_repository:
 #     repo: ppa:obsproject/obs-studio
-#     update_cache: yes
 #   become: yes
 
 - name: install packages

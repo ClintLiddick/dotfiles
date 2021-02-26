@@ -1,6 +1,7 @@
 ---
 - hosts: marvin
   roles:
+    - pre-tasks
     - linux-headless
     - linux-gui
     - gpg
@@ -43,6 +44,7 @@
 
 - hosts: clint-dell
   roles:
+    - pre-tasks
     - linux-headless
     - linux-gui
     - software-dev-min

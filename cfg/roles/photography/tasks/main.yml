@@ -22,11 +22,6 @@
       deb https://deb.debian.org/debian buster-backports main
   become: yes
 
-- name: update cache
-  apt:
-    update_cache: true
-  become: yes
-
 - name: install Darktable
   apt:
     package: darktable

@@ -9,7 +9,6 @@
 - name: install software build deps packages
   apt:
     name: "{{ packages }}"
-    update_cache: true
   vars:
     packages:
       - emacs
@@ -20,7 +19,6 @@
 - name: install packages
   apt:
     name: "{{ packages }}"
-    update_cache: true
   vars:
     packages:
       - checkinstall
