@@ -152,7 +152,9 @@
   (evil-leader/set-key-for-mode 'protobuf-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'protobuf-mode "F" 'clang-format-region)
   (evil-leader/set-key-for-mode 'glsl-mode "f" 'clang-format-buffer)
-  (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region))
+  (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region)
+  (evil-leader/set-key-for-mode 'go-mode "f" 'gofmt)
+  (evil-leader/set-key-for-mode 'go-mode "F" 'gofmt))
 
 ;; yapf: python formatting
 (use-package yapfify
