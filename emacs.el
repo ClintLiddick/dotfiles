@@ -177,7 +177,7 @@
 (use-package company-c-headers
   :config
   (let ((default-directory "/usr/include/c++")
-        (gcc-versions '("5" "6" "7" "8" "9")))
+        (gcc-versions '("5" "6" "7" "8" "9" "10" "11")))
     (dolist (cpp-ver gcc-versions)
       (add-to-list 'company-c-headers-path-system (expand-file-name cpp-ver))))
   (add-to-list 'company-c-headers-path-user clint/extra-include-base))
