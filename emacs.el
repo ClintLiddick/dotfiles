@@ -109,7 +109,16 @@
   :init (setq projectile-completion-system 'ivy)
   :config
   (projectile-mode +1)
-  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map))
+  (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+  ;; Add "bazel" project type
+  (projectile-register-project-type
+   'bazel
+   '("WORKSPACE")  ;; identifier file for a bazel project type
+   :compile "bazel build "
+   :test "bazel test "
+   :run "bazel run "
+   :test-prefix "test_"
+   :test-suffix "_test"))
 
 (defconst clint/extra-include-base
   (if work-computer
