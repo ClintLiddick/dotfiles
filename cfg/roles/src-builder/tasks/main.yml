@@ -1,7 +1,7 @@
 ---
 - name: create ~/src directory
   file:
-    dest: "/home/{{ansible_user}}/src"
+    dest: "/home/{{lookup('env', 'USER')}}/src"
     state: directory
 
 - name: install build-essential packages

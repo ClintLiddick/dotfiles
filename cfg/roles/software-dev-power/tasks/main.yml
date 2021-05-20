@@ -75,14 +75,15 @@
 
 - name: add user to development groups
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ lookup('env', 'USER') }}"
     append: yes
     groups:
       - dialout
+  become: yes
 
 - name: create ~/src directory
   file:
-    dest: "/home/{{ansible_user}}/src"
+    dest: "/home/{{lookup('env', 'USER')}}/src"
     state: directory
 
 - name: set git email server
@@ -120,7 +121,7 @@
 # make -j8 && make install
 - name: checkout Emacs source
   git:
-    dest: "/home/{{ansible_user}}/src/emacs"
+    dest: "/home/{{lookup('env', 'USER')}}/src/emacs"
     repo: https://github.com/emacs-mirror/emacs.git
     version: emacs-27.1
     depth: 1
@@ -132,7 +133,7 @@
 # make prefix=$HOME/.local install
 - name: checkout Git source
   git:
-    dest: "/home/{{ansible_user}}/src/git"
+    dest: "/home/{{lookup('env', 'USER')}}/src/git"
     repo: https://github.com/git/git
     version: v2.28.0
     depth: 1
@@ -140,18 +141,18 @@
 - name: make ~/.fonts directory
   file:
     state: directory
-    path: "/home/{{ ansible_user }}/.fonts"
+    path: "/home/{{ lookup('env', 'USER') }}/.fonts"
 
 - name: download Adobe Source Code Pro roman font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
-    dest: "/home/{{ ansible_user }}/.fonts"
+    dest: "/home/{{ lookup('env', 'USER') }}/.fonts"
   register: sourcecodepro_roman
 
 - name: download Adobe Source Code Pro italic font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
-    dest: "/home/{{ ansible_user }}/.fonts"
+    dest: "/home/{{ lookup('env', 'USER') }}/.fonts"
   register: sourcecodepro_italic
 
 - name: update font cache

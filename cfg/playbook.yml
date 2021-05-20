@@ -69,6 +69,21 @@
     - name: restart pulseaudio
       shell: pulseaudio -k && pulseaudio -D && pulseaudio --check
 
+- hosts: clint-vdesk
+  roles:
+    - pre-tasks
+    - linux-headless
+    - software-dev-min
+    - software-dev-power
+    - rust
+    - private
+  tasks:
+    - name: Set x-www-browser
+      community.general.alternatives:
+        name: x-www-browser
+        path: /usr/bin/google-chrome
+      become: yes
+
 - hosts: builder
   roles:
     - linux-headless
@@ -76,5 +91,5 @@
   tasks:
     - name: clone dotfile repo
       git:
-        dest: "/home/{{ ansible_user }}/dotfiles"
+        dest: "/home/{{ lookup('env', 'USER') }}/dotfiles"
         repo: https://github.com/clintliddick/dotfiles

@@ -24,8 +24,8 @@
 - name: create dotfile symlinks
   file:
     state: link
-    src: "/home/{{ ansible_user }}/dotfiles/{{ item }}"
-    path: "/home/{{ ansible_user }}/.{{ item }}"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/{{ item }}"
+    path: "/home/{{ lookup('env', 'USER') }}/.{{ item }}"
     force: yes
   loop:
     - bash_profile
@@ -38,4 +38,4 @@
 - name: install simple vimrc
   get_url:
     url: https://clintonliddick.com/vimrc
-    dest: "/home/{{ ansible_user }}/.vimrc"
+    dest: "/home/{{ lookup('env', 'USER') }}/.vimrc"

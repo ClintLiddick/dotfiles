@@ -15,7 +15,7 @@
   when: has_rustup.rc != 0
   command: /tmp/rustup.sh -y --no-modify-path --default-toolchain stable
   args:
-    creates: "/home/{{ ansible_user }}/.cargo/bin/cargo"
+    creates: "/home/{{ lookup('env', 'USER') }}/.cargo/bin/cargo"
 
 # - name: check if ripgrep installed
 #   shell: which rg
@@ -23,7 +23,7 @@
 #   ignore_errors: yes
 
 - name: install ripgrep
-  command: "/home/{{ansible_user}}/.cargo/bin/cargo install ripgrep"
+  command: "/home/{{lookup('env', 'USER')}}/.cargo/bin/cargo install ripgrep"
   args:
   # when: has_ripgrep.rc != 0
-    creates: "/home/{{ ansible_user }}/.cargo/bin/rg"
+    creates: "/home/{{ lookup('env', 'USER') }}/.cargo/bin/rg"

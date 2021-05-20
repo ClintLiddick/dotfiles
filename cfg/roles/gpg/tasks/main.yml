@@ -17,7 +17,7 @@
 # make uninstall
 - name: checkout zbar source
   git:
-    dest: "/home/{{ansible_user}}/src/zbar"
+    dest: "/home/{{lookup('env', 'USER')}}/src/zbar"
     repo: https://github.com/mchehab/zbar.git
     version: 0.23.1
     depth: 1
@@ -25,7 +25,7 @@
 
 - name: install gnupg configuration
   copy:
-    dest: "/home/{{ ansible_user }}/.gnupg/gpg.conf"
+    dest: "/home/{{ lookup('env', 'USER') }}/.gnupg/gpg.conf"
     mode: 0600
     content: |
       personal-digest-preferences SHA256

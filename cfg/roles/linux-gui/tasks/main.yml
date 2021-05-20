@@ -50,9 +50,9 @@
     - oxygencursors
   become: yes
 
-- name: "add {{ ansible_user }} to admin groups"
+- name: "add {{ lookup('env', 'USER') }} to admin groups"
   user:
-    name: "{{ ansible_user }}"
+    name: "{{ lookup('env', 'USER') }}"
     append: yes
     groups:
       - lpadmin
@@ -73,8 +73,8 @@
 - name: create dotfile symlinks
   file:
     state: link
-    src: "/home/{{ ansible_user }}/dotfiles/{{ item }}"
-    path: "/home/{{ ansible_user }}/.{{ item }}"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/{{ item }}"
+    path: "/home/{{ lookup('env', 'USER') }}/.{{ item }}"
     force: yes
   loop:
     - xinitrc
@@ -83,20 +83,20 @@
 - name: create xsessionrc symlink
   file:
     state: link
-    src: "/home/{{ ansible_user }}/dotfiles/xsessionrc.{{ inventory_hostname }}"
-    path: "/home/{{ ansible_user }}/.xsessionrc"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/xsessionrc.{{ inventory_hostname }}"
+    path: "/home/{{ lookup('env', 'USER') }}/.xsessionrc"
 
 - name: create Xresources symlink
   file:
     state: link
-    src: "/home/{{ ansible_user }}/dotfiles/Xresources.{{ inventory_hostname }}"
-    path: "/home/{{ ansible_user }}/.Xresources"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/Xresources.{{ inventory_hostname }}"
+    path: "/home/{{ lookup('env', 'USER') }}/.Xresources"
 
 - name: create awesome config symlink
   file:
     state: link
-    src: "/home/{{ ansible_user }}/dotfiles/awesome"
-    path: "/home/{{ ansible_user }}/.config/awesome"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/awesome"
+    path: "/home/{{ lookup('env', 'USER') }}/.config/awesome"
 
 - name: create /mnt/usb directory
   file:
