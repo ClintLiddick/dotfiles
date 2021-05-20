@@ -312,7 +312,7 @@
   :mode "/.*/sites-\\(?:available\\|enabled\\)/")
 
 (use-package yaml-mode
-  :mode ("\\.yaml\\'" "\\.yml\\'" "\\.stack\\'" "\\.platform\\'" "\\.cfg\\'" "\\.hil\\'"))
+  :mode ("\\.yaml\\'" "\\.yml\\'" "\\.stack\\'" "\\.platform\\'" "\\.cfg\\'" "\\.hil\\'" "\\.pb\\.txt\\'"))
 
 (use-package protobuf-mode
   ;; use my own latest version of protobuf-mode.el from the Protobuf sources.
