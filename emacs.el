@@ -116,7 +116,7 @@
    '("WORKSPACE")  ;; identifier file for a bazel project type
    :compile "bazel build "
    :test "bazel test "
-   :run "bazel run "
+   :run "bazel run -- "
    :test-prefix "test_"
    :test-suffix "_test"))
 
