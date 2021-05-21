@@ -10,7 +10,7 @@ alias coinflip='if [[ $(( RANDOM % 2 )) -eq 0 ]]; then echo "heads"; else echo "
 alias dig='dig +search'
 alias dockerclean='docker images | rg "<none>" | awk '\''{ print $3 }'\'' | xargs docker rmi'
 alias dumpcore='ulimit -c unlimited'
-alias e='emacsclient -nw'
+alias e='emacsclient -nw --alternate-editor=""'
 alias filemanager='xfe'
 alias generate_passphrase='rg -e "^[a-z]+$" /usr/share/dict/words | sort -R | head -25 | xargs -L 5 echo'
 alias holdmybeer='sudo'
