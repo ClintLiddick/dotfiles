@@ -165,12 +165,11 @@
   (evil-leader/set-key-for-mode 'go-mode "f" 'gofmt)
   (evil-leader/set-key-for-mode 'go-mode "F" 'gofmt))
 
-;; yapf: python formatting
-(use-package yapfify
-  :custom
-  (yapfify-executable (if work-computer "/opt/aurora/bin/yapf.par" "yapf"))
+;; black: python formatting
+(use-package python-black
+  :after python
   :config
-  (evil-leader/set-key-for-mode 'python-mode "f" 'yapfify-buffer))
+  (evil-leader/set-key-for-mode 'python-mode "f" 'python-black-buffer))
 
 
 ;; company: code autocomplete
