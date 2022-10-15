@@ -1,7 +1,9 @@
 # This file is sourced by Xsession(5), not executed.
 
 xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Natural Scrolling Enabled" 1
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Accel Speed" 0.8
 
+# xinput list-props "SYNA2393:00 06CB:7A13 Touchpad"
 #Device 'SYNA2393:00 06CB:7A13 Touchpad':
 #	Device Enabled (172):	1
 #	Coordinate Transformation Matrix (174):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
