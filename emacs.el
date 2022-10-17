@@ -314,7 +314,7 @@
   :mode "\\.md\\'"
   :init
   (setq markdown-command "markdown2")  ;; python3-markdown2
-  (add-hook 'markdown-mode-hook (lambda () (set-fill-column 80)))
+  (add-hook 'markdown-mode-hook (lambda () (set-fill-column 100)))
   :config
   (evil-leader/set-key-for-mode 'markdown-mode "f" 'fill-paragraph)
   (evil-leader/set-key-for-mode 'markdown-mode "F" 'fill-region))
