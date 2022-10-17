@@ -15,3 +15,9 @@ ContinuationIndentWidth: 4
 ReflowComments: true
 FixNamespaceComments: true
 IncludeBlocks: Regroup
+---
+Language: TextProto
+BasedOnStyle: Google
+ColumnLimit: 100
+IndentWidth: 4
+ReflowComments: true
