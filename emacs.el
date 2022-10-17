@@ -192,6 +192,7 @@
   :config
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 2)
+  (if work-computer (setq company-clang-exectuable "/home/clint/av/bazel-av/external/clang11/bin/clang"))
   (setq company-clang-arguments (list
                                  (concat "-I" clint/extra-include-base)
                                  (concat "-I" (expand-file-name "bazel-bin" clint/extra-include-base)))))
