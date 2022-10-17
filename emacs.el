@@ -84,6 +84,18 @@
   :bind ("C-x g" . magit-status))
 (evil-leader/set-key "g" 'magit-status)
 
+(with-eval-after-load 'magit
+  ;; This disables slow parts of the status page, set "magit-refresh-verbose" to "t"
+  ;; to see how long the update takes and the breakdown of timing per hook in
+  ;; newer versions.
+  ;; Reference: https://jakemccrary.com/blog/2020/11/14/speeding-up-magit/
+  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+  ;; (remove-hook 'magit-status-sections-hook 'magit-insert-status-headers)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-pushremote)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
+  (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent))
+
 
 ;; ivy minibuffer completion
 (use-package ivy
