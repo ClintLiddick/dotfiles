@@ -1,95 +1,97 @@
 ---
-- hosts: marvin
-  roles:
-    - pre-tasks
-    - linux-headless
-    - linux-gui
-    - gpg
-    - home-backups
-    - software-dev-min
-    - software-dev-power
-    - rust
-    - photography
-    - private
-  tasks:
-    - name: configure home NAS Autofs master config
-      copy:
-        dest: /etc/auto.master.d/home_nas.autofs
-        content: |
-          /mnt/nas	/etc/auto.home_nas  --timeout 3600
-      become: yes
-      notify:
-        - reload autofs
-    - name: configure Autofs home NAS
-      copy:
-        dest: /etc/auto.home_nas
-        content: |
-          photos	-rw,soft	192.168.2.75:/volume1/photos
-          media	-rw,soft	192.168.2.75:/volume1/media
-          backups	-rw,soft	192.168.2.75:/volume1/backups
-      become: yes
-      notify:
-        - reload autofs
-    - name: Set x-www-browser
-      community.general.alternatives:
-        name: x-www-browser
-        path: /usr/bin/firefox
-      become: yes
-  handlers:
-    - name: reload autofs
-      service:
-        name: autofs.service
-        state: reloaded
-      become: yes
+#- hosts: marvin
+#  roles:
+#    - pre-tasks
+#    - linux-headless
+#    - linux-gui
+#    - gpg
+#    - home-backups
+#    - software-dev-min
+#    - software-dev-power
+#    - rust
+#    - photography
+#    - private
+#  tasks:
+#    - name: configure home NAS Autofs master config
+#      copy:
+#        dest: /etc/auto.master.d/home_nas.autofs
+#        content: |
+#          /mnt/nas	/etc/auto.home_nas  --timeout 3600
+#      become: yes
+#      notify:
+#        - reload autofs
+#    - name: configure Autofs home NAS
+#      copy:
+#        dest: /etc/auto.home_nas
+#        content: |
+#          photos	-rw,soft	192.168.2.75:/volume1/photos
+#          media	-rw,soft	192.168.2.75:/volume1/media
+#          backups	-rw,soft	192.168.2.75:/volume1/backups
+#      become: yes
+#      notify:
+#        - reload autofs
+#    - name: Set x-www-browser
+#      community.general.alternatives:
+#        name: x-www-browser
+#        path: /usr/bin/firefox
+#      become: yes
+#  handlers:
+#    - name: reload autofs
+#      service:
+#        name: autofs.service
+#        state: reloaded
+#      become: yes
 
-- hosts: clint-dell
-  roles:
-    - pre-tasks
-    - linux-headless
-    - linux-gui
-    - software-dev-min
-    - software-dev-power
-    - rust
-    - private
-    - webcam-streaming
-  tasks:
-    - name: enable Bluetooth module in Pulseaudio
-      lineinfile:
-        path: /etc/pulse/default.pa
-        regexp: ^#?.*load-module module-bluetooth-discover.*
-        line: load-module module-bluetooth-discover
-      become: yes
-      notify: restart pulseaudio
-    - name: Set x-www-browser
-      community.general.alternatives:
-        name: x-www-browser
-        path: /usr/bin/google-chrome
-      become: yes
-  handlers:
-    - name: restart pulseaudio
-      shell: pulseaudio -k && pulseaudio -D && pulseaudio --check
+#- hosts: clint-dell
+#  roles:
+#    - pre-tasks
+#    - linux-headless
+#    - linux-gui
+#    - software-dev-min
+#    - software-dev-power
+#    - rust
+#    - private
+#    - webcam-streaming
+#  tasks:
+#    - name: enable Bluetooth module in Pulseaudio
+#      lineinfile:
+#        path: /etc/pulse/default.pa
+#        regexp: ^#?.*load-module module-bluetooth-discover.*
+#        line: load-module module-bluetooth-discover
+#      become: yes
+#      notify: restart pulseaudio
+#    - name: Set x-www-browser
+#      community.general.alternatives:
+#        name: x-www-browser
+#        path: /usr/bin/google-chrome
+#      become: yes
+#  handlers:
+#    - name: restart pulseaudio
+#      shell: pulseaudio -k && pulseaudio -D && pulseaudio --check
 
-- hosts: clint-vdesk
-  roles:
-    - pre-tasks
-    - linux-headless
-    - software-dev-min
-    - software-dev-power
-    - rust
-    - private
+- name: provision clint-vdesk
+  hosts: clint-vdesk
+  # roles:
+  #   - pre-tasks
+  #   - linux-headless
+  #   - software-dev-min
+  #   - software-dev-power
+  #   - rust
+  #   - private
   tasks:
-    - name: Set x-www-browser
-      community.general.alternatives:
-        name: x-www-browser
-        path: /usr/bin/google-chrome
-      become: yes
+  - name: Set x-www-browser
+    community.general.alternatives:
+      name: x-www-browser
+      path: /usr/bin/google-chrome
+    become: yes
 
-- hosts: builder
+- name: provision builder
+  hosts: builder
   roles:
     - linux-headless
     - software-dev-min
   tasks:
-    - name: clone dotfile repo
-      git:
-        dest: "/home/{{ lookup('env', 'USER') }}/dotfiles"
-        repo: https://github.com/clintliddick/dotfiles
+  - name: clone dotfile repo
+    git:
+      dest: "/home/{{ lookup('env', 'USER') }}/dotfiles"
+      repo: https://github.com/clintliddick/dotfiles
