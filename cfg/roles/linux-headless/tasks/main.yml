@@ -34,8 +34,3 @@
     - emacs.el
     - profile
     - vimrc
-
-- name: install simple vimrc
-  get_url:
-    url: https://clintonliddick.com/vimrc
-    dest: "/home/{{ lookup('env', 'USER') }}/.vimrc"
