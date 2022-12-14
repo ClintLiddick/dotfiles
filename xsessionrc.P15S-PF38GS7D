@@ -37,3 +37,7 @@ xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled
 #	Device Product ID (312):	2, 7
 #	libinput Drag Lock Buttons (347):	<no items>
 #	libinput Horizontal Scroll Enabled (348):	1
+
+# COPIED/UNTESTED
+# Disable scroll inertia
+# synclient CoastingSpeed=0
