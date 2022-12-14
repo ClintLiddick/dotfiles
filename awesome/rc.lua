@@ -65,7 +65,7 @@ awful.layout.layouts = {
     awful.layout.suit.fair,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.tile.top,
+    -- awful.layout.suit.tile.top,
     awful.layout.suit.floating,
     -- awful.layout.suit.tile.left,
     -- awful.layout.suit.tile.bottom,
@@ -409,7 +409,15 @@ clientkeys = gears.table.join(
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end,
               {description = "move to master", group = "client"}),
     awful.key({ modkey,           }, "o",      function (c) c:move_to_screen()               end,
-              {description = "move to screen", group = "client"})
+              {description = "move to screen", group = "client"}),
+    awful.key({ modkey,           }, "m",
+        function (c)
+            c.maximized = false
+            c.maximized_horizontal = false
+            c.maximized_vertical = false
+            c:raise()
+        end,
+        {description = "demaximize window", group = "client"})
 )
 
 -- Bind all key numbers to tags.
