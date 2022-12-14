@@ -249,8 +249,8 @@
                                                         company-dabbrev-code
                                                         )))))
 
-;; go
 (use-package go-mode)
+(use-package lua-mode)
 
 ;; ;; rust
 ;; (use-package rust-mode
