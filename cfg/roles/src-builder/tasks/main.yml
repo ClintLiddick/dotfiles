@@ -9,5 +9,9 @@
     name: "{{ packages }}"
   vars:
     packages:
+      - autoconf
       - build-essential
+      - libssl-dev
+      - texi2html
+      - texinfo  # makeinfo
   become: yes

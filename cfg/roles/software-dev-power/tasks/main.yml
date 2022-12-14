@@ -7,15 +7,14 @@
     repo: ppa:zeal-developers/ppa
   become: yes
 
-# TODO(clint) does not seem to work
 - name: install software build deps packages
   apt:
     name: "{{ packages }}"
+    state: build-dep
   vars:
     packages:
       - emacs
       - git
-    state: build-dep
   become: yes
 
 - name: install packages
