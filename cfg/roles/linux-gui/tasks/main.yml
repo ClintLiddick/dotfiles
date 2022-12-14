@@ -35,7 +35,6 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - firefox
     - oxygen-cursor-theme-extra
     - screenruler  # no Debian equivalent after jessie
   become: yes

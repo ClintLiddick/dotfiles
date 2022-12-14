@@ -1,0 +1,39 @@
+# This file is sourced by Xsession(5), not executed.
+
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+
+#~$ xinput list-props "SynPS/2 Synaptics TouchPad"
+#Device 'SynPS/2 Synaptics TouchPad':
+#	Device Enabled (188):	1
+#	Coordinate Transformation Matrix (190):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+#	libinput Tapping Enabled (323):	0
+#	libinput Tapping Enabled Default (324):	0
+#	libinput Tapping Drag Enabled (325):	1
+#	libinput Tapping Drag Enabled Default (326):	1
+#	libinput Tapping Drag Lock Enabled (327):	0
+#	libinput Tapping Drag Lock Enabled Default (328):	0
+#	libinput Tapping Button Mapping Enabled (329):	1, 0
+#	libinput Tapping Button Mapping Default (330):	1, 0
+#	libinput Natural Scrolling Enabled (331):	0
+#	libinput Natural Scrolling Enabled Default (332):	0
+#	libinput Disable While Typing Enabled (333):	1
+#	libinput Disable While Typing Enabled Default (334):	1
+#	libinput Scroll Methods Available (335):	1, 1, 0
+#	libinput Scroll Method Enabled (336):	1, 0, 0
+#	libinput Scroll Method Enabled Default (337):	1, 0, 0
+#	libinput Click Methods Available (338):	1, 1
+#	libinput Click Method Enabled (339):	1, 0
+#	libinput Click Method Enabled Default (340):	1, 0
+#	libinput Middle Emulation Enabled (341):	0
+#	libinput Middle Emulation Enabled Default (342):	0
+#	libinput Accel Speed (343):	0.000000
+#	libinput Accel Speed Default (344):	0.000000
+#	libinput Left Handed Enabled (345):	0
+#	libinput Left Handed Enabled Default (346):	0
+#	libinput Send Events Modes Available (308):	1, 1
+#	libinput Send Events Mode Enabled (309):	0, 0
+#	libinput Send Events Mode Enabled Default (310):	0, 0
+#	Device Node (311):	"/dev/input/event6"
+#	Device Product ID (312):	2, 7
+#	libinput Drag Lock Buttons (347):	<no items>
+#	libinput Horizontal Scroll Enabled (348):	1

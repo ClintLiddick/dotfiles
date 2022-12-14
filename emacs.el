@@ -7,7 +7,7 @@
 (setq py-python-command "/usr/bin/python3")
 
 ;; determine whether or not on work computer
-(defconst work-computer (equal (system-name) "clint-dell"))
+(defconst work-computer (equal (system-name) "P15S-PF38GS7D"))
 
 ;; setup package archives
 (require 'package)

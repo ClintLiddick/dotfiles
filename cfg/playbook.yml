@@ -33,6 +33,7 @@
     - name: Set x-www-browser
       community.general.alternatives:
         name: x-www-browser
+        link: /usr/bin/x-www-browser
         path: /usr/bin/firefox
       become: yes
   handlers:
@@ -42,7 +43,7 @@
         state: reloaded
       become: yes
 
-- hosts: clint-dell
+- hosts: P15S-PF38GS7D
   roles:
     - pre-tasks
     - linux-headless
@@ -50,39 +51,24 @@
     - software-dev-min
     - software-dev-power
     - rust
-    - private
-    - webcam-streaming
+    #- private
   tasks:
-    - name: enable Bluetooth module in Pulseaudio
-      lineinfile:
-        path: /etc/pulse/default.pa
-        regexp: ^#?.*load-module module-bluetooth-discover.*
-        line: load-module module-bluetooth-discover
-      become: yes
-      notify: restart pulseaudio
+    #- name: enable Bluetooth module in Pulseaudio
+    #  lineinfile:
+    #    path: /etc/pulse/default.pa
+    #    regexp: ^#?.*load-module module-bluetooth-discover.*
+    #    line: load-module module-bluetooth-discover
+    #  become: yes
+    #  notify: restart pulseaudio
     - name: Set x-www-browser
       community.general.alternatives:
         name: x-www-browser
+        link: /usr/bin/x-www-browser
         path: /usr/bin/google-chrome
       become: yes
-  handlers:
-    - name: restart pulseaudio
-      shell: pulseaudio -k && pulseaudio -D && pulseaudio --check
-
-- hosts: clint-vdesk
-  roles:
-    - pre-tasks
-    - linux-headless
-    - software-dev-min
-    - software-dev-power
-    - rust
-    - private
-  tasks:
-    - name: Set x-www-browser
-      community.general.alternatives:
-        name: x-www-browser
-        path: /usr/bin/google-chrome
-      become: yes
+  # handlers:
+  #   - name: restart pulseaudio
+  #     shell: pulseaudio -k && pulseaudio -D && pulseaudio --check
 
 - hosts: builder
   roles:

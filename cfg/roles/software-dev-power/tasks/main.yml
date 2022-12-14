@@ -1,6 +1,8 @@
 ---
 - name: add Zeal docs PPA
-  when: ansible_facts['distribution'] == "Ubuntu"
+  when:
+    - ansible_facts['distribution'] == "Ubuntu"
+    - ansible_facts['distribution_major_version'] | int < 20
   apt_repository:
     repo: ppa:zeal-developers/ppa
   become: yes
