@@ -89,7 +89,8 @@
 
 # ./autogen.sh
 # ./configure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
-# make -j8 && make install
+# make -j8
+# make PREFIX=$HOME/.local install
 - name: checkout Emacs source
   git:
     dest: "/home/{{lookup('env', 'USER')}}/src/emacs"
