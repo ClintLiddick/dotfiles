@@ -87,36 +87,6 @@
     dest: "/home/{{lookup('env', 'USER')}}/src"
     state: directory
 
-- name: set git email server
-  git_config:
-    name: sendemail.smtpserver
-    scope: global
-    value: smtp.gmail.com
-
-- name: set git email server port
-  git_config:
-    name: sendemail.smtpserverport
-    scope: global
-    value: "587"
-
-- name: set git email encryption
-  git_config:
-    name: sendemail.smtpencryption
-    scope: global
-    value: tls
-
-- name: set git email user
-  git_config:
-    name: sendemail.smtpuser
-    scope: global
-    value: "{{email}}"
-
-- name: set private git email password
-  git_config:
-    name: sendemail.smtppass
-    scope: global
-    value: "{{git_email_password}}"
-
 # ./autogen.sh
 # ./configure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
 # make -j8 && make install
