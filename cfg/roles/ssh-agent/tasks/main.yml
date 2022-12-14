@@ -1,0 +1,28 @@
+---
+- name: add user systemd directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/systemd/user/"
+    state: directory
+
+- name: add ssh-agent systemd unit file
+  copy:
+    dest: "/home/{{ lookup('env', 'USER') }}/.config/systemd/user/ssh-agent.service"
+    content: |
+      [Unit]
+      Description=SSH key agent
+
+      [Service]
+      Type=simple
+      Environment=SSH_AUTH_SOCK=%t/ssh-agent.socket
+      ExecStart=/usr/bin/ssh-agent -D -a $SSH_AUTH_SOCK
+      
+      [Install]
+      WantedBy=default.target
+
+- name: start ssh-agent systemd service
+  systemd:
+    name: ssh-agent
+    daemon_reload: true
+    scope: user
+    enabled: true
+    state: started
