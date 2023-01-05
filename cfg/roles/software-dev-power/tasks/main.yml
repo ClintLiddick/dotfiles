@@ -72,7 +72,6 @@
   vars:
     packages:
       - flake8
-  become: yes
 
 - name: add user to development groups
   user:
