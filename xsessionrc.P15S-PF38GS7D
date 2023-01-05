@@ -1,6 +1,9 @@
 # This file is sourced by Xsession(5), not executed.
 
 xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
+xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5
+
+xinput set-prop "Kensington Expert Wireless TB Mouse" "libinput Accel Speed" 0.7
 
 #~$ xinput list-props "SynPS/2 Synaptics TouchPad"
 #Device 'SynPS/2 Synaptics TouchPad':
