@@ -407,6 +407,14 @@
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
 
+;; (defvar clint-font
+;;   (if work-computer
+;;       "SourceCodePro-10"
+;;       "SourceCodePro-12"))
+
+;; (if display-graphic-p
+;;     (set-frame-font clint-font))
+
 (defvar color-themes '())
 (use-package zenburn-theme
   :config

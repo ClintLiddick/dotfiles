@@ -1,3 +1,5 @@
+! Use `xrdb ~/.Xresources` to reload
+
 !
 ! Cursor
 !
@@ -7,7 +9,7 @@ Xcursor.theme: oxy-obsidian-hc
 !
 ! Applications
 !
-emacs.font: Source Code Variable-14
+emacs.font: Source Code Variable-12
 
 !
 ! Terminal
