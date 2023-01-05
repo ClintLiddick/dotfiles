@@ -123,11 +123,17 @@ complete -o default -F _pip_completion pip
 # pip bash completion end
 
 # kubectl/kubernetes bash completion
-if [[ -n $(which kubectl) ]]; then
+if [[ -n $(command -v kubectl) ]]; then
     source <(kubectl completion bash)
 fi
 
 # Cause AWS Go SDK and Terraform to read ~/.aws/config file
 export AWS_SDK_LOAD_CONFIG=1
+
+# AWS cli command completion
+
+if [[ -n $(command -v aws_completer) ]]; then
+    complete -C aws_completer aws
+fi
 
 . $HOME/dotfiles/clintrc
