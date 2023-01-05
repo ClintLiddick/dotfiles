@@ -10,6 +10,7 @@
     - jq
     - moreutils
     - mosh
+    - net-tools
     - nmon
     - pigz
     - python3-apt
