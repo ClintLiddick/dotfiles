@@ -263,22 +263,22 @@ globalkeys = gears.table.join(
     {description = "print focused window", group = "screen"}),
 
     -- Volume
-  awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE +3%") end,
-    {description = "raise", group = "volume"}),
-  awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE -3%") end,
-    {description = "lower", group = "volume"}),
-  awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute bluez_sink.04_52_C7_C2_6E_DE toggle") end,
-    {description = "mute", group = "volume"}),
+  --awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE +3%") end,
+  --  {description = "raise", group = "volume"}),
+  --awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE -3%") end,
+  --  {description = "lower", group = "volume"}),
+  --awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute bluez_sink.04_52_C7_C2_6E_DE toggle") end,
+  --  {description = "mute", group = "volume"}),
 
    -- -- Volume Keys
    -- awful.key({}, "XF86AudioLowerVolume", function ()
-   --   awful.util.spawn("amixer -q -D pulse sset Master 5%-", false)
+   --   awful.util.spawn("amixer -q sset Master 5%- unmute", false)
    -- end),
    -- awful.key({}, "XF86AudioRaiseVolume", function ()
-   --   awful.util.spawn("amixer -q -D pulse sset Master 5%+", false)
+   --   awful.util.spawn("amixer -q sset Master 5%+ unmute", false)
    -- end),
    -- awful.key({}, "XF86AudioMute", function ()
-   --   awful.util.spawn("amixer -D pulse set Master 1+ toggle", false)
+   --   awful.util.spawn("amixer -q set Master toggle", false)
    -- end),
    -- -- Media Keys
    -- awful.key({}, "XF86AudioPlay", function()
