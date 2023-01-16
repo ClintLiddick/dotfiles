@@ -94,7 +94,7 @@
   git:
     dest: "/home/{{lookup('env', 'USER')}}/src/emacs"
     repo: https://github.com/emacs-mirror/emacs.git
-    version: emacs-27.1
+    version: emacs-27.2
     depth: 1
 
 # make prefix=$HOME/.local
