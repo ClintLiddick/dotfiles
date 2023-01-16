@@ -50,8 +50,8 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - clang-7
-    - clang-format-7
+    - clang-13
+    - clang-format-13
   become: yes
 
 - name: pip upgrade
