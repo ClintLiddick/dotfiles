@@ -31,3 +31,10 @@
     name: fetch.prune
     scope: global
     value: true
+
+- name: set git config pull fast-forward only
+  # use git pull --rebase or --no-rebase to override
+  git_config:
+    name: pull.ff
+    scope: global
+    value: only
