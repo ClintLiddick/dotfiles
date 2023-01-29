@@ -80,3 +80,20 @@
       git:
         dest: "/home/{{ lookup('env', 'USER') }}/dotfiles"
         repo: https://github.com/clintliddick/dotfiles
+
+- hosts: Family-MacBook.local
+  roles:
+    - rust
+    - software-dev-min
+  tasks:
+    - name: create dotfile symlinks
+      file:
+        state: link
+        src: "{{ lookup('env', 'HOME') }}/dotfiles/{{ item }}"
+        path: "{{ lookup('env', 'HOME') }}/.{{ item }}"
+        force: yes
+      loop:
+        - clang-format
+        - emacs.el
+        - vimrc
+        - screenrc

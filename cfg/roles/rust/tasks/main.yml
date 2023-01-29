@@ -15,7 +15,7 @@
   when: has_rustup.rc != 0
   command: /tmp/rustup.sh -y --no-modify-path --default-toolchain stable
   args:
-    creates: "/home/{{ lookup('env', 'USER') }}/.cargo/bin/cargo"
+    creates: "{{ lookup('env', 'HOME') }}/.cargo/bin/cargo"
 
 # - name: check if ripgrep installed
 #   shell: which rg
@@ -23,7 +23,7 @@
 #   ignore_errors: yes
 
 - name: install ripgrep
-  command: "/home/{{lookup('env', 'USER')}}/.cargo/bin/cargo install ripgrep"
+  command: "{{lookup('env', 'HOME')}}/.cargo/bin/cargo install ripgrep"
   args:
   # when: has_ripgrep.rc != 0
-    creates: "/home/{{ lookup('env', 'USER') }}/.cargo/bin/rg"
+    creates: "{{ lookup('env', 'HOME') }}/.cargo/bin/rg"

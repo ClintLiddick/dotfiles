@@ -1,5 +1,6 @@
 ---
 - name: install packages
+  when: ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution'] == "Debian"
   apt:
     name: "{{ packages }}"
   vars:
