@@ -134,7 +134,6 @@
 
 (defconst clint/extra-include-base
   (if work-computer
-      "/home/clint/av"
     "/home/clint/personal_projects"))
 
 ;; flycheck syntax checking
@@ -173,9 +172,7 @@
   (evil-leader/set-key-for-mode 'protobuf-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'protobuf-mode "F" 'clang-format-region)
   (evil-leader/set-key-for-mode 'glsl-mode "f" 'clang-format-buffer)
-  (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region)
-  (evil-leader/set-key-for-mode 'go-mode "f" 'gofmt)
-  (evil-leader/set-key-for-mode 'go-mode "F" 'gofmt))
+  (evil-leader/set-key-for-mode 'glsl-mode "F" 'clang-format-region))
 
 ;; black: python formatting
 (use-package python-black
@@ -249,7 +246,11 @@
                                                         company-dabbrev-code
                                                         )))))
 
-(use-package go-mode)
+(use-package go-mode
+  :config
+  (evil-leader/set-key-for-mode 'go-mode "f" 'gofmt)
+  (evil-leader/set-key-for-mode 'go-mode "F" 'gofmt))
+
 (use-package lua-mode)
 
 ;; ;; rust
@@ -314,7 +315,7 @@
   :mode "\\.md\\'"
   :init
   (setq markdown-command "markdown2")  ;; python3-markdown2
-  (add-hook 'markdown-mode-hook (lambda () (set-fill-column 100)))
+  (add-hook 'markdown-mode-hook (lambda () (set-fill-column 88)))
   :config
   (evil-leader/set-key-for-mode 'markdown-mode "f" 'fill-paragraph)
   (evil-leader/set-key-for-mode 'markdown-mode "F" 'fill-region))
@@ -327,13 +328,12 @@
 
 (use-package protobuf-mode
   ;; use my own latest version of protobuf-mode.el from the Protobuf sources.
-  :load-path "/home/clint/dotfiles/third_party/"
+  :load-path "../dotfiles/third_party/"
   :mode "\\.proto\\'")
 
-;; Bazel files are basically Python
-(add-to-list 'auto-mode-alist '("\\WORKSPACE\\'" . python-mode))
-(add-to-list 'auto-mode-alist '("\\BUILD\\'" . python-mode))
-(add-to-list 'auto-mode-alist '("\\.bzl\\'" . python-mode))
+(use-package bazel
+  :config
+  (evil-leader/set-key-for-mode 'bazel-mode "f" 'bazel-buildifier))
 
 (use-package terraform-mode)
 
@@ -357,7 +357,7 @@
 (setq gdb-many-windows t)
 (show-paren-mode t)  ;; highlight matching braces
 (setq show-paren-delay 0)
-(setq-default fill-column 100)
+(setq-default fill-column 88)  ;; set line length to match black python formatting
 ;; don't pollute emacs.el with custom-set-variables
 (setq custom-file (make-temp-file "emacs-custom"))
 ;; set default python interpreter
