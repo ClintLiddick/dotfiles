@@ -246,6 +246,20 @@
                                                         company-dabbrev-code
                                                         )))))
 
+;; Copiliot
+(use-package dash)
+(use-package s)
+(use-package editorconfig)
+(use-package copilot
+  :load-path "~/dotfiles/third_party/"
+  :config
+  (add-hook 'prog-mode-hook 'copilot-mode)
+  (delq 'company-preview-if-just-one-frontend company-frontends)
+  (evil-define-key 'insert copilot-mode-map (kbd "<tab>") 'copilot-accept-completion))
+  ;; (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  ;; (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+
+
 (use-package go-mode
   :config
   (evil-leader/set-key-for-mode 'go-mode "f" 'gofmt)
