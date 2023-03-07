@@ -333,7 +333,9 @@
 
 (use-package bazel
   :config
-  (evil-leader/set-key-for-mode 'bazel-mode "f" 'bazel-buildifier))
+  (evil-leader/set-key-for-mode 'bazel-build-mode "f" 'bazel-buildifier)
+  (evil-leader/set-key-for-mode 'bazel-workspace-mode "f" 'bazel-buildifier)
+  (evil-leader/set-key-for-mode 'bazel-starlark-mode "f" 'bazel-buildifier))
 
 (use-package terraform-mode)
 
