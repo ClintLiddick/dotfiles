@@ -4,6 +4,7 @@
     name: "{{ packages }}"
   vars:
     packages:
+    - acpid
     - autofs
     - awesome
     - bluez
@@ -49,6 +50,11 @@
     - firefox-esr
     - oxygencursors
   become: yes
+
+- name: start acpid service for battery and volume monitoring
+  systemd:
+    name: acpid
+    state: started
 
 - name: "add {{ lookup('env', 'USER') }} to admin groups"
   user:

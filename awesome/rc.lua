@@ -15,7 +15,7 @@ local hotkeys_popup = require("awful.hotkeys_popup").widget
 require("awful.hotkeys_popup.keys")
 
 -- Custom libraries
-local volumearc_widget = require("awesome-wm-widgets.volumearc-widget.volumearc")
+local volume_control = require("volume-control")
 local batteryarc_widget = require("awesome-wm-widgets.batteryarc-widget.batteryarc")
 
 -- {{{ Error handling
@@ -127,6 +127,12 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+-- Create volume widget
+volumecfg = volume_control({
+    device = "pulse",
+    listen = true,
+})
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
                     awful.button({ }, 1, function(t) t:view_only() end),
@@ -226,7 +232,7 @@ awful.screen.connect_for_each_screen(function(s)
             mykeyboardlayout,
             wibox.widget.systray(),
             batteryarc_widget,
-            volumearc_widget,
+            volumecfg.widget,
             mytextclock,
             s.mylayoutbox,
         },
@@ -263,33 +269,9 @@ globalkeys = gears.table.join(
     {description = "print focused window", group = "screen"}),
 
     -- Volume
-  --awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE +3%") end,
-  --  {description = "raise", group = "volume"}),
-  --awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("pactl set-sink-volume bluez_sink.04_52_C7_C2_6E_DE -3%") end,
-  --  {description = "lower", group = "volume"}),
-  --awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute bluez_sink.04_52_C7_C2_6E_DE toggle") end,
-  --  {description = "mute", group = "volume"}),
-
-   -- -- Volume Keys
-   -- awful.key({}, "XF86AudioLowerVolume", function ()
-   --   awful.util.spawn("amixer -q sset Master 5%- unmute", false)
-   -- end),
-   -- awful.key({}, "XF86AudioRaiseVolume", function ()
-   --   awful.util.spawn("amixer -q sset Master 5%+ unmute", false)
-   -- end),
-   -- awful.key({}, "XF86AudioMute", function ()
-   --   awful.util.spawn("amixer -q set Master toggle", false)
-   -- end),
-   -- -- Media Keys
-   -- awful.key({}, "XF86AudioPlay", function()
-   --   awful.util.spawn("playerctl play-pause", false)
-   -- end),
-   -- awful.key({}, "XF86AudioNext", function()
-   --   awful.util.spawn("playerctl next", false)
-   -- end),
-   -- awful.key({}, "XF86AudioPrev", function()
-   --   awful.util.spawn("playerctl previous", false)
-   -- end),
+  awful.key({}, "XF86AudioRaiseVolume", function () volumecfg:up() end),
+  awful.key({}, "XF86AudioLowerVolume", function () volumecfg:down() end),
+  awful.key({}, "XF86AudioMute",        function () volumecfg:toggle() end),
 
     -- Brightness
   awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -dec 10") end,
@@ -393,7 +375,7 @@ globalkeys = gears.table.join(
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
               {description = "show the menubar", group = "launcher"})
-)
+) -- end of globalkeys join
 
 clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
