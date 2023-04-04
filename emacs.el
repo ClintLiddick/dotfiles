@@ -251,13 +251,15 @@
 (use-package s)
 (use-package editorconfig)
 (use-package copilot
-  :load-path "~/dotfiles/third_party/"
-  :config
+  :load-path "~/dotfiles/third_party/copilot_el"
+  :init
   (add-hook 'prog-mode-hook 'copilot-mode)
   (delq 'company-preview-if-just-one-frontend company-frontends)
-  (evil-define-key 'insert copilot-mode-map (kbd "<tab>") 'copilot-accept-completion))
-  ;; (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
-  ;; (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+
+  :config
+  ;; (evil-leader/set-key-for-mode 'copilot-mode "c" 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
 
 
 (use-package go-mode
