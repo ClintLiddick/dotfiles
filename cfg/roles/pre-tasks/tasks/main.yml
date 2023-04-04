@@ -1,6 +1,7 @@
 ---
-- name: update Apt cache
+- name: update Apt cache and packages
   apt:
     update_cache: true
+    upgrade: dist
   become: yes
 
