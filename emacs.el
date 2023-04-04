@@ -370,7 +370,6 @@
 (global-linum-mode t)  ;; always show line numbrs
 (setq linum-format "%d ")
 (setq column-number-mode t)
-(setq browse-url-generic-program "firefox")
 (setq make-backup-files nil)
 (setq gdb-many-windows t)
 (show-paren-mode t)  ;; highlight matching braces
