@@ -21,6 +21,7 @@
     - tree
     - lynx
     - zip
+    - zstd
   become: yes
 
 - name: create dotfile symlinks
