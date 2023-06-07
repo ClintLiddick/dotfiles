@@ -29,6 +29,15 @@
     - xsel
   become: yes
 
+- name: install pip packages
+  pip:
+    name: "{{ packages }}"
+    extra_args: --user
+  vars:
+    packages:
+      - autorandr
+  # no become
+
 - name: install Ubuntu packages
   when: ansible_facts['distribution'] == "Ubuntu"
   apt:

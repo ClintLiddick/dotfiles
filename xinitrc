@@ -2,9 +2,9 @@
 
 xrdb -merge ~/.Xresources
 urxvtd -q -o -f
-dropbox start
+# dropbox start
 if [ -d /home/clint.liddick/src ]; then
-    emacs --chdir=/home/clint.liddick/src --daemon
+    emacs --chdir=/home/clint/av --daemon
 else
     emacs --daemon
 fi

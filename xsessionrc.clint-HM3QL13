@@ -1,47 +1,59 @@
 # This file is sourced by Xsession(5), not executed.
 
-xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Natural Scrolling Enabled" 1
-xinput set-prop "SynPS/2 Synaptics TouchPad" "libinput Accel Speed" 0.5
+# Disable tap-to-click
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Tap Action" 0
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Tap Time" 0
+# natural scrolling
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Scrolling Distance" -30 -30
+# palm detection
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Palm Detection" 1
+# three-finger middle click emulation
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Click Action" 1 3 2
 
-xinput set-prop "Kensington Expert Wireless TB Mouse" "libinput Accel Speed" 0.7
-xinput set-prop "Kensington Expert Mouse" "libinput Accel Speed" 0.7
+# natr
 
-#~$ xinput list-props "SynPS/2 Synaptics TouchPad"
-#Device 'SynPS/2 Synaptics TouchPad':
-#	Device Enabled (188):	1
-#	Coordinate Transformation Matrix (190):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
-#	libinput Tapping Enabled (323):	0
-#	libinput Tapping Enabled Default (324):	0
-#	libinput Tapping Drag Enabled (325):	1
-#	libinput Tapping Drag Enabled Default (326):	1
-#	libinput Tapping Drag Lock Enabled (327):	0
-#	libinput Tapping Drag Lock Enabled Default (328):	0
-#	libinput Tapping Button Mapping Enabled (329):	1, 0
-#	libinput Tapping Button Mapping Default (330):	1, 0
-#	libinput Natural Scrolling Enabled (331):	0
-#	libinput Natural Scrolling Enabled Default (332):	0
-#	libinput Disable While Typing Enabled (333):	1
-#	libinput Disable While Typing Enabled Default (334):	1
-#	libinput Scroll Methods Available (335):	1, 1, 0
-#	libinput Scroll Method Enabled (336):	1, 0, 0
-#	libinput Scroll Method Enabled Default (337):	1, 0, 0
-#	libinput Click Methods Available (338):	1, 1
-#	libinput Click Method Enabled (339):	1, 0
-#	libinput Click Method Enabled Default (340):	1, 0
-#	libinput Middle Emulation Enabled (341):	0
-#	libinput Middle Emulation Enabled Default (342):	0
-#	libinput Accel Speed (343):	0.000000
-#	libinput Accel Speed Default (344):	0.000000
-#	libinput Left Handed Enabled (345):	0
-#	libinput Left Handed Enabled Default (346):	0
-#	libinput Send Events Modes Available (308):	1, 1
-#	libinput Send Events Mode Enabled (309):	0, 0
-#	libinput Send Events Mode Enabled Default (310):	0, 0
-#	Device Node (311):	"/dev/input/event6"
-#	Device Product ID (312):	2, 7
-#	libinput Drag Lock Buttons (347):	<no items>
-#	libinput Horizontal Scroll Enabled (348):	1
-
-# COPIED/UNTESTED
-# Disable scroll inertia
-# synclient CoastingSpeed=0
+# xinput list-props SYNA2393:00 06CB:7A13 Touchpad
+# Device 'SYNA2393:00 06CB:7A13 Touchpad':
+# 	Device Enabled (202):	1
+# 	Coordinate Transformation Matrix (204):	1.000000, 0.000000, 0.000000, 0.000000, 1.000000, 0.000000, 0.000000, 0.000000, 1.000000
+# 	Device Accel Profile (332):	1
+# 	Device Accel Constant Deceleration (333):	2.500000
+# 	Device Accel Adaptive Deceleration (334):	1.000000
+# 	Device Accel Velocity Scaling (335):	12.500000
+# 	Synaptics Edges (355):	49, 1179, 50, 878
+# 	Synaptics Finger (356):	25, 30, 0
+# 	Synaptics Tap Time (357):	0
+# 	Synaptics Tap Move (358):	67
+# 	Synaptics Tap Durations (359):	180, 180, 100
+# 	Synaptics ClickPad (360):	1
+# 	Synaptics Middle Button Timeout (361):	0
+# 	Synaptics Two-Finger Pressure (362):	282
+# 	Synaptics Two-Finger Width (363):	7
+# 	Synaptics Scrolling Distance (364):	30, 30
+# 	Synaptics Edge Scrolling (365):	1, 0, 0
+# 	Synaptics Two-Finger Scrolling (366):	1, 0
+# 	Synaptics Move Speed (367):	1.000000, 1.750000, 0.129955, 0.000000
+# 	Synaptics Off (368):	0
+# 	Synaptics Locked Drags (369):	0
+# 	Synaptics Locked Drags Timeout (370):	5000
+# 	Synaptics Tap Action (371):	2, 3, 0, 0, 1, 3, 0
+# 	Synaptics Click Action (372):	1, 3, 0
+# 	Synaptics Circular Scrolling (373):	0
+# 	Synaptics Circular Scrolling Distance (374):	0.100000
+# 	Synaptics Circular Scrolling Trigger (375):	0
+# 	Synaptics Circular Pad (376):	0
+# 	Synaptics Palm Detection (377):	0
+# 	Synaptics Palm Dimensions (378):	10, 200
+# 	Synaptics Coasting Speed (379):	20.000000, 50.000000
+# 	Synaptics Pressure Motion (380):	30, 160
+# 	Synaptics Pressure Motion Factor (381):	1.000000, 1.000000
+# 	Synaptics Resolution Detect (382):	1
+# 	Synaptics Grab Event Device (383):	0
+# 	Synaptics Gestures (384):	1
+# 	Synaptics Capabilities (385):	1, 0, 0, 1, 1, 0, 0
+# 	Synaptics Pad Resolution (386):	12, 12
+# 	Synaptics Area (387):	0, 0, 0, 0
+# 	Synaptics Soft Button Areas (388):	614, 0, 760, 0, 0, 0, 0, 0
+# 	Synaptics Noise Cancellation (389):	7, 7
+# 	Device Product ID (325):	1739, 31251
+# 	Device Node (324):	"/dev/input/event16"
