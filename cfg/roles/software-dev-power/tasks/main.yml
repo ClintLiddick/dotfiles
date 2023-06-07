@@ -25,7 +25,13 @@
       - checkinstall
       - colordiff
       - cppcheck
+      - gnutls-bin
       - iperf3
+      - libgif-dev
+      - libgtk-3-dev
+      - libjpeg-dev
+      - libtiff-dev
+      - libxpm-dev
       - python3-pip
       - python3-venv
       - shellcheck
@@ -88,13 +94,13 @@
 
 # ./autogen.sh
 # ./configure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
-# make -j8
-# make PREFIX=$HOME/.local install
+# make prefix=$HOME/.local
+# make prefix=$HOME/.local install
 - name: checkout Emacs source
   git:
     dest: "/home/{{lookup('env', 'USER')}}/src/emacs"
     repo: https://github.com/emacs-mirror/emacs.git
-    version: emacs-27.2
+    version: emacs-28.2
     depth: 1
 
 # make prefix=$HOME/.local
@@ -106,7 +112,7 @@
   git:
     dest: "/home/{{lookup('env', 'USER')}}/src/git"
     repo: https://github.com/git/git
-    version: v2.28.0
+    version: v2.41.0
     depth: 1
 
 - name: make ~/.fonts directory
