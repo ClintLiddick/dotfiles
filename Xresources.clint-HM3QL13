@@ -9,7 +9,7 @@ Xcursor.theme: oxy-obsidian-hc
 !
 ! Applications
 !
-emacs.font: Source Code Variable-12
+emacs.font: Source Code Variable-10
 
 !
 ! Terminal
