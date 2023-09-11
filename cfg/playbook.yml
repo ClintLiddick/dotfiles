@@ -67,6 +67,12 @@
         link: /usr/bin/x-www-browser
         path: /usr/bin/google-chrome
       become: yes
+    - name: git don't fetch tags
+      git_config:
+        name: remote.origin.tagOpt
+        value: --no-tags
+        scope: local
+        repo: "{{ lookup('env', 'HOME') }}/av"
   # handlers:
   #   - name: restart pulseaudio
   #     shell: pulseaudio -k && pulseaudio -D && pulseaudio --check
