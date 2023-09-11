@@ -19,7 +19,7 @@
     - pavucontrol
     - printer-driver-cups-pdf
     - pulseaudio-module-bluetooth
-    - rxvt-unicode-256color
+    - rxvt-unicode
     - sensible-utils
     - scrot
     - suckless-tools
