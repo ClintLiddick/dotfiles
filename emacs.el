@@ -7,7 +7,7 @@
 (setq py-python-command "/usr/bin/python3")
 
 ;; determine whether or not on work computer
-(defconst work-computer (equal (system-name) "P15S-PF38GS7D"))
+(defconst work-computer (equal (system-name) "clint-HM3QL13"))
 
 ;; setup package archives
 (require 'package)
@@ -351,7 +351,7 @@
 (setq initial-scratch-message nil)
 (setq initial-major-mode 'markdown-mode)
 (setq diff-switches "-u")  ;; unified diffs
-(global-linum-mode t)  ;; always show line numbrs
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)  ;; always show line number column
 (setq linum-format "%d ")
 (setq column-number-mode t)
 (setq browse-url-generic-program "firefox")
