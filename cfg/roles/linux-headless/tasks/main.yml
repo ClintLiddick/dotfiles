@@ -34,6 +34,7 @@
     - bashrc
     - clang-format
     - emacs.el
+    - nvmrc
     - profile
     - vimrc
     - screenrc

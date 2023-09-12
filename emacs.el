@@ -52,7 +52,6 @@
 ;; evil-leader: fast \-prefixed shortcuts
 ;; must come before (use-package evil)
 (use-package evil-leader
-  :ensure t
   :init
   (setq evil-want-integration t) ;; default
   (setq evil-want-keybinding nil)
@@ -63,7 +62,6 @@
 
 ;; evil: vi emulation. I'm that kind of heathen.
 (use-package evil
-  :ensure t
   :init
   (setq evil-want-integration t) ;; default
   (setq evil-want-keybinding nil)
@@ -85,7 +83,6 @@
 
 (use-package evil-collection
   :after evil
-  :ensure t
   :config
   (evil-collection-init))
 
@@ -210,6 +207,12 @@
          (concat "-I" clint/extra-include-base)
          (concat "-I" (expand-file-name "bazel-bin" clint/extra-include-base)))))
 
+(use-package company-box
+  :config
+  (if (display-graphic-p)
+      (add-hook 'company-mode-hook 'company-box-mode)))
+
+
 (use-package company-c-headers
   :config
   (let ((default-directory "/usr/include/c++")
@@ -228,12 +231,27 @@
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pylsp")))
 (add-hook 'python-mode-hook 'eglot-ensure)
+(add-to-list 'eglot-server-programs
+             '(shell-script-mode . ("bash-language-server")))  ;; installed with npm i -g
+(add-hook 'shell-script-mode-hook 'eglot-ensure)
+
 
 (use-package company-jedi)
 ;;(use-package company-lua)
 ;;(use-package company-racer)  ;; rust
 ;;(use-package company-web)
 ;;(use-package web-completion-data)
+
+;; GitHub Copilot integration
+(use-package dash)
+(use-package s)
+(use-package editorconfig)
+(use-package copilot
+  :load-path "../dotfiles/third_party/zerolfx_copilot"
+  :config
+  (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
+  (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
+
 
 ;; Only a single backend or backend "group" is active at a time, so backends must be "set" per mode
 ;; rather than "appended" in general
@@ -435,7 +453,6 @@
 
 ;; theme and font
 (use-package unicode-fonts   ;; allow fallback fonts
-  :ensure t
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
 

@@ -10,6 +10,6 @@ export HISTSIZE=-1  # save all
 export HISTIMEFORMAT="[%F %T] "
 export HISTFILE=~/.bash_eternal_history
 
-export PATH=$HOME/.cargo/bin:$HOME/.local/bin:/opt/darktable/bin:$PATH
+export PATH="$HOME/.cargo/bin:$(nvm which --silent):$HOME/.local/bin:/opt/darktable/bin:$PATH"
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
