@@ -7,7 +7,12 @@
 (setq py-python-command "/usr/bin/python3")
 
 ;; determine whether or not on work computer
-(defconst work-computer (equal (system-name) "clint-HM3QL13"))
+(defconst clint/work-computer (equal (system-name) "clint-HM3QL13"))
+(defconst clint/clang-version (if clint/work-computer "11" "13"))
+
+(defconst clint/extra-include-base
+  (if (not clint/work-computer)
+    "/home/clint/personal_projects"))
 
 ;; setup package archives
 (require 'package)
@@ -47,6 +52,10 @@
 ;; evil-leader: fast \-prefixed shortcuts
 ;; must come before (use-package evil)
 (use-package evil-leader
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; default
+  (setq evil-want-keybinding nil)
   :config
   (global-evil-leader-mode)
   (evil-leader/set-key "f" 'indent-according-to-mode)
@@ -54,6 +63,10 @@
 
 ;; evil: vi emulation. I'm that kind of heathen.
 (use-package evil
+  :ensure t
+  :init
+  (setq evil-want-integration t) ;; default
+  (setq evil-want-keybinding nil)
   :config
   (evil-mode 1)
   ;; evilnc: fast code comment/uncomment
@@ -69,6 +82,12 @@
   "cc" 'evilnc-copy-and-comment-lines
   "cp" 'evilnc-comment-or-uncomment-paragraphs
   "cr" 'comment-or-uncomment-region)
+
+(use-package evil-collection
+  :after evil
+  :ensure t
+  :config
+  (evil-collection-init))
 
 
 ;; git helper packages
@@ -132,10 +151,6 @@
    :test-prefix "test_"
    :test-suffix "_test"))
 
-(defconst clint/extra-include-base
-  (if work-computer
-    "/home/clint/personal_projects"))
-
 ;; flycheck syntax checking
 ;; Python - flake8
 ;; C++ - clang/gcc/cppcheck
@@ -189,9 +204,11 @@
   :config
   (setq company-idle-delay 0.1)
   (setq company-minimum-prefix-length 2)
-  (setq company-clang-arguments (list
-                                 (concat "-I" clint/extra-include-base)
-                                 (concat "-I" (expand-file-name "bazel-bin" clint/extra-include-base)))))
+  (setq company-clang-executable (concat "clang-" clint/clang-version))
+  (setq company-clang-arguments
+        (list
+         (concat "-I" clint/extra-include-base)
+         (concat "-I" (expand-file-name "bazel-bin" clint/extra-include-base)))))
 
 (use-package company-c-headers
   :config
@@ -200,6 +217,17 @@
     (dolist (cpp-ver gcc-versions)
       (add-to-list 'company-c-headers-path-system (expand-file-name cpp-ver))))
   (add-to-list 'company-c-headers-path-user clint/extra-include-base))
+
+(require 'eglot)  ;; built-in
+(add-to-list 'eglot-server-programs
+             (list 'c++-mode (concat "clangd-" clint/clang-version)))
+(add-hook 'c++-mode-hook 'eglot-ensure)
+(add-to-list 'eglot-server-programs
+             (list 'c-mode (concat "clangd-" clint/clang-version)))
+(add-hook 'c-mode-hook 'eglot-ensure)
+(add-to-list 'eglot-server-programs
+             '(python-mode . ("pylsp")))
+(add-hook 'python-mode-hook 'eglot-ensure)
 
 (use-package company-jedi)
 ;;(use-package company-lua)
@@ -229,22 +257,24 @@
 (add-hook 'fundamental-mode-hook 'clint/company-text-modes-hook)
 (add-hook 'markdown-mode-hook 'clint/company-text-modes-hook)
 
-(add-hook 'python-mode-hook (lambda ()
-                              (setq company-backends '((
-                                                        company-jedi
-                                                        company-capf
-                                                        company-files
-                                                        company-keywords
-                                                        company-dabbrev-code
-                                                        )))))
+(add-hook 'python-mode-hook
+          (lambda ()
+            (setq company-backends '((
+                                      company-jedi
+                                      company-capf
+                                      company-files
+                                      company-keywords
+                                      company-dabbrev-code
+                                      )))))
 
-(add-hook 'sh-mode-hook (lambda ()
-                              (setq company-backends '((
-                                                        company-capf
-                                                        company-files
-                                                        company-keywords
-                                                        company-dabbrev-code
-                                                        )))))
+(add-hook 'sh-mode-hook
+          (lambda ()
+            (setq company-backends '((
+                                      company-capf
+                                      company-files
+                                      company-keywords
+                                      company-dabbrev-code
+                                      )))))
 
 (use-package go-mode
   :config

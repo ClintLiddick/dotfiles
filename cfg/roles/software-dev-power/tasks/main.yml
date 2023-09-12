@@ -48,6 +48,7 @@
     packages:
     - clang-11
     - clang-format-11
+    - clangd-11
   become: yes
 
 - name: install Debian packages
@@ -58,6 +59,7 @@
     packages:
     - clang-13
     - clang-format-13
+    - clangd-13
   become: yes
 
 - name: pip upgrade
@@ -78,6 +80,8 @@
   vars:
     packages:
       - flake8
+      - python-lsp-server
+      - python-lsp-black
 
 - name: add user to development groups
   user:
