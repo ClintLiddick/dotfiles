@@ -96,10 +96,6 @@
     dest: "/home/{{lookup('env', 'USER')}}/src"
     state: directory
 
-# ./autogen.sh
-# ./configure --prefix=$HOME/.local --with-x-toolkit=gtk3 --with-x
-# make prefix=$HOME/.local
-# make prefix=$HOME/.local install
 - name: checkout Emacs source
   git:
     dest: "/home/{{lookup('env', 'USER')}}/src/emacs"
@@ -107,17 +103,36 @@
     version: emacs-29.1
     depth: 1
 
-# make prefix=$HOME/.local
-# make prefix=$HOME/.local install
-# cd contrib/subtree
-# make prefix=$HOME/.local
-# make prefix=$HOME/.local install
+- name: create emacs build script
+  copy:
+    dest: "/home/{{lookup('env', 'USER')}}/src/emacs/clintbuild.sh"
+    mode: 0755
+    content: |
+      #!/bin/bash
+      set -euxo pipefail
+      ./autogen.sh
+      ./configure --prefix=$HOME/.local --with-x --with-x-toolkit=gtk3
+      make prefix=$HOME/.local
+      make prefix=$HOME/.local install
+
 - name: checkout Git source
   git:
     dest: "/home/{{lookup('env', 'USER')}}/src/git"
     repo: https://github.com/git/git
     version: v2.41.0
     depth: 1
+
+- name: create git build script
+  copy:
+    dest: "/home/{{lookup('env', 'USER')}}/src/git/clintbuild.sh"
+    mode: 0755
+    content: |
+      #!/bin/bash
+      set -euxo pipefail
+      make prefix=$HOME/.local
+      make prefix=$HOME/.local install
+      make -C contrib/subtree prefix=$HOME/.local
+      make -C contrib/subtree prefix=$HOME/.local install
 
 - name: make ~/.fonts directory
   file:
