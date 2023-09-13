@@ -8,17 +8,17 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+export EDITOR="emacsclient --alternate-editor=vim"
+export VISUAL="emacsclient -c -a emacs"
+
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
+export PATH="$HOME/.cargo/bin:$HOME/.local/bin:/opt/darktable/bin:$PATH"
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
     if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
+	    . "$HOME/.bashrc"
     fi
 fi
-
-. "$HOME/dotfiles/env_vars"
-
-if [ -f "$HOME/.env_vars_private" ]; then
-    . "$HOME/.env_vars_private"
-fi
-

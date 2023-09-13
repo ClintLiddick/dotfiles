@@ -30,11 +30,15 @@
     path: "{{ lookup('env', 'HOME') }}/.{{ item }}"
     force: yes
   loop:
-    - bash_profile
     - bashrc
     - clang-format
     - emacs.el
     - nvmrc
     - profile
-    - vimrc
     - screenrc
+    - vimrc
+
+- name: remove .bash_profile
+  file:
+    state: absent
+    path: "{{ lookup('env', 'HOME') }}/.bash_profile"
