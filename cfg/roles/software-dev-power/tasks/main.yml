@@ -80,6 +80,9 @@
   vars:
     packages:
       - flake8
+      - jupyterlab
+      - pandas
+      - plotnine
       - python-lsp-server
       - python-lsp-black
 
