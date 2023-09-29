@@ -15,6 +15,12 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 export PATH="$HOME/.cargo/bin:$HOME/.local/bin:/opt/darktable/bin:$PATH"
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[[ ":$PATH:" != *":${NVM_BIN}:"* ]] && PATH="${NVM_BIN}:${PATH}"
+
+# RUN LAST
+
 # if running bash
 if [ -n "$BASH_VERSION" ]; then
     # include .bashrc if it exists
