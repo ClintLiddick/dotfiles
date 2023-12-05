@@ -8,7 +8,7 @@
 
 ;; determine whether or not on work computer
 (defconst clint/work-computer (equal (system-name) "clint-HM3QL13"))
-(defconst clint/clang-version (if clint/work-computer "11" "13"))
+(defconst clint/clang-version (if clint/work-computer "15" "13"))
 
 (defconst clint/extra-include-base
   (if (not clint/work-computer)
