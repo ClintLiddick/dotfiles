@@ -402,7 +402,8 @@
 (setq initial-scratch-message nil)
 (setq initial-major-mode 'markdown-mode)
 (setq diff-switches "-u")  ;; unified diffs
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)  ;; always show line number column
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(add-hook 'text-mode-hook 'display-line-numbers-mode)
 (setq linum-format "%d ")
 (setq column-number-mode t)
 (setq browse-url-generic-program "firefox")
