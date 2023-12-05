@@ -38,3 +38,9 @@
     name: pull.ff
     scope: global
     value: only
+
+- name: set git co alias
+  git_config:
+    name: alias.co
+    scope: global
+    value: "checkout"
