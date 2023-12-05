@@ -6,7 +6,8 @@
 xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Tap Action" 0
 xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Tap Time" 0
 # natural scrolling
-xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Scrolling Distance" -30 -30
+# xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Scrolling Distance" -30 -30
+xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "libinput Natural Scrolling Enabled" 1
 # palm detection
 xinput set-prop "SYNA2393:00 06CB:7A13 Touchpad" "Synaptics Palm Detection" 1
 # three-finger middle click emulation
