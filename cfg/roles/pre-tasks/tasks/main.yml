@@ -1,6 +1,7 @@
 ---
-- name: update Apt cache
+- name: apt full-upgrade with fresh cache
   apt:
     update_cache: true
+    upgrade: full
   become: yes
 
