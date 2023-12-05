@@ -387,6 +387,9 @@
 
 (use-package terraform-mode)
 
+(use-package dbc-mode
+  :load-path "../dotfiles/third_party/")
+
 ;; (use-package cmake-mode
 ;;   :mode ("CMakeLists\\.txt\\'"
 ;;          "\\.cmake\\'"))
