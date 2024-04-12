@@ -11,6 +11,7 @@
     - cups
     - fonts-noto
     - gthumb
+    - i3-wm
     - i3lock
     - kcolorchooser
     - libnotify-bin
