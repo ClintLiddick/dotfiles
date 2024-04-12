@@ -27,6 +27,8 @@
 
 ;; configure use-package
 
+;; per magit recommendation, override default and allow upgrade of built-in packages
+(setq package-install-upgrade-built-in t)
 ;; always download and install use-package packages
 (setq use-package-always-ensure t)
 ;; prefer latest, not stable
@@ -93,6 +95,8 @@
 (use-package with-editor)
 ;; use emacs to author git commit messages
 (use-package git-commit)
+;; required to manually "install" built-in "transient" package for magit
+(use-package transient)
 ;; superpowered git interface
 (use-package magit
   :config
