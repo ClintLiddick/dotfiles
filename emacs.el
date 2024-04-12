@@ -83,12 +83,6 @@
   "cp" 'evilnc-comment-or-uncomment-paragraphs
   "cr" 'comment-or-uncomment-region)
 
-(use-package evil-collection
-  :after evil
-  :config
-  (evil-collection-init))
-
-
 ;; git helper packages
 
 ;; invoke emacs from command line with temp files
