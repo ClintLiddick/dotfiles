@@ -120,19 +120,30 @@
     src: "/home/{{ lookup('env', 'USER') }}/dotfiles/i3config.conf"
     state: link
 
+- name: create dunst config dir
+  file:
+    path: "/home/{{ lookup('env', 'USER') }}/.config/dunst"
+    state: directory
+
+- name: create dunst config symlink
+  file:
+    path: "/home/{{ lookup('env', 'USER') }}/.config/dunst/dunstrc"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/dunstrc"
+    state: link
+
 - name: create /mnt/usb directory
   file:
     state: directory
     path: /mnt/usb
   become: yes
 
-- name: check if Dropbox installed
-  shell: which dropbox
-  register: has_dropbox
-  ignore_errors: yes
+# - name: check if Dropbox installed
+#   shell: which dropbox
+#   register: has_dropbox
+#   ignore_errors: yes
 
-- name: install Dropbox
-  when: has_dropbox.rc != 0
-  apt:
-    deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
-  become: yes
+# - name: install Dropbox
+#   when: has_dropbox.rc != 0
+#   apt:
+#     deb: https://www.dropbox.com/download?dl=packages/ubuntu/dropbox_2020.03.04_amd64.deb
+#   become: yes
