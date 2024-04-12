@@ -9,4 +9,8 @@ else
     emacs --daemon
 fi
 
+if [ -r ~/Pictures/wallpaper/wallpaper ]; then
+    feh --no-fehbg --bg-fill ~/Pictures/wallpaper/wallpaper
+fi
+
 i3
