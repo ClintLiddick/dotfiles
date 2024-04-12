@@ -117,7 +117,7 @@
 - name: create i3 config symlink
   file:
     path: "/home/{{ lookup('env', 'USER') }}/.config/i3/config"
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/i3config"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/i3config.conf"
     state: link
 
 - name: create /mnt/usb directory
