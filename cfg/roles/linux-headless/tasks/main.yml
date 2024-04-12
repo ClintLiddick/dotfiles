@@ -5,9 +5,11 @@
   vars:
     packages:
     - acpi
+    - atool
     - cpufrequtils
     - imagemagick
     - jq
+    - lynx
     - moreutils
     - mosh
     - net-tools
@@ -15,11 +17,11 @@
     - pigz
     - python3-apt
     - python3-gpg
-    - socat
+    - rename
     - screen
+    - socat
     - speedtest-cli
     - tree
-    - lynx
     - zip
   become: yes
 

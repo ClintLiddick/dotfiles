@@ -26,6 +26,7 @@
       - colordiff
       - cppcheck
       - gnutls-bin
+      - graphviz
       - iperf3
       - libgif-dev
       - libgtk-3-dev
