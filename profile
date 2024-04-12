@@ -8,7 +8,8 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-export EDITOR="emacsclient --alternate-editor=vim"
+export EDITOR="emacsclient"
+export ALTERNATE_EDITOR="vim"
 export VISUAL="emacsclient -c -a emacs"
 
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
