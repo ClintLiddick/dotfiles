@@ -9,4 +9,4 @@ else
     emacs --daemon
 fi
 
-/usr/bin/dbus-launch --exit-with-session awesome
+i3
