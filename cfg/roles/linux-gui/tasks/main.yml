@@ -108,6 +108,17 @@
     src: "/home/{{ lookup('env', 'USER') }}/dotfiles/awesome"
     path: "/home/{{ lookup('env', 'USER') }}/.config/awesome"
 
+- name: create i3 config dir
+  file:
+    path: "/home/{{ lookup('env', 'USER') }}/.config/i3"
+    state: directory
+
+- name: create i3 config symlink
+  file:
+    path: "/home/{{ lookup('env', 'USER') }}/.config/i3/config"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/i3config"
+    state: link
+
 - name: create /mnt/usb directory
   file:
     state: directory
