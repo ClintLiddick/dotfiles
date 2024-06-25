@@ -28,10 +28,12 @@
       - gnutls-bin
       - graphviz
       - iperf3
+      - libgccjit-11-dev  # for elisp native
       - libgif-dev
       - libgtk-3-dev
       - libjpeg-dev
       - libtiff-dev
+      - libtree-sitter-dev
       - libxpm-dev
       - python3-pip
       - python3-venv
