@@ -49,9 +49,9 @@
     name: "{{ packages }}"
   vars:
     packages:
-    - clang-11
-    - clang-format-11
-    - clangd-11
+    - clang-15
+    - clang-format-15
+    - clangd-15
   become: yes
 
 - name: install Debian packages
