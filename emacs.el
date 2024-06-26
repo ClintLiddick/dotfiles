@@ -173,8 +173,12 @@
 (use-package flycheck-rust)
 
 ;; C/C++ formatting
-(use-package clang-format
+(use-package clang-format+
   :config
+  (setq clang-format+-context 'buffer)
+  (add-hook 'c-mode-common-hook #'clang-format+-mode)
+  (add-hook 'protobuf-mode-hook #'clang-format+-mode)
+  (add-hook 'glsl-mode-hook #'clang-format+-mode)
   (evil-leader/set-key-for-mode 'c++-mode "f" 'clang-format-buffer)
   (evil-leader/set-key-for-mode 'c++-mode "F" 'clang-format-region)
   (evil-leader/set-key-for-mode 'c-mode "f" 'clang-format-buffer)
