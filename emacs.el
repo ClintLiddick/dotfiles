@@ -225,11 +225,9 @@
 
 (require 'eglot)  ;; built-in
 (add-to-list 'eglot-server-programs
-             (list 'c++-mode (concat "clangd-" clint/clang-version)))
-;; (add-hook 'c++-mode-hook 'eglot-ensure)
-(add-to-list 'eglot-server-programs
-             (list 'c-mode (concat "clangd-" clint/clang-version)))
-;; (add-hook 'c-mode-hook 'eglot-ensure)
+             `(,'(c++-mode c-mode)
+               ,(concat "clangd-" clint/clang-version) "--background-index=false"))
+;; (add-hook 'c-mode-common-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pylsp")))
 (add-hook 'python-mode-hook 'eglot-ensure)
