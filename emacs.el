@@ -224,7 +224,7 @@
 (add-to-list 'eglot-server-programs
              `(,'(c++-mode c-mode)
                ,(concat "clangd-" clint/clang-version) "--background-index=false"))
-;; (add-hook 'c-mode-common-hook 'eglot-ensure)
+(add-hook 'c-mode-common-hook 'eglot-ensure)
 (add-to-list 'eglot-server-programs
              '(python-mode . ("pylsp")))
 (add-hook 'python-mode-hook 'eglot-ensure)
