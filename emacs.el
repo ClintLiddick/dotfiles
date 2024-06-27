@@ -158,8 +158,6 @@
 (use-package flycheck
   :config
   (global-flycheck-mode)
-  ;; (use-package flycheck-irony)
-  ;; (add-hook 'flycheck-mode-hook 'flycheck-irony-setup)
   (setq flycheck-protoc-import-path '(clint/extra-include-base))
   (add-hook 'c++-mode-hook
             (lambda()
@@ -214,7 +212,6 @@
   (if (display-graphic-p)
       (add-hook 'company-mode-hook 'company-box-mode)))
 
-
 (use-package company-c-headers
   :config
   (let ((default-directory "/usr/include/c++")
@@ -236,11 +233,11 @@
 (add-hook 'shell-script-mode-hook 'eglot-ensure)
 
 
-(use-package company-jedi)
-;;(use-package company-lua)
-;;(use-package company-racer)  ;; rust
-;;(use-package company-web)
-;;(use-package web-completion-data)
+(use-package company-jedi)  ;; Python
+;; (use-package company-lua)
+;; (use-package company-racer)  ;; Rust
+;; (use-package company-web)
+;; (use-package web-completion-data)
 
 ;; GitHub Copilot integration
 (use-package dash)
@@ -253,8 +250,8 @@
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
 
 
-;; Only a single backend or backend "group" is active at a time, so backends must be "set" per mode
-;; rather than "appended" in general
+;; Only a single backend or backend "group" is active at a time, so backends must be
+;; "set" per mode rather than "appended" in general
 (defun clint/company-cish-modes-hook ()
   (setq company-backends '((
                             company-c-headers
@@ -357,7 +354,7 @@
 
 (use-package dockerfile-mode :mode "Dockerfile.*\\'")
 
-(use-package groovy-mode)
+;; (use-package groovy-mode)
 
 (use-package markdown-mode
   :mode "\\.md\\'"
@@ -459,14 +456,6 @@
 (use-package unicode-fonts   ;; allow fallback fonts
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
-
-;; (defvar clint-font
-;;   (if work-computer
-;;       "SourceCodePro-10"
-;;       "SourceCodePro-12"))
-
-;; (if display-graphic-p
-;;     (set-frame-font clint-font))
 
 (defvar color-themes '())
 (use-package zenburn-theme
