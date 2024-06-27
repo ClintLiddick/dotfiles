@@ -241,10 +241,11 @@
 
 ;; GitHub Copilot integration
 (use-package dash)
+(use-package f)
 (use-package s)
 (use-package editorconfig)
 (use-package copilot
-  :load-path "../dotfiles/third_party/zerolfx_copilot"
+  :load-path "/home/clint/dotfiles/third_party/copilot/"
   :config
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
