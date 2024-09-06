@@ -87,8 +87,6 @@
 
 ;; invoke emacs from command line with temp files
 (use-package with-editor)
-;; use emacs to author git commit messages
-(use-package git-commit)
 ;; required to manually "install" built-in "transient" package for magit
 (use-package transient)
 ;; superpowered git interface
