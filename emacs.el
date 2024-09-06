@@ -198,25 +198,25 @@
   :bind ("TAB" . company-indent-or-complete-common)
   :config
   (setq company-idle-delay 0.1)
-  (setq company-minimum-prefix-length 2)
-  (setq company-clang-executable (concat "clang-" clint/clang-version))
-  (setq company-clang-arguments
-        (list
-         (concat "-I" clint/extra-include-base)
-         (concat "-I" (expand-file-name "bazel-bin" clint/extra-include-base)))))
+  (setq company-minimum-prefix-length 2))
+  ;; (setq company-clang-executable (concat "clang-" clint/clang-version))
+  ;; (setq company-clang-arguments
+  ;;       (list
+  ;;        (concat "-I" clint/extra-include-base)
+  ;;        (concat "-I" (expand-file-name "bazel-bin" clint/extra-include-base)))))
 
 (use-package company-box
   :config
   (if (display-graphic-p)
       (add-hook 'company-mode-hook 'company-box-mode)))
 
-(use-package company-c-headers
-  :config
-  (let ((default-directory "/usr/include/c++")
-        (gcc-versions '("5" "6" "7" "8" "9" "10" "11")))
-    (dolist (cpp-ver gcc-versions)
-      (add-to-list 'company-c-headers-path-system (expand-file-name cpp-ver))))
-  (add-to-list 'company-c-headers-path-user clint/extra-include-base))
+;; (use-package company-c-headers
+;;   :config
+;;   (let ((default-directory "/usr/include/c++")
+;;         (gcc-versions '("5" "6" "7" "8" "9" "10" "11")))
+;;     (dolist (cpp-ver gcc-versions)
+;;       (add-to-list 'company-c-headers-path-system (expand-file-name cpp-ver))))
+;;   (add-to-list 'company-c-headers-path-user clint/extra-include-base))
 
 (require 'eglot)  ;; built-in
 (add-to-list 'eglot-server-programs
