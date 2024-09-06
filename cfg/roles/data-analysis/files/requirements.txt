@@ -1,0 +1,7 @@
+jupyterlab
+numpy
+plotnine
+pandas
+sympy
+requests
+attrs

@@ -1,0 +1,23 @@
+---
+- name: create tmpfile for requirements
+  tempfile:
+    state: file
+    suffix: .txt
+  register: requirements_tmpfile
+  
+- name: copy requirements file
+  copy:
+    src: requirements.txt
+    dest: "{{ requirements_tmpfile.path }}"
+
+- name: install Jupyter and Python packages into venv
+  pip:
+    virtualenv: "{{ venv_dir }}"
+    virtualenv_command: "{{ venv_cmd }}"
+    requirements: "{{ requirements_tmpfile.path }}"
+
+- name: clean up requirements tmpfile
+  file:
+    path: "{{ requirements_tmpfile.path }}"
+    state: absent
+  when: requirements_tmpfile.path is defined

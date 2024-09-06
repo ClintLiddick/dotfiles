@@ -52,6 +52,7 @@
     - software-dev-power
     - rust
     - ssh-agent
+    - data-analysis
     #- private
   tasks:
     #- name: enable Bluetooth module in Pulseaudio
