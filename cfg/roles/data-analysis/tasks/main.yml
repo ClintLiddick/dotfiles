@@ -21,3 +21,9 @@
     path: "{{ requirements_tmpfile.path }}"
     state: absent
   when: requirements_tmpfile.path is defined
+
+- name: install virtualenv ipykernel
+  tags: new
+  command:
+    cmd: "{{ venv_python }} -m ipykernel install --name venv --user"
+    creates: "/home/{{ lookup('env', 'USER') }}/.local/share/jupyter/kernels/venv"
