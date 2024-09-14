@@ -20,6 +20,7 @@
     - mesa-utils
     - nfs-common
     - okular
+    - pandoc
     - pavucontrol
     - printer-driver-cups-pdf
     - pulseaudio-module-bluetooth
