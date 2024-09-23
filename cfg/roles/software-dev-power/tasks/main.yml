@@ -3,8 +3,15 @@
   when:
     - ansible_facts['distribution'] == "Ubuntu"
     - ansible_facts['distribution_major_version'] | int < 20
+    - has_gui == true
   apt_repository:
     repo: ppa:zeal-developers/ppa
+  become: yes
+
+- name: install Zeal package
+  apt:
+    name: zeal
+  when: has_gui == true
   become: yes
 
 - name: install software build deps packages
@@ -40,7 +47,6 @@
       - shellcheck
       - xclip
       - xdotool
-      - zeal
   become: yes
 
 - name: install Ubuntu packages
