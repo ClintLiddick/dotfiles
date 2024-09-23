@@ -140,6 +140,14 @@
       make -C contrib/subtree prefix=$HOME/.local
       make -C contrib/subtree prefix=$HOME/.local install
 
+- name: install global pycodestyle config
+  copy:
+    dest: "/home/{{lookup('env', 'USER')}}/.config/pycodestyle"
+    mode: 0644
+    content: |
+      [pycodestyle]
+      max-line-length = 100
+
 - name: make ~/.fonts directory
   file:
     state: directory
