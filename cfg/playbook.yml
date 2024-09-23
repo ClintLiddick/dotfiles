@@ -43,6 +43,23 @@
         state: reloaded
       become: yes
 
+- hosts: clint-vdesk
+  roles:
+    - pre-tasks
+    - linux-headless
+    - software-dev-min
+    - rust
+    - ssh-agent
+    - data-analysis
+  tasks:
+    - name: git don't fetch tags
+      git_config:
+        name: remote.origin.tagOpt
+        value: --no-tags
+        scope: local
+        repo: "{{ lookup('env', 'HOME') }}/av"
+
+
 - hosts: clint-HM3QL13
   roles:
     - pre-tasks
