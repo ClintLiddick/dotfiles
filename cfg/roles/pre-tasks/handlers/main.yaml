@@ -1,8 +1,7 @@
 ---
-- name: apt full-upgrade with fresh cache
+- name: update apt cache
   apt:
     update_cache: true
-    upgrade: full
   when: ansible_os_family == "Debian"
+  listen: "update apt cache"
   become: yes
-

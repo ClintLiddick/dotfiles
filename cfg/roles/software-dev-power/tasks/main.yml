@@ -6,6 +6,7 @@
     - has_gui == true
   apt_repository:
     repo: ppa:zeal-developers/ppa
+  notify: "update apt cache"
   become: yes
 
 - name: install Zeal package
@@ -13,6 +14,18 @@
     name: zeal
   when: has_gui == true
   become: yes
+
+- name: add deb-src apt sources
+  when: ansible_os_family == "Debian"
+  replace:
+    path: /etc/apt/sources.list
+    regexp: '^# ?(deb-src.+)$'
+    replace: '\1'
+  notify: update apt cache
+  become: yes
+
+- name: force handlers for apt cache update
+  meta: flush_handlers
 
 - name: install software build deps packages
   apt:
