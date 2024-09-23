@@ -1,7 +1,7 @@
 ## Setup
 
-    $ sudo apt install libssl-dev python3-setuptools python3-wheel
-    $ pip3 --user install ansible
+    $ sudo apt install libssl-dev python3-setuptools python3-wheel python3-venv
+    $ pip3 install ansible
     $ ansible-galaxy collection install community.general
 
 You may need to install rust tools first for new Python cryptography packages.
