@@ -83,7 +83,7 @@
       Type=Application
   become: yes
 
-- name: create dotfile symlinks
+- name: create X dotfile symlinks
   file:
     state: link
     src: "/home/{{ lookup('env', 'USER') }}/dotfiles/{{ item }}"
@@ -105,12 +105,6 @@
     src: "/home/{{ lookup('env', 'USER') }}/dotfiles/Xresources.{{ inventory_hostname }}"
     path: "/home/{{ lookup('env', 'USER') }}/.Xresources"
 
-- name: create awesome config symlink
-  file:
-    state: link
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/awesome"
-    path: "/home/{{ lookup('env', 'USER') }}/.config/awesome"
-
 - name: create i3 config dir
   file:
     path: "/home/{{ lookup('env', 'USER') }}/.config/i3"
@@ -131,6 +125,23 @@
   file:
     path: "/home/{{ lookup('env', 'USER') }}/.config/dunst/dunstrc"
     src: "/home/{{ lookup('env', 'USER') }}/dotfiles/dunstrc"
+    state: link
+
+- name: create kitty config dir
+  file:
+    path: "/home/{{ lookup('env', 'USER') }}/.config/kitty"
+    state: directory
+
+- name: create kitty.d symlink
+  file:
+    path: "/home/{{ lookup('env', 'USER') }}/.config/kitty/kitty.d"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/kitty.d"
+    state: link
+
+- name: create kitty config symlink
+  file:
+    path: "/home/{{ lookup('env', 'USER') }}/.config/kitty/kitty.conf"
+    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/kitty.conf"
     state: link
 
 - name: create /mnt/usb directory
