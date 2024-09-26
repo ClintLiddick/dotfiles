@@ -63,6 +63,14 @@
         scope: local
         repo: "{{ lookup('env', 'HOME') }}/av"
 
+- hosts: Clint-Liddick-DY4K52RWN2
+  roles:
+    - mac-core
+    - rust
+    - software-dev-min
+    - kitty
+  vars:
+    has_gui: true
 
 - hosts: clint-HM3QL13
   roles:
@@ -74,6 +82,7 @@
     - rust
     - ssh-agent
     - data-analysis
+    - kitty
     #- private
   vars:
     has_gui: true
@@ -107,27 +116,11 @@
     - software-dev-min
   vars:
     has_gui: false
-  tasks:
-    - name: clone dotfile repo
-      git:
-        dest: "/home/{{ lookup('env', 'USER') }}/dotfiles"
-        repo: https://github.com/clintliddick/dotfiles
 
 - hosts: Family-MacBook.local
   roles:
+    - mac-core
     - rust
     - software-dev-min
   vars:
     has_gui: true
-  tasks:
-    - name: create dotfile symlinks
-      file:
-        state: link
-        src: "{{ lookup('env', 'HOME') }}/dotfiles/{{ item }}"
-        path: "{{ lookup('env', 'HOME') }}/.{{ item }}"
-        force: yes
-      loop:
-        - clang-format
-        - emacs.el
-        - vimrc
-        - screenrc

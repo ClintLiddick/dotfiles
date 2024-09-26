@@ -1,0 +1,13 @@
+---
+- name: create dotfile symlinks
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
+    path: "{{ ansible_user_dir }}/.{{ item }}"
+    force: yes
+  loop:
+    - clang-format
+    - emacs.el
+    - vimrc
+    - screenrc
+    - zshrc

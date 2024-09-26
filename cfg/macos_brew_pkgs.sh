@@ -8,6 +8,7 @@ brew_pkgs=(
 
 brew_cask_pkgs=(
     emacs
+    kitty
 )
 
 brew install ${brew_pkgs[@]}

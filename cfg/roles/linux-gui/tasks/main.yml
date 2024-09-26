@@ -127,23 +127,6 @@
     src: "/home/{{ lookup('env', 'USER') }}/dotfiles/dunstrc"
     state: link
 
-- name: create kitty config dir
-  file:
-    path: "/home/{{ lookup('env', 'USER') }}/.config/kitty"
-    state: directory
-
-- name: create kitty.d symlink
-  file:
-    path: "/home/{{ lookup('env', 'USER') }}/.config/kitty/kitty.d"
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/kitty.d"
-    state: link
-
-- name: create kitty config symlink
-  file:
-    path: "/home/{{ lookup('env', 'USER') }}/.config/kitty/kitty.conf"
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/kitty.conf"
-    state: link
-
 - name: create /mnt/usb directory
   file:
     state: directory

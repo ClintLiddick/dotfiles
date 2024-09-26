@@ -7,7 +7,8 @@
 (setq py-python-command "/usr/bin/python3")
 
 ;; determine whether or not on work computer
-(defconst clint/work-computer (equal (system-name) "clint-HM3QL13"))
+(defconst clint/mac (eq system-type 'darwin))
+(defconst clint/work-computer (equal (system-name) "clint-vdesk"))
 (defconst clint/clang-version (if clint/work-computer "15" "13"))
 
 (defconst clint/extra-include-base
@@ -50,6 +51,13 @@
   ;; update unprompted but not at startup to prevent login hangs from daemon
   ;; startup blocking on networked updates
   (auto-package-update-at-time "12:30"))
+
+;; Set Emacs PATH from shell PATH because OSX makes it almost impossible to configure
+;; system-wide PATH.
+(if clint/mac
+    (use-package exec-path-from-shell
+      :config (if (display-graphic-p)
+                  (exec-path-from-shell-initialize))))
 
 ;; evil-leader: fast \-prefixed shortcuts
 ;; must come before (use-package evil)
@@ -456,6 +464,9 @@
 (use-package unicode-fonts   ;; allow fallback fonts
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
+
+(when (and clint/mac (display-graphic-p))
+  (set-frame-font "Source Code Pro-14" nil t))
 
 (defvar color-themes '())
 (use-package zenburn-theme

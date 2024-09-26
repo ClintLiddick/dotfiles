@@ -12,11 +12,17 @@ You may need to install rust tools first for new Python cryptography packages.
 
 ### MacOS prerequisite
 
-* Install Homebrew:
+- Install Homebrew:
+
+Install pkg from [GitHub release](https://github.com/Homebrew/brew/releases) or:
 
         $ /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
-* Install brew packages (the community.general.homebrew ansible rules don't current work correctly for casks):
+- Setup PATH
+
+        $ echo "export PATH=/opt/homebrew/bin:$PATH" >> ~/.zshrc
+
+- Install brew packages (the community.general.homebrew ansible rules don't current work correctly for casks):
 
         $ ./macos_brew_pkgs.sh
 
