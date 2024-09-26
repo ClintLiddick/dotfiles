@@ -101,6 +101,13 @@
 (use-package magit
   :config
   (setq magit-completing-read-function 'ivy-completing-read)
+  (if clint/work-computer
+    (setq display-buffer-alist
+            '(("\\magit-?\\w*: .*"
+            (display-buffer-reuse-window display-buffer-in-side-window)
+            (side . right)
+            (window-width . 0.5)))))
+
   :bind ("C-x g" . magit-status))
 (evil-leader/set-key "g" 'magit-status)
 
