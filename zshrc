@@ -4,7 +4,7 @@ if [ -f "$HOME/.zsh_aliases" ]; then
     source "$HOME/.zsh_aliases"
 fi
 
-export PATH=/opt/homebrew/bin:$HOME/.cargo/bin:/Users/clint/Library/Python/3.9/bin:$PATH
+export PATH=$HOME/.local/bin:/opt/homebrew/bin:$HOME/.cargo/bin:/Users/clint/Library/Python/3.9/bin:$PATH
 
 # Setup auto-completion
 autoload -Uz compinit

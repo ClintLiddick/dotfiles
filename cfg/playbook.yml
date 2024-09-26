@@ -53,6 +53,7 @@
     - rust
     - ssh-agent
     - data-analysis
+    - zsh
   vars:
     has_gui: false
   tasks:
@@ -69,6 +70,7 @@
     - rust
     - software-dev-min
     - kitty
+    - zsh
   vars:
     has_gui: true
 

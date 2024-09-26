@@ -1,0 +1,19 @@
+---
+- name: install zsh
+  when: ansible_os_family == "Debian"
+  apt:
+    name: zsh
+  become: yes
+
+- name: link zshrc dotfile
+  file:
+    state: link
+    src: "{{ ansible_user_dir }}/dotfiles/zshrc"
+    path: "{{ ansible_user_dir }}/.zshrc"
+    force: yes
+
+- name: update default shell to zsh
+  user:
+    name: "{{ ansible_user }}"
+    shell: /bin/zsh
+  become: yes
