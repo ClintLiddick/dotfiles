@@ -103,7 +103,7 @@
   (setq magit-completing-read-function 'ivy-completing-read)
   (if clint/work-computer
     (setq display-buffer-alist
-            '(("\\magit-?\\w*: .*"
+            '(("\\magit: .*"
             (display-buffer-reuse-window display-buffer-in-side-window)
             (side . right)
             (window-width . 0.5)))))
