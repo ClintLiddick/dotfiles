@@ -41,7 +41,7 @@ zstyle ':vcs_info:git*:*' stagedstr '+'
 
 # Set up the prompt (with git branch name)
 setopt prompt_subst
-PROMPT='%F{blue}%~%f%F{red}${vcs_info_msg_0_}%f$ '
+PROMPT='%m %F{blue}%~%f%F{red}${vcs_info_msg_0_}%f%# '
 
 # Universal aliases
 
