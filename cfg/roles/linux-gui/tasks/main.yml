@@ -5,12 +5,10 @@
   vars:
     packages:
     - autofs
-    - awesome
     - bluez
     - blueman
     - cups
     - feh
-    - fonts-font-awesome
     - fonts-noto
     - gthumb
     - i3-wm
