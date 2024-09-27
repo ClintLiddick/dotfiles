@@ -2,13 +2,7 @@
 
     $ sudo apt install libssl-dev python3-setuptools python3-wheel python3-venv
     $ pip3 install ansible
-    $ ansible-galaxy collection install community.general
-
-You may need to install rust tools first for new Python cryptography packages.
-
-## Running
-
-    $ ansible-playbook -i hosts.yml -l <host> -K playbook.yml
+    $ ansible-galaxy collection install community.general  # old versions only
 
 ### MacOS prerequisite
 
@@ -26,9 +20,15 @@ Install pkg from [GitHub release](https://github.com/Homebrew/brew/releases) or:
 
         $ ./macos_brew_pkgs.sh
 
+## Running
 
-### Only certain tasks
+    $ ansible-playbook -i hosts.yml -l $(hostname) -K playbook.yml
+
+### Testing
+
+To only see what would change add `--check`:
+
+    $ ansible-playbook -i hosts.yml -l $(hostname) -K playbook.yml --check
 
 To run only a certain task, add `tags: new` (or any string) and then run the
 playbook with `--tags new`, and only those tagged tasks are executed.
-
