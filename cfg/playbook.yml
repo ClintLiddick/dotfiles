@@ -16,7 +16,7 @@
         name: remote.origin.tagOpt
         value: --no-tags
         scope: local
-        repo: "{{ lookup('env', 'HOME') }}/av"
+        repo: "{{ ansible_user_dir }}/av"
 
 - hosts: Clint-Liddick-DY4K52RWN2
   roles:

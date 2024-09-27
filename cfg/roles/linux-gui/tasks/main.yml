@@ -61,9 +61,9 @@
     - oxygencursors
   become: yes
 
-- name: "add {{ lookup('env', 'USER') }} to admin groups"
+- name: "add {{ ansible_user }} to admin groups"
   user:
-    name: "{{ lookup('env', 'USER') }}"
+    name: "{{ ansible_user }}"
     append: yes
     groups:
       - lpadmin
@@ -84,8 +84,8 @@
 - name: create X dotfile symlinks
   file:
     state: link
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/{{ item }}"
-    path: "/home/{{ lookup('env', 'USER') }}/.{{ item }}"
+    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
+    path: "{{ ansible_user_dir }}/.{{ item }}"
     force: yes
   loop:
     - xinitrc
@@ -94,35 +94,35 @@
 - name: create xsessionrc symlink
   file:
     state: link
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/xsessionrc.{{ inventory_hostname }}"
-    path: "/home/{{ lookup('env', 'USER') }}/.xsessionrc"
+    src: "{{ ansible_user_dir }}/dotfiles/xsessionrc.{{ inventory_hostname }}"
+    path: "{{ ansible_user_dir }}/.xsessionrc"
 
 - name: create Xresources symlink
   file:
     state: link
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/Xresources.{{ inventory_hostname }}"
-    path: "/home/{{ lookup('env', 'USER') }}/.Xresources"
+    src: "{{ ansible_user_dir }}/dotfiles/Xresources.{{ inventory_hostname }}"
+    path: "{{ ansible_user_dir }}/.Xresources"
 
 - name: create i3 config dir
   file:
-    path: "/home/{{ lookup('env', 'USER') }}/.config/i3"
+    path: "{{ ansible_user_dir }}/.config/i3"
     state: directory
 
 - name: create i3 config symlink
   file:
-    path: "/home/{{ lookup('env', 'USER') }}/.config/i3/config"
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/i3config.conf"
+    path: "{{ ansible_user_dir }}/.config/i3/config"
+    src: "{{ ansible_user_dir }}/dotfiles/i3config.conf"
     state: link
 
 - name: create dunst config dir
   file:
-    path: "/home/{{ lookup('env', 'USER') }}/.config/dunst"
+    path: "{{ ansible_user_dir }}/.config/dunst"
     state: directory
 
 - name: create dunst config symlink
   file:
-    path: "/home/{{ lookup('env', 'USER') }}/.config/dunst/dunstrc"
-    src: "/home/{{ lookup('env', 'USER') }}/dotfiles/dunstrc"
+    path: "{{ ansible_user_dir }}/.config/dunst/dunstrc"
+    src: "{{ ansible_user_dir }}/dotfiles/dunstrc"
     state: link
 
 - name: create /mnt/usb directory

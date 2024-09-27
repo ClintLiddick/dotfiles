@@ -110,7 +110,7 @@
 
 - name: add user to development groups
   user:
-    name: "{{ lookup('env', 'USER') }}"
+    name: "{{ ansible_user }}"
     append: yes
     groups:
       - dialout
@@ -118,19 +118,19 @@
 
 - name: create ~/src directory
   file:
-    dest: "/home/{{lookup('env', 'USER')}}/src"
+    dest: "{{ ansible_user_dir }}/src"
     state: directory
 
 - name: checkout Emacs source
   git:
-    dest: "/home/{{lookup('env', 'USER')}}/src/emacs"
+    dest: "{{ ansible_user_dir }}/src/emacs"
     repo: https://github.com/emacs-mirror/emacs.git
     version: emacs-29.1
     depth: 1
 
 - name: create emacs build script
   copy:
-    dest: "/home/{{lookup('env', 'USER')}}/src/emacs/clintbuild.sh"
+    dest: "{{ ansible_user_dir }}/src/emacs/clintbuild.sh"
     mode: 0755
     content: |
       #!/bin/bash
@@ -142,14 +142,14 @@
 
 - name: checkout Git source
   git:
-    dest: "/home/{{lookup('env', 'USER')}}/src/git"
+    dest: "{{ ansible_user_dir }}/src/git"
     repo: https://github.com/git/git
     version: v2.41.0
     depth: 1
 
 - name: create git build script
   copy:
-    dest: "/home/{{lookup('env', 'USER')}}/src/git/clintbuild.sh"
+    dest: "{{ ansible_user_dir }}/src/git/clintbuild.sh"
     mode: 0755
     content: |
       #!/bin/bash
@@ -161,7 +161,7 @@
 
 - name: install global pycodestyle config
   copy:
-    dest: "/home/{{lookup('env', 'USER')}}/.config/pycodestyle"
+    dest: "{{ ansible_user_dir }}/.config/pycodestyle"
     mode: 0644
     content: |
       [pycodestyle]
@@ -170,18 +170,18 @@
 - name: make ~/.fonts directory
   file:
     state: directory
-    path: "/home/{{ lookup('env', 'USER') }}/.fonts"
+    path: "{{ ansible_user_dir }}/.fonts"
 
 - name: download Adobe Source Code Pro roman font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
-    dest: "/home/{{ lookup('env', 'USER') }}/.fonts"
+    dest: "{{ ansible_user_dir }}/.fonts"
   register: sourcecodepro_roman
 
 - name: download Adobe Source Code Pro italic font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
-    dest: "/home/{{ lookup('env', 'USER') }}/.fonts"
+    dest: "{{ ansible_user_dir }}/.fonts"
   register: sourcecodepro_italic
 
 - name: update font cache

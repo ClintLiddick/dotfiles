@@ -3,14 +3,14 @@
   get_url:
     url: http://mirrors.ocf.berkeley.edu/kde/stable/digikam/7.1.0/digikam-7.1.0-x86-64.appimage
     checksum: "sha256:5f14cc3c1d0e9c013e5fd1c2f71b8f7a925cdc3faaa3ab1b19c3c9181e1c3db9"
-    dest: "/home/{{ lookup('env', 'USER') }}/.local/bin/digikam-7.1.0-x86-64.appimage"
+    dest: "{{ ansible_user_dir }}/.local/bin/digikam-7.1.0-x86-64.appimage"
     mode: 0755
 
 - name: symlink latest Digikam version
   file:
     state: link
-    path: "/home/{{ lookup('env', 'USER') }}/.local/bin/digikam"
-    src: "/home/{{ lookup('env', 'USER') }}/.local/bin/digikam-7.1.0-x86-64.appimage"
+    path: "{{ ansible_user_dir }}/.local/bin/digikam"
+    src: "{{ ansible_user_dir }}/.local/bin/digikam-7.1.0-x86-64.appimage"
 
 - name: add Debian backports list
   when: ansible_facts['distribution'] == "Debian"

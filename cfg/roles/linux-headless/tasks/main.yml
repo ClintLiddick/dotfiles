@@ -28,8 +28,8 @@
 - name: create dotfile symlinks
   file:
     state: link
-    src: "{{ lookup('env', 'HOME') }}/dotfiles/{{ item }}"
-    path: "{{ lookup('env', 'HOME') }}/.{{ item }}"
+    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
+    path: "{{ ansible_user_dir }}/.{{ item }}"
     force: yes
   loop:
     - bashrc
@@ -43,4 +43,4 @@
 - name: remove .bash_profile
   file:
     state: absent
-    path: "{{ lookup('env', 'HOME') }}/.bash_profile"
+    path: "{{ ansible_user_dir }}/.bash_profile"

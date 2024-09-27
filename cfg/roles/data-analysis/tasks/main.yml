@@ -25,4 +25,4 @@
 - name: install virtualenv ipykernel
   command:
     cmd: "{{ venv_python }} -m ipykernel install --name venv --user"
-    creates: "/home/{{ lookup('env', 'USER') }}/.local/share/jupyter/kernels/venv"
+    creates: "{{ ansible_user_dir }}/.local/share/jupyter/kernels/venv"
