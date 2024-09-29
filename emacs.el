@@ -257,8 +257,9 @@
 (use-package f)
 (use-package s)
 (use-package editorconfig)
+(defconst load-copilot-path (expand-file-name "~/dotfiles/third_party/copilot/"))
 (use-package copilot
-  :load-path "/home/clint/dotfiles/third_party/copilot/"
+  :load-path load-copilot-path
   :config
   (define-key copilot-completion-map (kbd "<tab>") 'copilot-accept-completion)
   (define-key copilot-completion-map (kbd "TAB") 'copilot-accept-completion))
