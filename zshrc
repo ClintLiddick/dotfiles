@@ -6,7 +6,7 @@ fi
 
 # System-specific private values
 if [ -f "$HOME/.env_vars_private" ]; then
-    . "$HOME/.env_vars_private"
+    source "$HOME/.env_vars_private"
 fi
 
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:$HOME/.cargo/bin:/Users/clint/Library/Python/3.9/bin:/opt/aurora/bin:$PATH
@@ -54,3 +54,9 @@ alias ipy='ipython3'
 alias ls='ls --color=auto'
 alias ll='ls -alhF --color=auto'
 alias weather='curl -sSL "https://wttr.in/Mountain+View?m"'
+
+
+
+if [ -f "$HOME/.zshrc_bonsai" ]; then
+    source "$HOME/.zshrc_bonsai"
+fi
