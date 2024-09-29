@@ -9,7 +9,9 @@ if [ -f "$HOME/.env_vars_private" ]; then
     source "$HOME/.env_vars_private"
 fi
 
-export PATH=$HOME/.local/bin:/opt/homebrew/bin:$HOME/.cargo/bin:/Users/clint/Library/Python/3.9/bin:/opt/aurora/bin:$PATH
+PATH=/Users/clint/Library/Python/3.12/bin:/Users/clint/Library/Python/3.9/bin:$PATH
+export PATH=$HOME/.local/bin:/opt/homebrew/bin:$HOME/.cargo/bin:/opt/aurora/bin:$PATH
+
 
 HISTFILE=~/.zsh_history
 HISTSIZE=10000

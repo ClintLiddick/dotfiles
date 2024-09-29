@@ -34,5 +34,7 @@
     - mac-core
     - rust
     - software-dev-min
+    - kitty
+    - zsh
   vars:
     has_gui: true
