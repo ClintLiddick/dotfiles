@@ -46,8 +46,8 @@
       - colordiff
       - cppcheck
       - gnutls-bin
-      - graphviz
       - iperf3
+      - ispell
       - libgccjit-11-dev  # for elisp native
       - libgif-dev
       - libgtk-3-dev
@@ -58,8 +58,17 @@
       - python3-pip
       - python3-venv
       - shellcheck
+  become: yes
+
+- name: install gui packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      - graphviz
       - xclip
       - xdotool
+  when: has_gui == true
   become: yes
 
 - name: install Ubuntu packages
@@ -102,9 +111,6 @@
   vars:
     packages:
       - flake8
-      - jupyterlab
-      - pandas
-      - plotnine
       - python-lsp-server
       - python-lsp-black
 
@@ -171,18 +177,21 @@
   file:
     state: directory
     path: "{{ ansible_user_dir }}/.fonts"
+  when: has_gui == true
 
 - name: download Adobe Source Code Pro roman font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
     dest: "{{ ansible_user_dir }}/.fonts"
   register: sourcecodepro_roman
+  when: has_gui == true
 
 - name: download Adobe Source Code Pro italic font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
     dest: "{{ ansible_user_dir }}/.fonts"
   register: sourcecodepro_italic
+  when: has_gui == true
 
 - name: update font cache
   when: sourcecodepro_roman.changed or sourcecodepro_italic.changed

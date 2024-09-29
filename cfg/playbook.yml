@@ -4,6 +4,7 @@
     - pre-tasks
     - linux-headless
     - software-dev-min
+    - software-dev-power
     - rust
     - ssh-agent
     - data-analysis
