@@ -32,7 +32,7 @@ add-zsh-hook precmd vcs_info
 
 # Format the vcs_info_msg_0_ variable
 # branch/uncommitted/changed
-zstyle ':vcs_info:git:*' formats       ' (%b[%u%c])'
+zstyle ':vcs_info:git:*' formats       ' (%b%u%c)'
 zstyle ':vcs_info:git:*' actionformats ' (%b[a% u%c])'
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:git*:*' check-for-changes true
