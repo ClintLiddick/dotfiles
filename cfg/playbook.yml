@@ -34,6 +34,7 @@
     - mac-core
     - rust
     - software-dev-min
+    - software-dev-macosx
     - kitty
     - zsh
     - typesetting

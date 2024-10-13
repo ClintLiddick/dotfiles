@@ -1,0 +1,23 @@
+---
+- name: create ~/src directory
+  file:
+    dest: "{{ ansible_user_dir }}/src"
+    state: directory
+
+- name: install bazelisk
+  homebrew:
+    name: bazelisk
+    state: present
+
+- name: install global pycodestyle config
+  copy:
+    dest: "{{ ansible_user_dir }}/.config/pycodestyle"
+    mode: 0644
+    content: |
+      [pycodestyle]
+      max-line-length = 100
+
+- name: install docker
+  homebrew_cask:
+    name: docker
+    state: present
