@@ -383,9 +383,21 @@
   :mode "\\.proto\\'")
 
 (use-package bazel
+  :custom
+  ;; requires pre-fetching commands within workspace
+  (bazel-buildifier-command
+   (if clint/mac
+       "~/personal_projects/bazel-bin/external/buildifier_prebuilt~/buildifier/buildifier"
+     "buildifier"))
+  (bazel-buildozer-command
+   (if clint/mac
+       "~/personal_projects/bazel-bin/external/buildifier_prebuilt~/buildifier/buildozer"
+     "buildozer"))
+  (bazel-buildifier-before-save t)
   :config
   (evil-leader/set-key-for-mode 'bazel-build-mode "f" 'bazel-buildifier)
   (evil-leader/set-key-for-mode 'bazel-workspace-mode "f" 'bazel-buildifier)
+  (evil-leader/set-key-for-mode 'bazel-module-mode "f" 'bazel-buildifier)
   (evil-leader/set-key-for-mode 'bazel-starlark-mode "f" 'bazel-buildifier))
 
 (use-package terraform-mode)
