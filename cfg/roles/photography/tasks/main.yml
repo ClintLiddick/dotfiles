@@ -37,6 +37,12 @@
     name: digikam
     state: present
 
+- name: install exiftool
+  when: ansible_facts["os_family"] == "Darwin"
+  homebrew:
+    name: exiftool
+    state: present
+
 - name: install Darktable
   when: ansible_facts["os_family"] == "Darwin"
   homebrew_cask:
