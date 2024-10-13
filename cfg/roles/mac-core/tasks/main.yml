@@ -10,3 +10,11 @@
     - emacs.el
     - vimrc
     - screenrc
+
+- name: upgrade all homebrew formula
+  community.general.homebrew:
+    upgrade_all: yes
+
+- name: upgrade all homebrew casks
+  community.general.homebrew_cask:
+    upgrade_all: yes
