@@ -36,5 +36,6 @@
     - software-dev-min
     - kitty
     - zsh
+    - typesetting
   vars:
     has_gui: true
