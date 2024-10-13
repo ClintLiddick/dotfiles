@@ -1,5 +1,6 @@
 ---
 - name: download Digikam
+  when: ansible_facts["os_family"] == "Debian"
   get_url:
     url: http://mirrors.ocf.berkeley.edu/kde/stable/digikam/7.1.0/digikam-7.1.0-x86-64.appimage
     checksum: "sha256:5f14cc3c1d0e9c013e5fd1c2f71b8f7a925cdc3faaa3ab1b19c3c9181e1c3db9"
@@ -7,6 +8,7 @@
     mode: 0755
 
 - name: symlink latest Digikam version
+  when: ansible_facts["os_family"] == "Debian"
   file:
     state: link
     path: "{{ ansible_user_dir }}/.local/bin/digikam"
@@ -23,7 +25,20 @@
   become: yes
 
 - name: install Darktable
+  when: ansible_facts['distribution'] == "Debian"
   apt:
     package: darktable
     default_release: buster-backports
   become: yes
+
+- name: install Digikam
+  when: ansible_facts["os_family"] == "Darwin"
+  homebrew_cask:
+    name: digikam
+    state: present
+
+- name: install Darktable
+  when: ansible_facts["os_family"] == "Darwin"
+  homebrew_cask:
+    name: darktable
+    state: present

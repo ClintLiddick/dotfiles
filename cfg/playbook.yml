@@ -38,5 +38,6 @@
     - kitty
     - zsh
     - typesetting
+    - photography
   vars:
     has_gui: true
