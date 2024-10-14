@@ -22,6 +22,7 @@
 - hosts: Clint-Liddick-DY4K52RWN2
   roles:
     - mac-core
+    - data-analysis
     - rust
     - software-dev-min
     - kitty
