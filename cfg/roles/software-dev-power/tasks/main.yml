@@ -196,3 +196,15 @@
 - name: update font cache
   when: sourcecodepro_roman.changed or sourcecodepro_italic.changed
   command: fc-cache -rv
+
+- name: download NVM installer
+  get_url:
+    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh
+    dest: /tmp/nvm-install.sh
+    mode: "0755"
+
+- name: install NVM
+  shell: /tmp/nvm-install.sh
+  args:
+    creates: "{{ ansible_user_dir }}/.nvm/nvm.sh"
+
