@@ -21,3 +21,14 @@
   homebrew_cask:
     name: docker
     state: present
+
+- name: download NVM installer
+  get_url:
+    url: https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh
+    dest: /tmp/nvm-install.sh
+    mode: "0755"
+
+- name: install NVM
+  shell: /tmp/nvm-install.sh
+  args:
+    creates: "{{ ansible_user_dir }}/.nvm/nvm.sh"
