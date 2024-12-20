@@ -246,7 +246,9 @@
 (add-hook 'shell-script-mode-hook 'eglot-ensure)
 
 
-(use-package company-jedi)  ;; Python
+(use-package company-jedi
+  :config
+  (setq jedi:environment-virtualenv '("python3" "-m" "venv")))  ;; Python
 ;; (use-package company-lua)
 ;; (use-package company-racer)  ;; Rust
 ;; (use-package company-web)
