@@ -20,3 +20,9 @@
   when: not pdflatex_check.stat.exists and ansible_facts["distribution"] == "MacOSX"
   debug:
     msg: "pdflatex not found. Use 'brew install basictex' to install"
+
+- name: install multimarkdown
+  when: ansible_facts["distribution"] == "MacOSX"
+  homebrew:
+    name: multimarkdown
+    state: latest
