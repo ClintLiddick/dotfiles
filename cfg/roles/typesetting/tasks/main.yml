@@ -9,3 +9,14 @@
   homebrew:
     name: pandoc
     state: present
+
+- name: check pdflatex installation
+  when: ansible_facts["distribution"] == "MacOSX"
+  stat:
+    path: /Library/TeX/texbin/pdflatex
+  register: pdflatex_check
+
+- name: print pdflatex installation instructions
+  when: not pdflatex_check.stat.exists and ansible_facts["distribution"] == "MacOSX"
+  debug:
+    msg: "pdflatex not found. Use 'brew install basictex' to install"
