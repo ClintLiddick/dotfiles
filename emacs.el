@@ -4,7 +4,7 @@
 ;;; Code:
 
 ;; Set Python3 as default
-(setq py-python-command "/usr/bin/python3")
+(setq py-python-command "python3")
 
 ;; determine whether or not on work computer
 (defconst clint/mac (eq system-type 'darwin))
