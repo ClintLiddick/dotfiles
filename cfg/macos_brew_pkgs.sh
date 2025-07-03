@@ -4,11 +4,14 @@ set -euo pipefail
 
 brew_pkgs=(
     git
+    bazelisk
+    clang-format
 )
 
 brew_cask_pkgs=(
-    emacs
+    emacs-app
     kitty
+    docker-desktop
 )
 
 brew install ${brew_pkgs[@]}
