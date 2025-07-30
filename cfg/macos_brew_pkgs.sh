@@ -3,9 +3,10 @@
 set -euo pipefail
 
 brew_pkgs=(
-    git
     bazelisk
     clang-format
+    git
+    pyenv
 )
 
 brew_cask_pkgs=(

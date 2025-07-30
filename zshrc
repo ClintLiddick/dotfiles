@@ -9,7 +9,9 @@ if [ -f "$HOME/.env_vars_private" ]; then
     source "$HOME/.env_vars_private"
 fi
 
+# Add user ansible install path to PATH
 PATH=/Users/clint/Library/Python/3.12/bin:/Users/clint/Library/Python/3.9/bin:$PATH
+# Add common binary tool locations to PATH
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:$HOME/.cargo/bin:/opt/aurora/bin:$PATH
 
 
@@ -64,3 +66,7 @@ fi
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
