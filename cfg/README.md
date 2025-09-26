@@ -22,13 +22,13 @@ Install pkg from [GitHub release](https://github.com/Homebrew/brew/releases) or:
 
 ## Running
 
-    $ ansible-playbook -i hosts.yml -l $(hostname) -K playbook.yml
+    $ ansible-playbook -i hosts.yml -l $(hostname -s) -K playbook.yml
 
 ### Testing
 
 To only see what would change add `--check`:
 
-    $ ansible-playbook -i hosts.yml -l $(hostname) -K playbook.yml --check
+    $ ansible-playbook -i hosts.yml -l $(hostname -s) -K playbook.yml --check
 
 To run only a certain task, add `tags: new` (or any string) and then run the
 playbook with `--tags new`, and only those tagged tasks are executed.

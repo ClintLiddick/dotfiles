@@ -8,7 +8,7 @@
 
 ;; determine whether or not on work computer
 (defconst clint/mac (eq system-type 'darwin))
-(defconst clint/work-computer (equal (system-name) "clint-vdesk"))
+(defconst clint/work-computer (equal (system-name) "cliddick-mac"))
 (defconst clint/clang-version (if clint/work-computer "15" "13"))
 
 (defconst clint/extra-include-base
@@ -139,7 +139,7 @@
   :init
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c /" . counsel-rg)
+         ("C-c /" . counsel-grep)  ;; TODO: update to use counsel-rg on personal computers
          ("C-c l" . counsel-locate)))
 
 
@@ -477,8 +477,8 @@
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
 
-(when (and clint/mac (display-graphic-p))
-  (set-frame-font "Source Code Pro-14" nil t))
+;;(when (and clint/mac (display-graphic-p))
+;;  (set-frame-font "Source Code Pro-14" nil t))
 
 (defvar color-themes '())
 (use-package zenburn-theme

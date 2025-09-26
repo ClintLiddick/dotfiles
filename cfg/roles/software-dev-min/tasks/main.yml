@@ -44,3 +44,11 @@
     name: alias.co
     scope: global
     value: "checkout"
+
+- name: install mercurial config file
+  ansible.builtin.copy:
+    content: |
+      [ui]
+      username = Clint Liddick <{{ email }}>
+      merge = :merge3
+    dest: "{{ ansible_user_dir }}/.hgrc"

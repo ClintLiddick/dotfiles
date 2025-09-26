@@ -10,7 +10,7 @@ if [ -f "$HOME/.env_vars_private" ]; then
 fi
 
 # Add user ansible install path to PATH
-PATH=/Users/clint/Library/Python/3.12/bin:/Users/clint/Library/Python/3.9/bin:$PATH
+PATH=$HOME/Library/Python/3.12/bin:$HOME/Library/Python/3.9/bin:$PATH
 # Add common binary tool locations to PATH
 export PATH=$HOME/.local/bin:/opt/homebrew/bin:$HOME/.cargo/bin:/opt/aurora/bin:$PATH
 
@@ -69,4 +69,11 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if command -v pyenv &> /dev/null; then
+    eval "$(pyenv init -)"
+fi
+
+if [[ -f /etc/bash_completion.d/hgd ]]; then
+  source /etc/bash_completion.d/hgd
+fi
+

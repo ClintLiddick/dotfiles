@@ -19,14 +19,10 @@
         scope: local
         repo: "{{ ansible_user_dir }}/av"
 
-- hosts: Clint-Liddick-DY4K52RWN2
+- hosts: cliddick-mac
   roles:
     - mac-core
-    - data-analysis
-    - rust
     - software-dev-min
-    - software-dev-macosx
-    - kitty
     - zsh
   vars:
     has_gui: true
