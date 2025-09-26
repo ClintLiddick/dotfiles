@@ -1,29 +1,4 @@
 ---
-- name: install packages
-  apt:
-    name: "{{ packages }}"
-  vars:
-    packages:
-    - acpi
-    - atool
-    - cpufrequtils
-    - imagemagick
-    - jq
-    - lynx
-    - moreutils
-    - mosh
-    - net-tools
-    - nmon
-    - pigz
-    - python3-apt
-    - python3-gpg
-    - rename
-    - screen
-    - socat
-    - speedtest-cli
-    - tree
-    - zip
-  become: yes
 
 - name: create dotfile symlinks
   file:

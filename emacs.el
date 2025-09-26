@@ -6,10 +6,16 @@
 ;; Set Python3 as default
 (setq py-python-command "python3")
 
-;; determine whether or not on work computer
+;; TODO: necessary? or only need iterm override to ESC+?
+;; Override keyboard input for alt/option key and treat as Emacs meta key
+;; (setq mac-option-modifier 'meta)
+
+;; determine computer attributes
 (defconst clint/mac (eq system-type 'darwin))
-(defconst clint/work-computer (equal (system-name) "clint-vdesk"))
-(defconst clint/clang-version (if clint/work-computer "15" "13"))
+;; NOTE: On MacOS, iTerm2 must configure Option (Alt) key override to ESC+
+(defconst clint/work-computer (equal (system-name) "cliddick-mac"))
+(defconst clint/is-glinux (equal (system-name) "cliddick"))
+(defconst clint/clang-version (if clint/work-computer "17" "13"))
 
 (defconst clint/extra-include-base
   (if (not clint/work-computer)
@@ -58,6 +64,9 @@
     (use-package exec-path-from-shell
       :config (if (display-graphic-p)
                   (exec-path-from-shell-initialize))))
+
+(if clint/is-glinux
+    (require 'google))
 
 ;; evil-leader: fast \-prefixed shortcuts
 ;; must come before (use-package evil)
@@ -139,7 +148,7 @@
   :init
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c /" . counsel-rg)
+         ("C-c /" . counsel-grep)  ;; TODO: update to use counsel-rg on personal computers
          ("C-c l" . counsel-locate)))
 
 
@@ -477,8 +486,10 @@
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
 
-(when (and clint/mac (display-graphic-p))
-  (set-frame-font "Source Code Pro-14" nil t))
+(when (and
+       (not clint/work-computer)
+       (display-graphic-p))
+ (set-frame-font "Source Code Pro-14" nil t))
 
 (defvar color-themes '())
 (use-package zenburn-theme

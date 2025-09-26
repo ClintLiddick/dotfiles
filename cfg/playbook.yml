@@ -1,35 +1,44 @@
 ---
-- hosts: clint-vdesk
+- hosts: cliddick
   roles:
     - pre-tasks
     - linux-headless
-    - software-dev-min
-    - software-dev-power
-    - rust
-    - ssh-agent
-    - data-analysis
     - zsh
-  vars:
-    has_gui: false
   tasks:
-    - name: git don't fetch tags
-      git_config:
-        name: remote.origin.tagOpt
-        value: --no-tags
-        scope: local
-        repo: "{{ ansible_user_dir }}/av"
+    - name: install packages
+      apt:
+          name: "{{ packages }}"
+      vars:
+          packages:
+          - atool
+          - jq
+          - glinux-emacs
+          - google-emacs-nox
+          - moreutils
+          # - net-tools
+          # - nmon
+          # - pigz
+          # - python3-apt
+          # - python3-gpg
+          - rename
+          - screen
+          - tree
+          - zip
+      become: yes
+    - name: set google emacs alternative
+      community.general.alternatives:
+        name: emacs
+        path: /usr/bin/google-emacs-nox
+    - name: set google emacsclient alternative
+      community.general.alternatives:
+        name: emacsclient
+        path: /usr/bin/emacsclient.google-emacs
 
-- hosts: Clint-Liddick-DY4K52RWN2
+- hosts: cliddick-mac
   roles:
     - mac-core
-    - data-analysis
-    - rust
     - software-dev-min
-    - software-dev-macosx
-    - kitty
     - zsh
-  vars:
-    has_gui: true
 
 - hosts: Family-MacBook.local
   roles:
@@ -42,5 +51,3 @@
     - zsh
     - typesetting
     - photography
-  vars:
-    has_gui: true

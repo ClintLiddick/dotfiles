@@ -1,4 +1,11 @@
 ---
+- name: brew installed
+  ansible.builtin.command: command -v brew
+  register: brew_installed_result
+  changed_when: false
+  ignore_errors: true
+
+
 - name: create dotfile symlinks
   file:
     state: link
@@ -14,7 +21,9 @@
 - name: upgrade all homebrew formula
   community.general.homebrew:
     upgrade_all: yes
+  when: brew_installed_result.rc == 0
 
 - name: upgrade all homebrew casks
   community.general.homebrew_cask:
     upgrade_all: yes
+  when: brew_installed_result.rc == 0

@@ -16,4 +16,5 @@
   user:
     name: "{{ ansible_user }}"
     shell: /bin/zsh
+  when: not is_glinux
   become: yes
