@@ -14,7 +14,7 @@
 (defconst clint/mac (eq system-type 'darwin))
 ;; NOTE: On MacOS, iTerm2 must configure Option (Alt) key override to ESC+
 (defconst clint/work-computer (equal (system-name) "cliddick-mac"))
-(defconst clint/is-glinux (equal (system-name) "cliddick"))
+(defconst clint/is-glinux (string-suffix-p ".c.googlers.com" (system-name)))
 (defconst clint/clang-version (if clint/work-computer "17" "13"))
 
 (defconst clint/extra-include-base
