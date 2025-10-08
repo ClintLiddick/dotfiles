@@ -50,5 +50,9 @@
     content: |
       [ui]
       username = Clint Liddick <{{ email }}>
-      merge = :merge3
+      #merge = :merge3
+      merge = ediff
+      editor = emacsclient -nw -t -a ''
+      [google-change-tags]
+      default.markdown = true
     dest: "{{ ansible_user_dir }}/.hgrc"
