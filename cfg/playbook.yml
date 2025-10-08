@@ -3,6 +3,7 @@
   roles:
     - pre-tasks
     - linux-headless
+    - software-dev-min
     - zsh
   tasks:
     - name: install packages
@@ -13,7 +14,6 @@
           - atool
           - jq
           - glinux-emacs
-          - google-emacs-nox
           - moreutils
           # - net-tools
           # - nmon
@@ -25,14 +25,6 @@
           - tree
           - zip
       become: yes
-    - name: set google emacs alternative
-      community.general.alternatives:
-        name: emacs
-        path: /usr/bin/google-emacs-nox
-    - name: set google emacsclient alternative
-      community.general.alternatives:
-        name: emacsclient
-        path: /usr/bin/emacsclient.google-emacs
 
 - hosts: cliddick-mac
   roles:
