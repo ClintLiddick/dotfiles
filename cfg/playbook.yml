@@ -32,7 +32,7 @@
     - software-dev-min
     - zsh
 
-- hosts: Family-MacBook.local
+- hosts: Family-MacBook
   roles:
     - mac-core
     - rust
