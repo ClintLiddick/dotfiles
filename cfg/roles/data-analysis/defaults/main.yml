@@ -1,4 +1,4 @@
 ---
-venv_dir: "{{ ansible_user_dir }}/venv"
+venv_dir: "{{ ansible_facts['user_dir'] }}/venv"
 venv_cmd: "{{ ansible_python_interpreter }} -m venv"
 venv_python: "{{ venv_dir }}/bin/python"

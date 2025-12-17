@@ -124,19 +124,19 @@
 
 - name: create ~/src directory
   file:
-    dest: "{{ ansible_user_dir }}/src"
+    dest: "{{ ansible_facts['user_dir'] }}/src"
     state: directory
 
 - name: checkout Emacs source
   git:
-    dest: "{{ ansible_user_dir }}/src/emacs"
+    dest: "{{ ansible_facts['user_dir'] }}/src/emacs"
     repo: https://github.com/emacs-mirror/emacs.git
     version: emacs-29.1
     depth: 1
 
 - name: create emacs build script
   copy:
-    dest: "{{ ansible_user_dir }}/src/emacs/clintbuild.sh"
+    dest: "{{ ansible_facts['user_dir'] }}/src/emacs/clintbuild.sh"
     mode: 0755
     content: |
       #!/bin/bash
@@ -148,14 +148,14 @@
 
 - name: checkout Git source
   git:
-    dest: "{{ ansible_user_dir }}/src/git"
+    dest: "{{ ansible_facts['user_dir'] }}/src/git"
     repo: https://github.com/git/git
     version: v2.41.0
     depth: 1
 
 - name: create git build script
   copy:
-    dest: "{{ ansible_user_dir }}/src/git/clintbuild.sh"
+    dest: "{{ ansible_facts['user_dir'] }}/src/git/clintbuild.sh"
     mode: 0755
     content: |
       #!/bin/bash
@@ -167,7 +167,7 @@
 
 - name: install global pycodestyle config
   copy:
-    dest: "{{ ansible_user_dir }}/.config/pycodestyle"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/pycodestyle"
     mode: 0644
     content: |
       [pycodestyle]
@@ -176,20 +176,20 @@
 - name: make ~/.fonts directory
   file:
     state: directory
-    path: "{{ ansible_user_dir }}/.fonts"
+    path: "{{ ansible_facts['user_dir'] }}/.fonts"
   when: has_gui == true
 
 - name: download Adobe Source Code Pro roman font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
-    dest: "{{ ansible_user_dir }}/.fonts"
+    dest: "{{ ansible_facts['user_dir'] }}/.fonts"
   register: sourcecodepro_roman
   when: has_gui == true
 
 - name: download Adobe Source Code Pro italic font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
-    dest: "{{ ansible_user_dir }}/.fonts"
+    dest: "{{ ansible_facts['user_dir'] }}/.fonts"
   register: sourcecodepro_italic
   when: has_gui == true
 
@@ -206,5 +206,5 @@
 - name: install NVM
   shell: /tmp/nvm-install.sh
   args:
-    creates: "{{ ansible_user_dir }}/.nvm/nvm.sh"
+    creates: "{{ ansible_facts['user_dir'] }}/.nvm/nvm.sh"
 

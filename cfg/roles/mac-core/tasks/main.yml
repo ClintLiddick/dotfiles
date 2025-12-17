@@ -9,8 +9,8 @@
 - name: create dotfile symlinks
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
-    path: "{{ ansible_user_dir }}/.{{ item }}"
+    src: "{{ ansible_facts['user_dir'] }}/dotfiles/{{ item }}"
+    path: "{{ ansible_facts['user_dir'] }}/.{{ item }}"
     force: yes
   loop:
     - clang-format
@@ -18,12 +18,13 @@
     - vimrc
     - screenrc
 
-- name: upgrade all homebrew formula
-  community.general.homebrew:
-    upgrade_all: yes
-  when: brew_installed_result.rc == 0
+# Disabled because can't passthrough sudo password without (dangerously) running brew itself with sudo
+# - name: upgrade all homebrew formula
+#   community.general.homebrew:
+#     upgrade_all: yes
+#   when: brew_installed_result.rc == 0
 
-- name: upgrade all homebrew casks
-  community.general.homebrew_cask:
-    upgrade_all: yes
-  when: brew_installed_result.rc == 0
+# - name: upgrade all homebrew casks
+#   community.general.homebrew_cask:
+#     upgrade_all: yes
+#   when: brew_installed_result.rc == 0

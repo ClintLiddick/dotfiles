@@ -1,8 +1,9 @@
 ## Setup
 
     $ sudo apt install libssl-dev python3-setuptools python3-wheel python3-venv
+    $ python3 -m venv venv
+    $ source venv/bin/activate
     $ pip3 install ansible
-    $ ansible-galaxy collection install community.general  # old versions only
 
 ### MacOS prerequisite
 

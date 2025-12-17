@@ -1,12 +1,12 @@
 ---
 - name: add user systemd directory
   file:
-    path: "{{ ansible_user_dir }}/.config/systemd/user/"
+    path: "{{ ansible_facts['user_dir'] }}/.config/systemd/user/"
     state: directory
 
 - name: add ssh-agent systemd unit file
   copy:
-    dest: "{{ ansible_user_dir }}/.config/systemd/user/ssh-agent.service"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/systemd/user/ssh-agent.service"
     content: |
       [Unit]
       Description=SSH key agent

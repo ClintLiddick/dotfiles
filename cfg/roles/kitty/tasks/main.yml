@@ -1,17 +1,17 @@
 ---
 - name: create kitty config dir
   file:
-    path: "{{ ansible_user_dir }}/.config/kitty"
+    path: "{{ ansible_facts['user_dir'] }}/.config/kitty"
     state: directory
 
 - name: create kitty.d symlink
   file:
-    path: "{{ ansible_user_dir }}/.config/kitty/kitty.d"
-    src: "{{ ansible_user_dir }}/dotfiles/kitty.d"
+    path: "{{ ansible_facts['user_dir'] }}/.config/kitty/kitty.d"
+    src: "{{ ansible_facts['user_dir'] }}/dotfiles/kitty.d"
     state: link
 
 - name: create kitty config symlink
   file:
-    path: "{{ ansible_user_dir }}/.config/kitty/kitty.conf"
-    src: "{{ ansible_user_dir }}/dotfiles/kitty.conf"
+    path: "{{ ansible_facts['user_dir'] }}/.config/kitty/kitty.conf"
+    src: "{{ ansible_facts['user_dir'] }}/dotfiles/kitty.conf"
     state: link

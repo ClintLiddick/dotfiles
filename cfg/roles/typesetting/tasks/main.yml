@@ -1,8 +1,8 @@
 ---
 - name: install typst
-  command: "{{ ansible_user_dir }}/.cargo/bin/cargo install typst-cli"
+  command: "{{ ansible_facts['user_dir'] }}/.cargo/bin/cargo install typst-cli"
   args:
-    creates: "{{ ansible_user_dir }}/.cargo/bin/typst"
+    creates: "{{ ansible_facts['user_dir'] }}/.cargo/bin/typst"
 
 - name: install pandoc
   when: ansible_facts["distribution"] == "MacOSX"

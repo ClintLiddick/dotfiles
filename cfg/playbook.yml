@@ -38,7 +38,7 @@
     - rust
     - software-dev-min
     - software-dev-macosx
-    - data-analysis
+    # - data-analysis
     - kitty
     - zsh
     - typesetting

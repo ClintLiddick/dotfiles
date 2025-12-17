@@ -66,7 +66,7 @@
 # sudo modprobe v4l2loopback card_label="OBS Virtual Camera" exclusive_caps=1
 - name: clone v4l2loopback
   git:
-    dest: "{{ ansible_user_dir }}/src/v4l2loopback"
+    dest: "{{ ansible_facts['user_dir'] }}/src/v4l2loopback"
     repo: https://github.com/umlaeute/v4l2loopback.git
     depth: 1
     version: v0.12.5
@@ -77,7 +77,7 @@
 # sudo checkinstall --default --pkgname=obs-studio --fstrans=no --backup=no --pkgversion="$(date +%Y%m%d)-git" --deldoc=yes
 - name: clone obs-studio sources
   git:
-    dest: "{{ ansible_user_dir }}/src/obs-studio"
+    dest: "{{ ansible_facts['user_dir'] }}/src/obs-studio"
     repo: https://github.com/obsproject/obs-studio.git
     version: 26.0.2
     depth: 1
@@ -103,7 +103,7 @@
 # cmake --build . --target install
 - name: clone obs-v4l2sink plugin
   git:
-    dest: "{{ ansible_user_dir }}/src/obs-v4l2sink"
+    dest: "{{ ansible_facts['user_dir'] }}/src/obs-v4l2sink"
     repo: https://github.com/CatxFish/obs-v4l2sink.git
     depth: 1
     force: yes
@@ -112,6 +112,6 @@
   unarchive:
     src: https://github.com/Xaymar/obs-StreamFX/releases/download/0.9.1/streamfx-ubuntu-18.04-0.9.1.0-ad245401.zip
     remote_src: yes
-    dest: "{{ ansible_user_dir }}/.config/obs-studio"
+    dest: "{{ ansible_facts['user_dir'] }}/.config/obs-studio"
 
 # TODO(clint) https://github.com/umlaeute/v4l2loopback#load-the-module-at-boot

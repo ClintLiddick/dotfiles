@@ -3,8 +3,8 @@
 - name: create dotfile symlinks
   file:
     state: link
-    src: "{{ ansible_user_dir }}/dotfiles/{{ item }}"
-    path: "{{ ansible_user_dir }}/.{{ item }}"
+    src: "{{ ansible_facts['user_dir'] }}/dotfiles/{{ item }}"
+    path: "{{ ansible_facts['user_dir'] }}/.{{ item }}"
     force: yes
   loop:
     - bashrc
@@ -18,4 +18,4 @@
 - name: remove .bash_profile
   file:
     state: absent
-    path: "{{ ansible_user_dir }}/.bash_profile"
+    path: "{{ ansible_facts['user_dir'] }}/.bash_profile"

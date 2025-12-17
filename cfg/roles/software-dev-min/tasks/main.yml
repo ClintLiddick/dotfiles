@@ -55,4 +55,4 @@
       editor = emacsclient -nw -t -a ''
       [google-change-tags]
       default.markdown = true
-    dest: "{{ ansible_user_dir }}/.hgrc"
+    dest: "{{ ansible_facts['user_dir'] }}/.hgrc"
