@@ -43,3 +43,31 @@
     - zsh
     - typesetting
     - photography
+
+- hosts: gir
+  roles:
+    - pre-tasks
+    - linux-headless
+    - software-dev-min
+    - kitty
+    - rust
+    - zsh
+  tasks:
+    - name: install packages
+      apt:
+          name: "{{ packages }}"
+      vars:
+          packages:
+          - atool
+          - jq
+          - moreutils
+          - net-tools
+          - nmon
+          # - pigz
+          # - python3-apt
+          # - python3-gpg
+          - rename
+          - screen
+          - tree
+          - zip
+      become: yes

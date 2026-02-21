@@ -3,6 +3,6 @@
   apt:
     update_cache: true
     upgrade: full
-  when: ansible_os_family == "Debian"
+  when: ansible_facts["os_family"] == "Debian"
   become: yes
 
