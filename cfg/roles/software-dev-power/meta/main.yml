@@ -2,3 +2,4 @@
 dependencies:
   - role: pre-tasks
   - role: src-builder
+  - role: fonts

@@ -42,6 +42,7 @@
     - mac-core
     - git
     - zsh
+    - fonts
 
 - hosts: Family-MacBook
   roles:
@@ -49,6 +50,7 @@
     - rust
     - git
     - software-dev-macosx
+    - fonts
     # - data-analysis
     - kitty
     - zsh
@@ -61,6 +63,7 @@
     - linux-headless
     - git
     - kitty
+    - fonts
     - rust
     - jujutsu
     - zsh

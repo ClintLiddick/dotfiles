@@ -1,0 +1,24 @@
+---
+- name: make ~/.fonts directory
+  file:
+    state: directory
+    path: "{{ ansible_facts['user_dir'] }}/.fonts"
+  when: has_gui == true
+
+- name: download Adobe Source Code Pro roman font
+  get_url:
+    url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
+    dest: "{{ ansible_facts['user_dir'] }}/.fonts"
+  register: sourcecodepro_roman
+  when: has_gui == true
+
+- name: download Adobe Source Code Pro italic font
+  get_url:
+    url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Italic.otf
+    dest: "{{ ansible_facts['user_dir'] }}/.fonts"
+  register: sourcecodepro_italic
+  when: has_gui == true
+
+- name: update font cache
+  when: sourcecodepro_roman.changed or sourcecodepro_italic.changed
+  command: fc-cache -rv
