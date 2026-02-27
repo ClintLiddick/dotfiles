@@ -1,7 +1,6 @@
 ---
 - hosts: cliddick
   roles:
-    - pre-tasks
     - linux-headless
     - git
     - zsh
@@ -59,7 +58,6 @@
 
 - hosts: gir
   roles:
-    - pre-tasks
     - linux-headless
     - git
     - kitty
