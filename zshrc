@@ -4,25 +4,12 @@ if [ -f "$HOME/.zsh_aliases" ]; then
     source "$HOME/.zsh_aliases"
 fi
 
-# System-specific private values
-if [ -f "$HOME/.env_vars_private" ]; then
-    source "$HOME/.env_vars_private"
-fi
-
-# Add user ansible install path to PATH
-PATH=$HOME/Library/Python/3.12/bin:$HOME/Library/Python/3.9/bin:$PATH
-# Add common binary tool locations to PATH
-export PATH=$HOME/.local/bin:/opt/homebrew/bin:$HOME/.cargo/bin:/opt/aurora/bin:$PATH
-
-
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
 setopt sharehistory
 setopt incappendhistory
-
-export EDITOR='emacsclient -nw --alternate-editor=""'
 
 autoload -U colors && colors
 
@@ -63,12 +50,9 @@ if [ -f "$HOME/.zshrc_bonsai" ]; then
     source "$HOME/.zshrc_bonsai"
 fi
 
-export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
 if command -v pyenv &> /dev/null; then
     eval "$(pyenv init -)"
 fi
@@ -79,4 +63,3 @@ fi
 
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-

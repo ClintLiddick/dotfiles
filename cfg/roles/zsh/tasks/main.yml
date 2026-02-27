@@ -12,6 +12,13 @@
     path: "{{ ansible_facts['user_dir'] }}/.zshrc"
     force: yes
 
+- name: link zshenv dotfile
+  file:
+    state: link
+    src: "{{ ansible_facts['user_dir'] }}/dotfiles/zshenv"
+    path: "{{ ansible_facts['user_dir'] }}/.zshenv"
+    force: yes
+
 - name: update default shell to zsh
   user:
     name: "{{ ansible_user }}"
