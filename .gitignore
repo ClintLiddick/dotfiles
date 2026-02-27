@@ -2,6 +2,7 @@
 \#*
 *\#
 
-.venv
+.venv/
+venv/
 *.retry
 cfg/roles/private/
