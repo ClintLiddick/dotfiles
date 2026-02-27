@@ -3,9 +3,21 @@
   roles:
     - pre-tasks
     - linux-headless
-    - software-dev-min
+    - git
     - zsh
   tasks:
+    - name: install mercurial config file
+      ansible.builtin.copy:
+        content: |
+          [ui]
+          username = Clint Liddick <{{ email }}>
+          #merge = :merge3
+          merge = ediff
+          editor = emacsclient -nw -t -a ''
+          [google-change-tags]
+          default.markdown = true
+        dest: "{{ ansible_facts['user_dir'] }}/.hgrc"
+
     - name: install packages
       apt:
           name: "{{ packages }}"
@@ -29,14 +41,14 @@
 - hosts: cliddick-mac
   roles:
     - mac-core
-    - software-dev-min
+    - git
     - zsh
 
 - hosts: Family-MacBook
   roles:
     - mac-core
     - rust
-    - software-dev-min
+    - git
     - software-dev-macosx
     # - data-analysis
     - kitty
@@ -49,7 +61,7 @@
   roles:
     - pre-tasks
     - linux-headless
-    - software-dev-min
+    - git
     - kitty
     - rust
     - jujutsu
