@@ -36,6 +36,7 @@ PROMPT='%m %F{blue}%~%f%F{red}${vcs_info_msg_0_}%f%# '
 
 # Universal aliases
 
+alias clintcfg='pushd ~/dotfiles/cfg && ./venv/bin/ansible-playbook -i hosts.yml -K -l $(hostname -s) playbook.yml && popd'
 alias coinflip='if [[ $(( RANDOM % 2 )) -eq 0 ]]; then echo "heads"; else echo "tails"; fi'
 alias dockerclean='docker images | rg "<none>" | awk '\''{ print $3 }'\'' | xargs docker rmi'
 alias dumpcore='ulimit -c unlimited'

@@ -43,6 +43,7 @@
     - zsh
     - typesetting
     - photography
+    - jujutsu
 
 - hosts: gir
   roles:
@@ -51,6 +52,7 @@
     - software-dev-min
     - kitty
     - rust
+    - jujutsu
     - zsh
   tasks:
     - name: install packages

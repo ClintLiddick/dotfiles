@@ -1,0 +1,5 @@
+---
+- name: install jujutsu
+  command: "{{ ansible_facts['user_dir'] }}/.cargo/bin/cargo install jj-cli"
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.cargo/bin/jj"
