@@ -183,8 +183,9 @@
   :init
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
-         ("C-c /" . counsel-grep)  ;; TODO: update to use counsel-rg on personal computers
          ("C-c l" . counsel-locate)))
+(global-set-key (kbd "C-c /")
+                (if clint/work-computer #'counsel-grep #'counsel-rg))
 
 
 ;; projectile: project interaction
