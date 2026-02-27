@@ -13,7 +13,7 @@
 ;; determine computer attributes
 (defconst clint/mac (eq system-type 'darwin))
 ;; NOTE: On MacOS, iTerm2 must configure Option (Alt) key override to ESC+
-(defconst clint/work-computer (equal (system-name) "cliddick-mac"))
+(defconst clint/work-computer (string-prefix-p "cliddick-mac" (system-name)))
 (defconst clint/is-glinux (string-suffix-p ".c.googlers.com" (system-name)))
 (defconst clint/clang-version (if clint/work-computer "17" "13"))
 
@@ -525,9 +525,7 @@
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
 
-(when (and
-       (not clint/work-computer)
-       (display-graphic-p))
+(when (display-graphic-p)
  (set-frame-font "Source Code Variable-14" nil t))
 
 (defvar color-themes '())
