@@ -58,6 +58,10 @@ if command -v pyenv &> /dev/null; then
     eval "$(pyenv init -)"
 fi
 
+if command -v jj &> /dev/null; then
+    source <(jj util completion zsh)
+fi
+
 if [[ -f /etc/bash_completion.d/hgd ]]; then
   source /etc/bash_completion.d/hgd
 fi
