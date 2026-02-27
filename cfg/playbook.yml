@@ -4,6 +4,7 @@
     - linux-headless
     - git
     - zsh
+    - rust
   tasks:
     - name: install mercurial config file
       ansible.builtin.copy:
