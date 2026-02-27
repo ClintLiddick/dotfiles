@@ -528,7 +528,7 @@
 (when (and
        (not clint/work-computer)
        (display-graphic-p))
- (set-frame-font "Source Code Pro-14" nil t))
+ (set-frame-font "Source Code Variable-14" nil t))
 
 (defvar color-themes '())
 (use-package zenburn-theme
