@@ -133,7 +133,13 @@
       (setq flycheck-idle-change-delay 4) ;; only check when idle for 4 seconds
       (require 'fig)
       (evil-leader/set-key
-        "t" 'fig-status)))
+        "t" 'fig-status)
+      (require 'cider-agent)
+      (evil-leader/set-key
+        "a" 'cider-agent)
+      (evil-set-initial-state
+       'cider-agent-buffer-mode 'emacs)
+      ))
 
 ;; git helper packages
 
