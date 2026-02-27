@@ -20,5 +20,7 @@
   when: has_gui == true
 
 - name: update font cache
-  when: sourcecodepro_roman.changed or sourcecodepro_italic.changed
+  when:
+    - sourcecodepro_roman.changed or sourcecodepro_italic.changed
+    - ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution'] == "Debian"
   command: fc-cache -rv

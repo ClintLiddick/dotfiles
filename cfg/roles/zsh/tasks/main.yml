@@ -23,5 +23,7 @@
   user:
     name: "{{ ansible_user }}"
     shell: /bin/zsh
-  when: not is_glinux
+  when:
+    - ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution'] == "Debian"
+    - not is_glinux
   become: yes
