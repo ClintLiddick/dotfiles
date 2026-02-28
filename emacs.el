@@ -85,7 +85,6 @@
   (setq evil-want-C-w-in-emacs-state t)
   :config
   (evil-mode 1)
-  (evil-set-initial-state 'fig-mode 'emacs)
   (evil-set-initial-state 'dired-mode 'emacs)
   ;; evilnc: fast code comment/uncomment
   (use-package evil-nerd-commenter
@@ -134,6 +133,7 @@
       (require 'fig)
       (evil-leader/set-key
         "t" 'fig-status)
+      (evil-set-initial-state 'fig-mode 'emacs)
       (require 'cider-agent)
       (evil-leader/set-key
         "a" 'cider-agent)
@@ -172,6 +172,12 @@
   (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-pushremote)
   (remove-hook 'magit-status-sections-hook 'magit-insert-unpulled-from-upstream)
   (remove-hook 'magit-status-sections-hook 'magit-insert-unpushed-to-upstream-or-recent))
+
+;; jujutsu VCS integration based on magit
+(use-package majutsu
+  :vc (:url "https://github.com/0WD0/majutsu")  ;; TODO: replace with third-party vendoring?
+  :config
+  (evil-leader/set-key "f" 'majutsu-log))
 
 
 ;; ivy minibuffer completion
