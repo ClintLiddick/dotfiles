@@ -17,3 +17,10 @@
     path: "{{ ansible_facts['user_dir'] }}/.config/kitty/kitty.conf"
     src: "{{ ansible_facts['user_dir'] }}/dotfiles/kitty.conf"
     state: link
+
+- name: install kitty terminfo
+  command: >
+    tic -x -o {{ ansible_facts['user_dir'] }}/.terminfo
+    {{ ansible_facts['user_dir'] }}/.local/kitty.app/lib/kitty/terminfo/kitty.terminfo
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.terminfo/x/xterm-kitty"
