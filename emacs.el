@@ -177,7 +177,7 @@
 (use-package majutsu
   :vc (:url "https://github.com/0WD0/majutsu")  ;; TODO: replace with third-party vendoring?
   :config
-  (evil-leader/set-key "f" 'majutsu-log))
+  (evil-leader/set-key "v" 'majutsu-log))
 
 
 ;; ivy minibuffer completion
