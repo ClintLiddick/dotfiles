@@ -17,11 +17,6 @@
   args:
     creates: "{{ ansible_facts['user_dir'] }}/.cargo/bin/cargo"
 
-# - name: check if ripgrep installed
-#   shell: which rg
-#   register: has_ripgrep
-#   ignore_errors: yes
-
 - name: install packages
   when: ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution'] == "Debian"
   apt:
@@ -30,9 +25,3 @@
     packages:
     - build-essential
   become: yes
-
-- name: install ripgrep
-  command: "{{ ansible_facts['user_dir'] }}/.cargo/bin/cargo install ripgrep"
-  args:
-  # when: has_ripgrep.rc != 0
-    creates: "{{ ansible_facts['user_dir'] }}/.cargo/bin/rg"

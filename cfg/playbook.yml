@@ -4,7 +4,7 @@
     - linux-headless
     - git
     - zsh
-    - rust
+    - ripgrep
   tasks:
     - name: install mercurial config file
       ansible.builtin.copy:
@@ -48,7 +48,7 @@
 - hosts: Family-MacBook
   roles:
     - mac-core
-    - rust
+    - ripgrep
     - git
     - software-dev-macosx
     - fonts
@@ -65,7 +65,7 @@
     - git
     - kitty
     - fonts
-    - rust
+    - ripgrep
     - jujutsu
     - zsh
   tasks:
