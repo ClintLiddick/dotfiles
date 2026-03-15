@@ -1,0 +1,19 @@
+---
+# Install the prerequisite packages for a Debian Chinese input setup.
+# Still requires adding and displaying the input source.
+
+- name: install packages
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - gnome-tweaks
+    - ibus
+    - ibus-libpinyin
+  become: yes
+
+- name: add zh_CN.UTF-8 locale
+  locale_gen:
+    name: zh_CN.UTF-8
+    state: present
+  become: yes

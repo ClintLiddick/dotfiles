@@ -66,6 +66,7 @@
     - ripgrep
     - jujutsu
     - zsh
+    - chinese
   tasks:
     - name: install packages
       apt:
