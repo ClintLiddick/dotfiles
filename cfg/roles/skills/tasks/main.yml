@@ -1,0 +1,22 @@
+---
+- name: create Claude config directory
+  file:
+    state: directory
+    path: "{{ ansible_facts['user_dir'] }}/.claude"
+
+- name: create Gemini config directory
+  file:
+    state: directory
+    path: "{{ ansible_facts['user_dir'] }}/.gemini"
+
+- name: symlink Claude skills to dotfiles repo
+  file:
+    src: "{{ playbook_dir }}/roles/skills/files"
+    dest: "{{ ansible_facts['user_dir'] }}/.claude/skills"
+    state: link
+
+- name: symlink Gemini skills to dotfiles repo
+  file:
+    src: "{{ playbook_dir }}/roles/skills/files"
+    dest: "{{ ansible_facts['user_dir'] }}/.gemini/skills"
+    state: link
