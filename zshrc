@@ -69,8 +69,17 @@ if [[ -f /etc/bash_completion.d/hgd ]]; then
   source /etc/bash_completion.d/hgd
 fi
 
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+function alertmac() {
+    local result=$?
+    if [ $result -eq 0 ]; then
+        osascript -e "display notification \"Done ✅\" with title \"Terminal\""
+    else
+        osascript -e "display notification \"Failed with code $result ❌\" with title \"Terminal\""
+    fi
+}
+
 ### SSH AGENT MANAGED BY SSH SETUP TOOL DO NOT MODIFY UNLESS YOU MEAN IT!
 SSH_ENV="$HOME/.ssh/agent-environment"
 function start_agent {
