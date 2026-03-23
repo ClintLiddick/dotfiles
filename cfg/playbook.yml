@@ -38,12 +38,14 @@
           - zip
       become: yes
 
-- hosts: cliddick-mac
+- hosts: Clint-Liddick-FWJQC06GH1
   roles:
     - mac-core
     - git
     - zsh
     - fonts
+    - ripgrep
+    - jujutsu
 
 - hosts: Family-MacBook
   roles:

@@ -15,6 +15,8 @@ export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || pr
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
 # System-specific private values
 if [ -f "$HOME/.env_vars_private" ]; then
     source "$HOME/.env_vars_private"
