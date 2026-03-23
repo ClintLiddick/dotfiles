@@ -1,23 +1,12 @@
 ---
-- hosts: cliddick
+- hosts: clint-vdesk
   roles:
     - linux-headless
     - git
     - zsh
     - ripgrep
+    - jujutsu
   tasks:
-    - name: install mercurial config file
-      ansible.builtin.copy:
-        content: |
-          [ui]
-          username = Clint Liddick <{{ email }}>
-          #merge = :merge3
-          merge = ediff
-          editor = emacsclient -nw -t -a ''
-          [google-change-tags]
-          default.markdown = true
-        dest: "{{ ansible_facts['user_dir'] }}/.hgrc"
-
     - name: install packages
       apt:
           name: "{{ packages }}"
@@ -25,15 +14,15 @@
           packages:
           - atool
           - jq
-          - glinux-emacs
           - moreutils
-          # - net-tools
-          # - nmon
-          # - pigz
-          # - python3-apt
-          # - python3-gpg
+          - net-tools
+          - nmon
+          - pigz
+          - python3-apt
+          - python3-gpg
           - rename
           - screen
+          - tmux
           - tree
           - zip
       become: yes
