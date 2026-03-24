@@ -6,6 +6,7 @@
     - zsh
     - ripgrep
     - jujutsu
+    - zellij
     - software-dev-power
   tasks:
     - name: install packages

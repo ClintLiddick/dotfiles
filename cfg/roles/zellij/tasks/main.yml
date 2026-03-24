@@ -1,0 +1,29 @@
+---
+- name: install zellij
+  command: "{{ ansible_facts['user_dir'] }}/.cargo/bin/cargo install zellij"
+  args:
+    creates: "{{ ansible_facts['user_dir'] }}/.cargo/bin/zellij"
+
+- name: create zellij config directory
+  file:
+    state: directory
+    path: "{{ ansible_facts['user_dir'] }}/.config/zellij"
+
+- name: link zellij config file
+  file:
+    state: link
+    src: "{{ ansible_facts['user_dir'] }}/dotfiles/zellij.kdl"
+    path: "{{ ansible_facts['user_dir'] }}/.config/zellij/config.kdl"
+    force: yes
+
+- name: create zsh site-functions directory
+  file:
+    state: directory
+    path: "{{ ansible_facts['user_dir'] }}/.local/share/zsh/site-functions"
+
+- name: link zellij zsh completion
+  file:
+    state: link
+    src: "{{ ansible_facts['user_dir'] }}/dotfiles/_zellij"
+    path: "{{ ansible_facts['user_dir'] }}/.local/share/zsh/site-functions/_zellij"
+    force: yes
