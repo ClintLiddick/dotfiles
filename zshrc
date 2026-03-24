@@ -13,6 +13,9 @@ setopt incappendhistory
 
 autoload -U colors && colors
 
+# Add local auto-completion scripts
+fpath=($HOME/.local/share/zsh/site-functions $fpath)
+
 # Setup auto-completion
 autoload -Uz compinit
 compinit
