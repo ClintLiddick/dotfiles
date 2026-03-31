@@ -538,7 +538,7 @@
 (prefer-coding-system 'utf-8)
 
 (when (display-graphic-p)
- (set-frame-font "Source Code Variable-14" nil t))
+ (set-frame-font "Ioskeley Mono-14" nil t))
 
 (defvar color-themes '())
 (use-package zenburn-theme
@@ -549,8 +549,6 @@
                   (select-frame frame)
                   (load-theme 'zenburn t)))
     (load-theme 'zenburn t)))
-
-(global-prettify-symbols-mode t)
 
 ;;; emacs.el ends here
 (custom-set-variables

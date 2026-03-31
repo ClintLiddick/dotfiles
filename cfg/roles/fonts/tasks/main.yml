@@ -5,6 +5,7 @@
     path: "{{ ansible_facts['user_dir'] }}/.fonts"
   when: has_gui == true
 
+# Source Code Variable
 - name: download Adobe Source Code Pro roman font
   get_url:
     url: https://github.com/adobe-fonts/source-code-pro/releases/download/variable-fonts/SourceCodeVariable-Roman.otf
@@ -19,8 +20,38 @@
   register: sourcecodepro_italic
   when: has_gui == true
 
+# Maple Mono NL NF CN
+- name: download Maple unhinted font archive
+  get_url:
+    url: https://github.com/subframe7536/maple-font/releases/download/v7.9/MapleMonoNL-NF-CN-unhinted.zip
+    dest: /tmp/maple-font-v7.9.zip
+  when: has_gui == true
+
+- name: unzip Maple font
+  unarchive:
+    remote_src: yes
+    src: /tmp/maple-font-v7.9.zip
+    dest: "{{ ansible_facts['user_dir'] }}/.fonts"
+  register: maplefont
+  when: has_gui == true
+
+# Ioskeley Normal (Berkeley Mono free OSS copy)
+- name: download Ioskeley Normal font archive
+  get_url:
+    url: https://github.com/ahatem/IoskeleyMono/releases/download/v2.0.0-beta.1/IoskeleyMono-Normal.zip
+    dest: /tmp/ioskeley-normal-v2.0.0-beta.1.zip
+  when: has_gui == true
+
+- name: unzip Maple font
+  unarchive:
+    remote_src: yes
+    src: /tmp/ioskeley-normal-v2.0.0-beta.1.zip
+    dest: "{{ ansible_facts['user_dir'] }}/.fonts"
+  register: ioskeleyfont
+  when: has_gui == true
+
 - name: update font cache
   when:
-    - sourcecodepro_roman.changed or sourcecodepro_italic.changed
     - ansible_facts['distribution'] == "Ubuntu" or ansible_facts['distribution'] == "Debian"
+    - sourcecodepro_roman.changed or sourcecodepro_italic.changed or maplefont.changed or ioskeleyfont.changed
   command: fc-cache -rv
