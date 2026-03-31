@@ -13,9 +13,8 @@
 ;; determine computer attributes
 (defconst clint/mac (eq system-type 'darwin))
 ;; NOTE: On MacOS, iTerm2 must configure Option (Alt) key override to ESC+
-(defconst clint/work-computer (string-prefix-p "cliddick-mac" (system-name)))
-(defconst clint/is-glinux (string-suffix-p ".c.googlers.com" (system-name)))
-(defconst clint/clang-version (if clint/work-computer "17" "13"))
+(defconst clint/work-computer (string-prefix-p "Clint-Liddick-FWJQC06GH1" (system-name)))
+(defconst clint/clang-version (if clint/work-computer "21" "13"))
 
 (defconst clint/extra-include-base
   (if (not clint/work-computer)
@@ -156,9 +155,8 @@
   :init
   :bind (("M-x" . counsel-M-x)
          ("C-x C-f" . counsel-find-file)
+         ("C-c /" . counsel-rg)
          ("C-c l" . counsel-locate)))
-(global-set-key (kbd "C-c /")
-                (if clint/work-computer #'counsel-grep #'counsel-rg))
 
 
 ;; projectile: project interaction
@@ -252,19 +250,18 @@
 ;;   (add-to-list 'company-c-headers-path-user clint/extra-include-base))
 
 (require 'eglot)  ;; built-in
-(if (not clint/is-glinux)
-    (progn
-        (add-to-list 'eglot-server-programs
-                    `(,'(c++-mode c-mode)
-                    ,(concat "clangd-" clint/clang-version) "--background-index=false"))
-        ;; (add-hook 'c-mode-common-hook 'eglot-ensure)
-        (add-to-list 'eglot-server-programs
-                    '(python-mode . ("pylsp")))
-        ;; (add-hook 'python-mode-hook 'eglot-ensure)
-        (add-to-list 'eglot-server-programs
-                    '(shell-script-mode . ("bash-language-server")))  ;; installed with npm i -g
-        ;; (add-hook 'shell-script-mode-hook 'eglot-ensure)
-        ))
+(progn
+  (add-to-list 'eglot-server-programs
+               `(,'(c++-mode c-mode)
+                 ,(concat "clangd-" clint/clang-version) "--background-index=false"))
+  ;; (add-hook 'c-mode-common-hook 'eglot-ensure)
+  (add-to-list 'eglot-server-programs
+               '(python-mode . ("pylsp")))
+  ;; (add-hook 'python-mode-hook 'eglot-ensure)
+  (add-to-list 'eglot-server-programs
+               '(shell-script-mode . ("bash-language-server")))  ;; installed with npm i -g
+  ;; (add-hook 'shell-script-mode-hook 'eglot-ensure)
+  )
 
 
 (use-package company-jedi
