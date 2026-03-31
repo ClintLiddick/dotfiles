@@ -102,45 +102,6 @@
 
 (use-package jsonrpc)
 
-(if clint/is-glinux
-    (progn
-      (require 'google)
-      (global-set-key (kbd "C-c g") #'google-codemaker)
-      (require 'google-log)  ;; analytics
-      (require 'gogolink)
-      (require 'google3)
-      (require 'google3-mode)
-      (require 'google3-format)  ;; mimics hg fx
-      (require 'google3-eglot)
-      (setq google3-eglot-compose 't)
-      (add-to-list 'google3-eglot-enabled-modes 'google3-build-mode)
-      (add-to-list 'google3-eglot-enabled-modes 'skylark-mode)
-      (add-to-list 'google3-eglot-enabled-modes 'bazel-mode)
-      (google3-eglot-setup)
-      (require 'google3-build)
-      (require 'google3-build-fn)
-      (require 'google3-build-mode)
-      (require 'google3-build-cleaner)
-      (require 'google3-include-cleaner)
-      (require 'google-lint)
-      (require 'google-flycheck)
-      (require 'flycheck-google-cpplint)
-      (setq flycheck-python-pylint-executable "gpylint")
-      (setq flycheck-pylintrc nil)
-      (add-hook 'python-mode-hook (lambda () (flycheck-mode)))
-      (setq flycheck-check-syntax-automatically '(save idle-change mode-enable)) ;; check on save, idle and mode-change
-      (setq flycheck-idle-change-delay 4) ;; only check when idle for 4 seconds
-      (require 'fig)
-      (evil-leader/set-key
-        "t" 'fig-status)
-      (evil-set-initial-state 'fig-mode 'emacs)
-      (require 'cider-agent)
-      (evil-leader/set-key
-        "a" 'cider-agent)
-      (evil-set-initial-state
-       'cider-agent-buffer-mode 'emacs)
-      ))
-
 ;; git helper packages
 
 ;; invoke emacs from command line with temp files
