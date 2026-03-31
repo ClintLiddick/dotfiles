@@ -444,7 +444,6 @@
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 (setq linum-format "%d ")
 (setq column-number-mode t)
-(setq browse-url-generic-program "firefox")
 (setq make-backup-files nil)
 (setq gdb-many-windows t)
 (show-paren-mode t)  ;; highlight matching braces
