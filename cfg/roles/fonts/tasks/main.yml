@@ -42,12 +42,12 @@
     dest: /tmp/ioskeley-normal-v2.0.0-beta.1.zip
   when: has_gui == true
 
-- name: unzip Maple font
-  unarchive:
-    remote_src: yes
-    src: /tmp/ioskeley-normal-v2.0.0-beta.1.zip
-    dest: "{{ ansible_facts['user_dir'] }}/.fonts"
+- name: unzip Ioskeley Unhinted font
+  shell: >
+    unzip -jo /tmp/ioskeley-normal-v2.0.0-beta.1.zip "Unhinted/*"
+    -d {{ ansible_facts['user_dir'] }}/.fonts
   register: ioskeleyfont
+  changed_when: "'inflating' in ioskeleyfont.stdout"
   when: has_gui == true
 
 - name: update font cache
