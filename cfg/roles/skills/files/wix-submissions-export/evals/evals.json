@@ -1,0 +1,21 @@
+{
+  "skill_name": "wix-submissions-export",
+  "notes": "These evals require an active authenticated Wix session in Chrome. They cannot be run in a sandboxed environment without real credentials. The workflow was validated live during the skill's creation session (261 rows, 27 columns, payment status confirmed present).",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Export all submissions from my Wix registration form at https://manage.wix.com/dashboard/.../wix-forms/form/.../submissions — I need all columns including payment status, the built-in export is missing it.",
+      "expected_output": "A CSV file containing all submission rows (matching the count shown in the Submissions badge) with all selected columns including Payment info/paymentStatus. File saved to ~/Downloads and presented to user."
+    },
+    {
+      "id": 2,
+      "prompt": "I have 150 Wix form submissions and the export button only gives me some columns. Can you grab everything including who paid?",
+      "expected_output": "Navigates to the Wix submissions page, scrolls table to load all rows, extracts all columns via DOM, builds CSV with payment status included, triggers download."
+    },
+    {
+      "id": 3,
+      "prompt": "Get me a spreadsheet of all 261 Wix form responses with every field",
+      "expected_output": "Full CSV with header row + 261 data rows, all columns present, no truncation, file presented with clickable link."
+    }
+  ]
+}
