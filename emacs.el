@@ -490,6 +490,8 @@
 
 
 ;; theme and font
+(setq inhibit-startup-screen t)
+
 (use-package unicode-fonts   ;; allow fallback fonts
   :config (unicode-fonts-setup))
 (prefer-coding-system 'utf-8)
@@ -506,6 +508,17 @@
                   (select-frame frame)
                   (load-theme 'zenburn t)))
     (load-theme 'zenburn t)))
+
+
+;; fun
+
+;; Daily quote
+(when (executable-find "fortune")
+  (setq initial-scratch-message
+        (let ((quote (shell-command-to-string "fortune -s"))) ; -s keeps it short
+          (format ";; %s\n"
+                  (replace-regexp-in-string "\n" "\n;; "
+                                            (replace-regexp-in-string "\n$" "" quote))))))
 
 ;;; emacs.el ends here
 (custom-set-variables

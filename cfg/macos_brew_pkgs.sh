@@ -5,6 +5,7 @@ set -euo pipefail
 brew_pkgs=(
     bazelisk
     clang-format
+    fortune
     git
     pyenv
 )

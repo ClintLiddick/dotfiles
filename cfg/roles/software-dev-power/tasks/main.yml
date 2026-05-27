@@ -37,7 +37,7 @@
       - git
   become: yes
 
-- name: install packages
+- name: install common packages
   apt:
     name: "{{ packages }}"
   vars:
@@ -45,6 +45,7 @@
       - checkinstall
       - colordiff
       - cppcheck
+      - fortune
       - gnutls-bin
       - iperf3
       - ispell
