@@ -21,5 +21,5 @@ fi
 
 # System-specific private values
 if [ -f "$HOME/.env_vars_private" ]; then
-    source "$HOME/.env_vars_private"
+    . "$HOME/.env_vars_private"
 fi
