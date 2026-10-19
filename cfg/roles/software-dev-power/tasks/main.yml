@@ -95,16 +95,16 @@
     - clangd-13
   become: yes
 
-- name: pip upgrade
-  pip:
-    executable: pip3
-    extra_args: "--upgrade"
-    name: "{{ packages }}"
-  vars:
-    packages:
-      - pip
-      - setuptools
-  become: yes
+# - name: pip upgrade
+#   pip:
+#     executable: pip3
+#     extra_args: "--upgrade"
+#     name: "{{ packages }}"
+#   vars:
+#     packages:
+#       - pip
+#       - setuptools
+#   become: yes
 
 # - name: install python packages
 #   pip:
